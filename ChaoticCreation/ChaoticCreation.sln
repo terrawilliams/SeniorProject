@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29318.209
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChaoticCreation", "ChaoticCreation.csproj", "{84C904A0-CB8E-47E9-99A5-F6727478EFFA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{84C904A0-CB8E-47E9-99A5-F6727478EFFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84C904A0-CB8E-47E9-99A5-F6727478EFFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84C904A0-CB8E-47E9-99A5-F6727478EFFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84C904A0-CB8E-47E9-99A5-F6727478EFFA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AAFBAA0D-C81E-4AF1-8EED-0B9635DA9FA9}
+	EndGlobalSection
+EndGlobal
