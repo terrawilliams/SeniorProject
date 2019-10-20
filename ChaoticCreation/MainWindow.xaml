@@ -5,8 +5,105 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ChaoticCreation"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
+        Title="Chaotic Generation" Height="600" Width="1100">
+    <Grid Background="{StaticResource DarkThemeBackground}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="4*"/>
+        </Grid.RowDefinitions>
+
+        <TabControl
+            HorizontalAlignment="Right">
+            <TabItem
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Header="TabItem">
+                <TextBlock>
+                    Tab1 content
+                </TextBlock>
+            </TabItem>
+            <TabItem
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Header="TabItem2">
+                <TextBlock>
+                    Tab2 Content
+                </TextBlock>
+            </TabItem>
+        </TabControl>
+
+
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Button 
+                Grid.Column="0" 
+                Grid.Row="0" 
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Center"
+                Content="Button 1">
+            </Button>
+
+            <TextBlock 
+                Grid.Column="0"
+                Grid.Row="1"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center">
+                This is a TextBlock
+            </TextBlock>
+
+            <Label
+                Grid.Column="1"
+                Grid.Row="0"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center">
+                This is a Label
+            </Label>
+
+            <StackPanel 
+                Grid.Column="1"
+                Grid.Row="1"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center">
+                <CheckBox
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center">
+                    CheckBox Unchecked
+                </CheckBox>
+                <CheckBox
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    IsChecked="True">
+                    CheckBox Checked
+                </CheckBox>
+            </StackPanel>
+
+            <StackPanel 
+                Grid.Column="2"
+                Grid.Row="1"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center">
+                <RadioButton
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    IsChecked="True">
+                    Yes
+                </RadioButton>
+                <RadioButton
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center">
+                    No
+                </RadioButton>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Window>

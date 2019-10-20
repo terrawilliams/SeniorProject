@@ -4,6 +4,83 @@
              xmlns:local="clr-namespace:ChaoticCreation"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <SolidColorBrush x:Key="DarkThemeBackground" Color="#222222" />
+        <SolidColorBrush x:Key="DarkThemeBackgroundSecondary" Color="DimGray"/>
+        <SolidColorBrush x:Key="DarkThemeBackgroundSecondaryVariant" Color="Gray"/>
+        <SolidColorBrush x:Key="DarkThemePrimaryColor" Color="#008080" />
+        <SolidColorBrush x:Key="DarkThemePrimaryColorVariant" Color="#007070" />
+        <SolidColorBrush x:Key="DarkThemeSecondaryColor" Color="MediumOrchid" />
+        <SolidColorBrush x:Key="DarkThemeSecondaryColorVariant" Color="Orchid" />
+
+        <Style TargetType="Label">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="{StaticResource DarkThemeBackgroundSecondary}"/>
+        </Style>
+
+        <Style TargetType="Button">
+            <Setter Property="Foreground" Value="{StaticResource DarkThemeBackground}"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Background" Value="{StaticResource DarkThemePrimaryColor}"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="Border" CornerRadius="5" Background="{TemplateBinding Background}"
+                                BorderThickness="1" Padding="5">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center">
+
+                            </ContentPresenter>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="{StaticResource DarkThemePrimaryColorVariant}" TargetName="Border" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="DarkGoldenrod"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="TabItem">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TabItem">
+                        <Grid Name="Panel">
+                            <ContentPresenter x:Name="ContentSite"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        ContentSource="Header"
+                                        Margin="10,2"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter TargetName="Panel" Property="Background" Value="{StaticResource DarkThemePrimaryColor}" />
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="False">
+                                <Setter TargetName="Panel" Property="Background" Value="{StaticResource DarkThemeBackgroundSecondary}" />
+                                <Setter Property="Foreground" Value="White"/>
+                            </Trigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsMouseOver" Value="True"/>
+                                    <Condition Property="IsSelected" Value="False"/>
+                                </MultiTrigger.Conditions>
+                                <Setter TargetName="Panel" Property="Background" Value="{StaticResource DarkThemeBackgroundSecondaryVariant}"/>
+                            </MultiTrigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="RadioButton">
+
+        </Style>
     </Application.Resources>
 </Application>
