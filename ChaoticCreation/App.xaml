@@ -4,10 +4,10 @@
              xmlns:local="clr-namespace:ChaoticCreation"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        <SolidColorBrush x:Key="DarkThemeBackground" Color="#222222" />
-        <SolidColorBrush x:Key="DarkThemeBackgroundSecondary" Color="DimGray"/>
+        <SolidColorBrush x:Key="DarkThemeBackground" Color="#3a3a3a" />
+        <SolidColorBrush x:Key="DarkThemeBackgroundSecondary" Color="#e3e6e8"/>
         <SolidColorBrush x:Key="DarkThemeBackgroundSecondaryVariant" Color="Gray"/>
-        <SolidColorBrush x:Key="DarkThemePrimaryColor" Color="#008080" />
+        <SolidColorBrush x:Key="DarkThemePrimaryColor" Color="#fa7470" />
         <SolidColorBrush x:Key="DarkThemePrimaryColorVariant" Color="#007070" />
         <SolidColorBrush x:Key="DarkThemeSecondaryColor" Color="MediumOrchid" />
         <SolidColorBrush x:Key="DarkThemeSecondaryColorVariant" Color="Orchid" />
@@ -48,6 +48,9 @@
         </Style>
 
         <Style TargetType="TabItem">
+            <Setter Property="FontFamily" Value="Ariel"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Padding" Value="20"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="TabItem">
@@ -64,7 +67,6 @@
                             </Trigger>
                             <Trigger Property="IsSelected" Value="False">
                                 <Setter TargetName="Panel" Property="Background" Value="{StaticResource DarkThemeBackgroundSecondary}" />
-                                <Setter Property="Foreground" Value="White"/>
                             </Trigger>
                             <MultiTrigger>
                                 <MultiTrigger.Conditions>
