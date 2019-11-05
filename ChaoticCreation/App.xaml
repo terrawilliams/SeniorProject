@@ -51,6 +51,7 @@
             <Setter Property="FontFamily" Value="Ariel"/>
             <Setter Property="FontSize" Value="15"/>
             <Setter Property="Padding" Value="20"/>
+            <Setter Property="Height" Value="30"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="TabItem">

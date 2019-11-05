@@ -4,6 +4,14 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ChaoticCreation"
+        xmlns:home="clr-namespace:ChaoticCreation.HomeTab"
+        xmlns:about="clr-namespace:ChaoticCreation.AboutTab"
+        xmlns:npc="clr-namespace:ChaoticCreation.NpcGenerator"
+        xmlns:location="clr-namespace:ChaoticCreation.LocationGenerator"
+        xmlns:random="clr-namespace:ChaoticCreation.RandomTables"
+        xmlns:encounter="clr-namespace:ChaoticCreation.EncounterGenerator"
+        xmlns:wpf="http://schemas.microsoft.com/netfx/2009/xaml/presentation"
+        xmlns:wpf1="http://schemas.microsoft.com/netfx/2007/xaml/presentation"
         mc:Ignorable="d"
         Title="Chaotic Generation" Height="600" Width="1100">
     <Grid Background="{StaticResource DarkThemeBackground}">
@@ -22,7 +30,6 @@
             <FrameworkElement x:Name="uniformGrid"/>
         </UniformGrid>
 
-
         <TabControl
             HorizontalAlignment="Stretch"
             Grid.Row="1">
@@ -30,49 +37,37 @@
                 HorizontalAlignment="Stretch"
                 Width="{Binding ElementName=uniformGrid, Path=ActualWidth}"
                 Header="Home">
-                <TextBlock>
-                    Tab1 content
-                </TextBlock>
+                <home:Home/>
             </TabItem>
             <TabItem
                 HorizontalAlignment="Stretch"
                 Width="{Binding ElementName=uniformGrid, Path=ActualWidth}"
                 Header="Random Tables">
-                <TextBlock>
-                    Tab2 Content
-                </TextBlock>
+                <random:RandomTables/>
             </TabItem>
             <TabItem
                 HorizontalAlignment="Stretch"
                 Width="{Binding ElementName=uniformGrid, Path=ActualWidth}"
                 Header="Encounter Generator">
-                <TextBlock>
-                    Tab2 Content
-                </TextBlock>
+                <encounter:EncounterGenerator/>
             </TabItem>
             <TabItem
                 HorizontalAlignment="Stretch"
                 Width="{Binding ElementName=uniformGrid, Path=ActualWidth}"
                 Header="NPC Generator">
-                <TextBlock>
-                    Tab2 Content
-                </TextBlock>
+                <npc:NpcGenerator/>
             </TabItem>
             <TabItem
                 HorizontalAlignment="Stretch"
                 Width="{Binding ElementName=uniformGrid, Path=ActualWidth}"
                 Header="Location Generator">
-                <TextBlock>
-                    Tab2 Content
-                </TextBlock>
+                <location:LocationGenerator/>
             </TabItem>
             <TabItem
                 HorizontalAlignment="Stretch"
                 Width="{Binding ElementName=uniformGrid, Path=ActualWidth}"
                 Header="About">
-                <TextBlock>
-                    Tab2 Content
-                </TextBlock>
+                <about:About/>
             </TabItem>
         </TabControl>
     </Grid>
