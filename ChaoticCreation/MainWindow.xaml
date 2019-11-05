@@ -13,7 +13,7 @@
         xmlns:wpf="http://schemas.microsoft.com/netfx/2009/xaml/presentation"
         xmlns:wpf1="http://schemas.microsoft.com/netfx/2007/xaml/presentation"
         mc:Ignorable="d"
-        Title="Chaotic Generation" Height="600" Width="1100">
+        Title="Chaotic Generation" WindowState="Maximized">
     <Grid Background="{StaticResource DarkThemeBackground}">
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>

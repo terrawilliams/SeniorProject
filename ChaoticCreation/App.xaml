@@ -8,7 +8,7 @@
         <SolidColorBrush x:Key="DarkThemeBackgroundSecondary" Color="#e3e6e8"/>
         <SolidColorBrush x:Key="DarkThemeBackgroundSecondaryVariant" Color="Gray"/>
         <SolidColorBrush x:Key="DarkThemePrimaryColor" Color="#fa7470" />
-        <SolidColorBrush x:Key="DarkThemePrimaryColorVariant" Color="#007070" />
+        <SolidColorBrush x:Key="DarkThemePrimaryColorVariant" Color="#f93324" />
         <SolidColorBrush x:Key="DarkThemeSecondaryColor" Color="MediumOrchid" />
         <SolidColorBrush x:Key="DarkThemeSecondaryColorVariant" Color="Orchid" />
 
@@ -18,7 +18,7 @@
         </Style>
 
         <Style TargetType="Button">
-            <Setter Property="Foreground" Value="{StaticResource DarkThemeBackground}"/>
+            <Setter Property="Foreground" Value="White"/>
             <Setter Property="FontSize" Value="16"/>
             <Setter Property="Background" Value="{StaticResource DarkThemePrimaryColor}"/>
             <Setter Property="Padding" Value="10"/>
@@ -52,6 +52,7 @@
             <Setter Property="FontSize" Value="15"/>
             <Setter Property="Padding" Value="20"/>
             <Setter Property="Height" Value="30"/>
+            <Setter Property="Foreground" Value="Black"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="TabItem">
@@ -84,6 +85,10 @@
 
         <Style TargetType="RadioButton">
 
+        </Style>
+
+        <Style TargetType="ComboBox">
+            
         </Style>
     </Application.Resources>
 </Application>

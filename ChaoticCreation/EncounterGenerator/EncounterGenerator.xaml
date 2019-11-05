@@ -7,10 +7,91 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid Background="{StaticResource DarkThemeBackground}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="3*" x:Name="centerRow"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
 
-        <TextBlock 
-            Text="This is Encounter Generator"
-            VerticalAlignment="Center"
-            HorizontalAlignment="Center"/>
+        <StackPanel 
+            Grid.Row="0"
+            Orientation="Horizontal"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center">
+
+            <StackPanel 
+                Orientation="Horizontal"
+                Margin="10">
+                <TextBlock
+                    Padding="2"
+                    Margin="2"
+                    VerticalAlignment="Center"
+                    Foreground="White">
+                    Party Level:
+                </TextBlock>
+                <ComboBox
+                    Padding="10"
+                    Margin="10">
+
+                </ComboBox>
+            </StackPanel>
+
+            <StackPanel 
+                Orientation="Horizontal"
+                Margin="10">
+                <TextBlock
+                    Padding="2"
+                    Margin="2"
+                    VerticalAlignment="Center"
+                    Foreground="White">
+                    Terrain:
+                </TextBlock>
+                <ComboBox
+                    Padding="10"
+                    Margin="10">
+                  
+                </ComboBox>
+            </StackPanel>
+
+            <StackPanel 
+                Orientation="Horizontal"
+                Margin="10">
+                <TextBlock
+                    Padding="2"
+                    Margin="2"
+                    VerticalAlignment="Center"
+                    Foreground="White">
+                    Difficulty Level:
+                </TextBlock>
+                <ComboBox
+                    Padding="10"
+                    Margin="10">
+
+                </ComboBox>
+            </StackPanel>
+
+            <Border
+                Grid.Row="1"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Background="{StaticResource DarkThemeBackgroundSecondary}">
+                
+                
+            </Border>
+
+            <Button
+                VerticalAlignment="Center"
+                Margin="20">
+                Generate Encounter
+            </Button>
+
+        </StackPanel>
+
+        <Button
+            Grid.Row="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center">
+            Save Encounter
+        </Button>
     </Grid>
 </UserControl>
