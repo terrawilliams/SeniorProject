@@ -139,6 +139,11 @@
   <ItemGroup>
     <Resource Include="Images\ChaoticCreationsLogo.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Images\SearchIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\d20.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

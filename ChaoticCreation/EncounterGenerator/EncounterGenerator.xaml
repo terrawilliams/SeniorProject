@@ -32,7 +32,26 @@
                 <ComboBox
                     Padding="10"
                     Margin="10">
-
+                    <ComboBoxItem IsSelected="True">1</ComboBoxItem>
+                    <ComboBoxItem>2</ComboBoxItem>
+                    <ComboBoxItem>3</ComboBoxItem>
+                    <ComboBoxItem>4</ComboBoxItem>
+                    <ComboBoxItem>5</ComboBoxItem>
+                    <ComboBoxItem>6</ComboBoxItem>
+                    <ComboBoxItem>7</ComboBoxItem>
+                    <ComboBoxItem>8</ComboBoxItem>
+                    <ComboBoxItem>9</ComboBoxItem>
+                    <ComboBoxItem>10</ComboBoxItem>
+                    <ComboBoxItem>11</ComboBoxItem>
+                    <ComboBoxItem>12</ComboBoxItem>
+                    <ComboBoxItem>13</ComboBoxItem>
+                    <ComboBoxItem>14</ComboBoxItem>
+                    <ComboBoxItem>15</ComboBoxItem>
+                    <ComboBoxItem>16</ComboBoxItem>
+                    <ComboBoxItem>17</ComboBoxItem>
+                    <ComboBoxItem>18</ComboBoxItem>
+                    <ComboBoxItem>19</ComboBoxItem>
+                    <ComboBoxItem>20</ComboBoxItem>
                 </ComboBox>
             </StackPanel>
 
@@ -49,7 +68,11 @@
                 <ComboBox
                     Padding="10"
                     Margin="10">
-                  
+                    <ComboBoxItem Content="Any"/>
+                    <ComboBoxItem Content="Arctic"/>
+                    <ComboBoxItem IsSelected="True" Content="Forest"/>
+                    <ComboBoxItem Content="Mountains"/>
+                    <ComboBoxItem Content="Underdark"/>
                 </ComboBox>
             </StackPanel>
 
@@ -66,18 +89,12 @@
                 <ComboBox
                     Padding="10"
                     Margin="10">
-
+                    <ComboBoxItem Content="Easy"/>
+                    <ComboBoxItem IsSelected="True" Content="Medium"/>
+                    <ComboBoxItem Content="Hard"/>
+                    <ComboBoxItem Content="Deadly"/>
                 </ComboBox>
             </StackPanel>
-
-            <Border
-                Grid.Row="1"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                Background="{StaticResource DarkThemeBackgroundSecondary}">
-                
-                
-            </Border>
 
             <Button
                 VerticalAlignment="Center"
@@ -85,6 +102,38 @@
                 Generate Encounter
             </Button>
 
+        </StackPanel>
+
+        <StackPanel
+            Grid.Row="1"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center">
+
+            <TextBlock 
+                Text="Encounter:"
+                Foreground="White"
+                FontSize="24"
+                Padding="10"
+                HorizontalAlignment="Left"/>
+
+            <Border
+                Grid.Row="1"
+                Height="200" Width="400"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Bottom"
+                Background="{StaticResource DarkThemeBackgroundSecondary}"
+                Margin="10">
+                <ListBox 
+                    FontSize="24"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Left">
+                    <ListBoxItem Content="Black Bear"/>
+                    <ListBoxItem Content="Black Bear"/>
+                    <ListBoxItem Content="Dire Wolf"/>
+                </ListBox>
+
+            </Border>
+            
         </StackPanel>
 
         <Button
