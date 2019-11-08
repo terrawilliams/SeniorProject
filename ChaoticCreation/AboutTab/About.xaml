@@ -29,7 +29,7 @@
                 VerticalAlignment="Center">
                 <TextBlock
                     Text="Image of team here"/>
-                
+
                 <TextBlock
                     Grid.Column="1"
                     Grid.Row="2"
@@ -41,8 +41,6 @@
             </StackPanel>
         </Border>
 
-        
-
         <Border
             Grid.Column="3"
             Grid.Row="1"
@@ -50,6 +48,7 @@
             <TextBlock
                 TextWrapping="Wrap"
                 Foreground="White"
+                Margin="10"
                 Text="The team behind Chaotic Creations is a group of seniors in Computer Science at The University of Nevada..."/>
         </Border>
 

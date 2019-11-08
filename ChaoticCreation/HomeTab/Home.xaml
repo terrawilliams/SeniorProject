@@ -7,10 +7,50 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid Background="{StaticResource DarkThemeBackground}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
 
-        <TextBlock 
-            Text="This is the Home Page2"
-            VerticalAlignment="Center"
-            HorizontalAlignment="Center"/>
+        <TextBlock
+            Foreground="White"
+            VerticalAlignment="Bottom"
+            HorizontalAlignment="Center"
+            FontSize="24"
+            Text="Recent Creations"/>
+
+        <Border
+            x:Name="ListBorder"
+            Grid.Row="1"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            Padding="5" Margin="10"
+            Background="{StaticResource DarkThemeBackgroundSecondary}"
+            BorderBrush="White" BorderThickness=".5">
+            <ListBox FontSize="16">
+                <ListBoxItem Content="Challenge 0-4 Treasure Hoard"/>
+                <ListBoxItem Content="Scanlan Shorthalt"/>
+                <ListBoxItem Content="The Might Weasel"/>
+            </ListBox>
+        </Border>
+
+        <Border
+            Grid.Column="1"
+            Grid.Row="1"
+            Background="{StaticResource DarkThemeBackgroundSecondary}"
+            Margin="10">
+            <TextBlock
+                TextWrapping="Wrap"
+                Foreground="White"
+                FontSize="16"
+                Margin="10"
+                Text="Chaotic Creations is a website made for Dungeon Masters of the fifth edition of Dungeons and Dragons..."/>
+        </Border>
+
     </Grid>
 </UserControl>
