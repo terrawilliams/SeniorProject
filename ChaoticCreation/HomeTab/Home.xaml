@@ -42,7 +42,7 @@
         <Border
             Grid.Column="1"
             Grid.Row="1"
-            Background="{StaticResource DarkThemeBackgroundSecondary}"
+            Background="Transparent"
             Margin="10">
             <TextBlock
                 TextWrapping="Wrap"
