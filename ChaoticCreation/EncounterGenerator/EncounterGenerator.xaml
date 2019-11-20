@@ -27,31 +27,33 @@
                     Margin="2"
                     VerticalAlignment="Center"
                     Foreground="White">
+                    Party Size:
+                </TextBlock>
+                <ComboBox
+                    Name="PartySize"
+                    Padding="10"
+                    Margin="10"
+                    ItemsSource="{Binding Path=PartySize}"
+                    SelectedValue="{Binding Path=SelectedPartySize, Mode=TwoWay}">
+                </ComboBox>
+            </StackPanel>
+
+            <StackPanel 
+                Orientation="Horizontal"
+                Margin="10">
+                <TextBlock
+                    Padding="2"
+                    Margin="2"
+                    VerticalAlignment="Center"
+                    Foreground="White">
                     Party Level:
                 </TextBlock>
                 <ComboBox
+                    Name="PartyLevel"
                     Padding="10"
-                    Margin="10">
-                    <ComboBoxItem IsSelected="True">1</ComboBoxItem>
-                    <ComboBoxItem>2</ComboBoxItem>
-                    <ComboBoxItem>3</ComboBoxItem>
-                    <ComboBoxItem>4</ComboBoxItem>
-                    <ComboBoxItem>5</ComboBoxItem>
-                    <ComboBoxItem>6</ComboBoxItem>
-                    <ComboBoxItem>7</ComboBoxItem>
-                    <ComboBoxItem>8</ComboBoxItem>
-                    <ComboBoxItem>9</ComboBoxItem>
-                    <ComboBoxItem>10</ComboBoxItem>
-                    <ComboBoxItem>11</ComboBoxItem>
-                    <ComboBoxItem>12</ComboBoxItem>
-                    <ComboBoxItem>13</ComboBoxItem>
-                    <ComboBoxItem>14</ComboBoxItem>
-                    <ComboBoxItem>15</ComboBoxItem>
-                    <ComboBoxItem>16</ComboBoxItem>
-                    <ComboBoxItem>17</ComboBoxItem>
-                    <ComboBoxItem>18</ComboBoxItem>
-                    <ComboBoxItem>19</ComboBoxItem>
-                    <ComboBoxItem>20</ComboBoxItem>
+                    Margin="10"
+                    ItemsSource="{Binding Path=PartyLevel}"
+                    SelectedValue="{Binding Path=SelectedPartyLevel, Mode=TwoWay}">
                 </ComboBox>
             </StackPanel>
 
@@ -66,13 +68,11 @@
                     Terrain:
                 </TextBlock>
                 <ComboBox
+                    Name="Terrain"
                     Padding="10"
-                    Margin="10">
-                    <ComboBoxItem Content="Any"/>
-                    <ComboBoxItem Content="Arctic"/>
-                    <ComboBoxItem IsSelected="True" Content="Forest"/>
-                    <ComboBoxItem Content="Mountains"/>
-                    <ComboBoxItem Content="Underdark"/>
+                    Margin="10"
+                    ItemsSource="{Binding Path=Terrain}"
+                    SelectedValue="{Binding Path=SelectedTerrain, Mode=TwoWay}">
                 </ComboBox>
             </StackPanel>
 
@@ -87,18 +87,19 @@
                     Difficulty Level:
                 </TextBlock>
                 <ComboBox
+                    Name="Difficulty"
                     Padding="10"
-                    Margin="10">
-                    <ComboBoxItem Content="Easy"/>
-                    <ComboBoxItem IsSelected="True" Content="Medium"/>
-                    <ComboBoxItem Content="Hard"/>
-                    <ComboBoxItem Content="Deadly"/>
+                    Margin="10"
+                    ItemsSource="{Binding Path=Difficulty}"
+                    SelectedValue="{Binding Path=SelectedDifficulty, Mode=TwoWay}">
                 </ComboBox>
             </StackPanel>
 
             <Button
                 VerticalAlignment="Center"
-                Margin="20">
+                Margin="20"
+                MouseLeftButtonUp="GenerateButton_MouseLeftButtonUp"
+                MouseLeftButtonDown="GenerateButton_MouseLeftButtonUp">
                 Generate Encounter
             </Button>
 
@@ -126,10 +127,8 @@
                 <ListBox 
                     FontSize="24"
                     VerticalAlignment="Center"
-                    HorizontalAlignment="Left">
-                    <ListBoxItem Content="Black Bear"/>
-                    <ListBoxItem Content="Black Bear"/>
-                    <ListBoxItem Content="Dire Wolf"/>
+                    HorizontalAlignment="Left"
+                    ItemsSource="{Binding Path=Monsters, Mode=TwoWay}">
                 </ListBox>
 
             </Border>
@@ -139,7 +138,9 @@
         <Button
             Grid.Row="2"
             HorizontalAlignment="Center"
-            VerticalAlignment="Center">
+            VerticalAlignment="Center"
+            MouseLeftButtonUp="SaveButton_MouseLeftButtonUp"
+            >
             Save Encounter
         </Button>
     </Grid>

@@ -58,18 +58,24 @@
     <Compile Include="AboutTab\About.xaml.cs">
       <DependentUpon>About.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AboutTab\AboutModel.cs" />
     <Compile Include="EncounterGenerator\EncounterGenerator.xaml.cs">
       <DependentUpon>EncounterGenerator.xaml</DependentUpon>
     </Compile>
+    <Compile Include="EncounterGenerator\EncounterGeneratorModel.cs" />
     <Compile Include="HomeTab\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
     </Compile>
+    <Compile Include="HomeTab\HomeTabModel.cs" />
     <Compile Include="LocationGenerator\LocationGenerator.xaml.cs">
       <DependentUpon>LocationGenerator.xaml</DependentUpon>
     </Compile>
+    <Compile Include="LocationGenerator\LocationGeneratorModel.cs" />
     <Compile Include="NpcGenerator\NpcGenerator.xaml.cs">
       <DependentUpon>NpcGenerator.xaml</DependentUpon>
     </Compile>
+    <Compile Include="NpcGenerator\NpcGeneratorModel.cs" />
+    <Compile Include="RandomTables\RandomGeneratorModel.cs" />
     <Compile Include="RandomTables\RandomTables.xaml.cs">
       <DependentUpon>RandomTables.xaml</DependentUpon>
     </Compile>

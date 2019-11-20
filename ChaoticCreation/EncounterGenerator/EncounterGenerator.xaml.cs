@@ -20,9 +20,23 @@ namespace ChaoticCreation.EncounterGenerator
     /// </summary>
     public partial class EncounterGenerator : UserControl
     {
+        EncounterGeneratorModel encounterGeneratorModel = new EncounterGeneratorModel();
         public EncounterGenerator()
         {
             InitializeComponent();
+            this.DataContext = encounterGeneratorModel;
+        }
+
+        private void GenerateButton_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            encounterGeneratorModel.GenerateEncounter();
+            Console.WriteLine("Clicked Generate Button");
+        }
+
+        private void SaveButton_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            Console.WriteLine("Save Button Clicked");
+            encounterGeneratorModel.SaveCurrentEnocunter();
         }
     }
 }
