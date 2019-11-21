@@ -20,9 +20,21 @@ namespace ChaoticCreation.NpcGenerator
     /// </summary>
     public partial class NpcGenerator : UserControl
     {
+        NpcGeneratorModel npcGeneratorModel = new NpcGeneratorModel();
         public NpcGenerator()
         {
             InitializeComponent();
+            this.DataContext = npcGeneratorModel;
+        }
+
+        private void GenerateButton_Click(object sender, RoutedEventArgs e)
+        {
+            npcGeneratorModel.GenerateNewNpc();
+        }
+
+        private void SaveButton_Click(object sender, RoutedEventArgs e)
+        {
+            npcGeneratorModel.SaveCurrentNpc();
         }
     }
 }

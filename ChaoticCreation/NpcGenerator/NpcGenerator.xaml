@@ -31,17 +31,9 @@
                 </TextBlock>
                 <ComboBox
                     Padding="10"
-                    Margin="10">
-                    <ComboBoxItem>Any</ComboBoxItem>
-                    <ComboBoxItem>Dragonborn</ComboBoxItem>
-                    <ComboBoxItem>Dwarf</ComboBoxItem>
-                    <ComboBoxItem>Elf</ComboBoxItem>
-                    <ComboBoxItem IsSelected="True">Gnome</ComboBoxItem>
-                    <ComboBoxItem>Half-Elf</ComboBoxItem>
-                    <ComboBoxItem>Halfling</ComboBoxItem>
-                    <ComboBoxItem>Half-Orc</ComboBoxItem>
-                    <ComboBoxItem>Human</ComboBoxItem>
-                    <ComboBoxItem>Tiefling</ComboBoxItem>
+                    Margin="10"
+                    ItemsSource="{Binding Path=NpcRace}"
+                    SelectedValue="{Binding Path=CurrentNpcRace, Mode=TwoWay}">
                 </ComboBox>
             </StackPanel>
 
@@ -57,10 +49,9 @@
                 </TextBlock>
                 <ComboBox
                     Padding="10"
-                    Margin="10">
-                    <ComboBoxItem Content="Any"/>
-                    <ComboBoxItem IsSelected="True" Content="Male"/>
-                    <ComboBoxItem Content="Female"/>
+                    Margin="10"
+                    ItemsSource="{Binding Path=NpcGender}"
+                    SelectedValue="{Binding Path=CurrentNpcGender, Mode=TwoWay}">
                 </ComboBox>
             </StackPanel>
 
@@ -76,17 +67,16 @@
                 </TextBlock>
                 <ComboBox
                     Padding="10"
-                    Margin="10">
-                    <ComboBoxItem IsSelected="True" Content="Any"/>
-                    <ComboBoxItem Content="Adventurer"/>
-                    <ComboBoxItem Content="Inn Keeper"/>
-                    <ComboBoxItem Content="Musician"/>
+                    Margin="10"
+                    ItemsSource="{Binding Path=NpcOccupation}"
+                    SelectedValue="{Binding Path=CurrentNpcOccupation, Mode=TwoWay}">
                 </ComboBox>
             </StackPanel>
 
             <Button
                 VerticalAlignment="Center"
-                Margin="20">
+                Margin="20"
+                Click="GenerateButton_Click">
                 Generate NPC
             </Button>
 
@@ -120,7 +110,7 @@
                         HorizontalAlignment="Left"
                         Foreground="White"
                         Margin="5"
-                        Text="Scanlan Shorthalt"/>
+                        Text="{Binding Path=NpcName, Mode=TwoWay}"/>
                 </Border>
             </StackPanel>
                 
@@ -151,7 +141,7 @@
                         Foreground="White"
                         Margin="5"
                         Width="{Binding ElementName=DescriptionBorder, Path=ActualWidth}"
-                        Text="Before you stands a gnomish man with his dark hair in a short ponytail.  He's wearing fine purple clothing, and has a lyre strung across his back.  He's dancing across the stage playing a wooden flute."/>
+                        Text="{Binding Path=NpcDescription, Mode=TwoWay}"/>
                 </Border>
 
             </StackPanel>
@@ -162,7 +152,8 @@
         <Button
             Grid.Row="2"
             HorizontalAlignment="Center"
-            VerticalAlignment="Center">
+            VerticalAlignment="Center"
+            Click="SaveButton_Click">
             Save NPC
         </Button>
     </Grid>

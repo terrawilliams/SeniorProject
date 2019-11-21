@@ -81,12 +81,12 @@ namespace ChaoticCreation.LocationGenerator
 
         public void GenerateLocation()
         {
-
+            Console.WriteLine("Generate Location Button Pressed");
         }
 
         public void SaveLocation()
         {
-
+            Console.WriteLine("Save Location Button Pressed");
         }
     }
 }

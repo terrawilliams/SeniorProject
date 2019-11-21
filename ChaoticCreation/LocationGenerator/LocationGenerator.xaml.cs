@@ -27,14 +27,14 @@ namespace ChaoticCreation.LocationGenerator
             this.DataContext = locationGeneratorModel;
         }
 
-        private void GenerateButton_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        private void GenerateButton_Click(object sender, RoutedEventArgs e)
         {
-            Console.WriteLine("Generate Button Pressed");
+            locationGeneratorModel.GenerateLocation();
         }
 
-        private void SaveButton_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            Console.WriteLine("Save Button Pressed");
+            locationGeneratorModel.SaveLocation();
         }
     }
 }

@@ -27,15 +27,13 @@ namespace ChaoticCreation.EncounterGenerator
             this.DataContext = encounterGeneratorModel;
         }
 
-        private void GenerateButton_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        private void GenerateButton_Click(object sender, RoutedEventArgs e)
         {
             encounterGeneratorModel.GenerateEncounter();
-            Console.WriteLine("Clicked Generate Button");
         }
 
-        private void SaveButton_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            Console.WriteLine("Save Button Clicked");
             encounterGeneratorModel.SaveCurrentEnocunter();
         }
     }

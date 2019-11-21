@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ChaoticCreation.EncounterGenerator
 {
-    class EncounterGeneratorModel : INotifyPropertyChanged
+    class EncounterGeneratorModel
     {
         #region Members
         private List<int> partySize = new List<int>();
@@ -21,8 +21,6 @@ namespace ChaoticCreation.EncounterGenerator
         private int currentPartyLevel;
         private string currentTerrain;
         private string currentDifficulty;
-
-        public event PropertyChangedEventHandler PropertyChanged;
         #endregion
 
         #region Getters and Setters
@@ -46,7 +44,7 @@ namespace ChaoticCreation.EncounterGenerator
         public List<string> Monsters
         {
             get { return encounterMonsters; }
-            set { OnPropertyChanged("Monsters"); }
+            set { encounterMonsters = value; }
         }
 
         public int SelectedPartySize
@@ -111,22 +109,12 @@ namespace ChaoticCreation.EncounterGenerator
 
         public void GenerateEncounter()
         {
-            Console.WriteLine("Generate Button Pressed");
-            Monsters.Add("New Monster");
+            Console.WriteLine("Generate Encounter Button Pressed");
         }
 
         public void SaveCurrentEnocunter()
         {
-
-        }
-
-        protected void OnPropertyChanged(string name)
-        {
-            PropertyChangedEventHandler handler = PropertyChanged;
-            if (handler != null)
-            {
-                handler(this, new PropertyChangedEventArgs(name));
-            }
+            Console.WriteLine("Save Encounter Button Clicked");
         }
     }
 }

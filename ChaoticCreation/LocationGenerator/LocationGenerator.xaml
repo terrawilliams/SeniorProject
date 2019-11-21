@@ -58,7 +58,7 @@
             <Button
                 VerticalAlignment="Center"
                 Margin="20"
-                MouseLeftButtonUp="GenerateButton_MouseLeftButtonUp">
+                Click="GenerateButton_Click">
                 Generate Location
             </Button>
 
@@ -133,7 +133,7 @@
             Grid.Row="2"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
-            MouseLeftButtonUp="SaveButton_MouseLeftButtonUp">
+            Click="SaveButton_Click">
             Save Location
         </Button>
     </Grid>
