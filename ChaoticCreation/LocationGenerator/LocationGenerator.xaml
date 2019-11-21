@@ -31,14 +31,9 @@
                 </TextBlock>
                 <ComboBox
                     Padding="10"
-                    Margin="10">
-                    <ComboBoxItem>Any</ComboBoxItem>
-                    <ComboBoxItem>Blacksmith</ComboBoxItem>
-                    <ComboBoxItem>Castle</ComboBoxItem>
-                    <ComboBoxItem>General Store</ComboBoxItem>
-                    <ComboBoxItem>House</ComboBoxItem>
-                    <ComboBoxItem>Inn</ComboBoxItem>
-                    <ComboBoxItem IsSelected="True">Tavern</ComboBoxItem>
+                    Margin="10"
+                    ItemsSource="{Binding Path=LocationType}"
+                    SelectedValue="{Binding Path=CurrentLocationType, Mode=TwoWay}">
                 </ComboBox>
             </StackPanel>
 
@@ -54,19 +49,16 @@
                 </TextBlock>
                 <ComboBox
                     Padding="10"
-                    Margin="10">
-                    <ComboBoxItem Content="Any"/>
-                    <ComboBoxItem Content="Tiny"/>
-                    <ComboBoxItem Content="Small"/>
-                    <ComboBoxItem Content="Average"/>
-                    <ComboBoxItem IsSelected="True" Content="Large"/>
-                    <ComboBoxItem Content="Huge"/>
+                    Margin="10"
+                    ItemsSource="{Binding Path=PopulationSize}"
+                    SelectedValue="{Binding Path=CurrentPopulationSize, Mode=TwoWay}">
                 </ComboBox>
             </StackPanel>
 
             <Button
                 VerticalAlignment="Center"
-                Margin="20">
+                Margin="20"
+                MouseLeftButtonUp="GenerateButton_MouseLeftButtonUp">
                 Generate Location
             </Button>
 
@@ -100,7 +92,7 @@
                         HorizontalAlignment="Left"
                         Foreground="White"
                         Margin="5"
-                        Text="Mighty Weasel"/>
+                        Text="{Binding Path=LocationName}"/>
                 </Border>
             </StackPanel>
 
@@ -131,7 +123,7 @@
                         Foreground="White"
                         Margin="5"
                         Width="{Binding ElementName=DescriptionBorder, Path=ActualWidth}"
-                        Text="The tavern is full of mostly humans and dwarves.  Chandeliers made of antlers hang from the ceiling, and there is a band performing on a small stage."/>
+                        Text="{Binding Path=LocationDescription}"/>
                 </Border>
 
             </StackPanel>
@@ -140,7 +132,8 @@
         <Button
             Grid.Row="2"
             HorizontalAlignment="Center"
-            VerticalAlignment="Center">
+            VerticalAlignment="Center"
+            MouseLeftButtonUp="SaveButton_MouseLeftButtonUp">
             Save Location
         </Button>
     </Grid>

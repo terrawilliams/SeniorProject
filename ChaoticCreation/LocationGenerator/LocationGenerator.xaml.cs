@@ -20,9 +20,21 @@ namespace ChaoticCreation.LocationGenerator
     /// </summary>
     public partial class LocationGenerator : UserControl
     {
+        LocationGeneratorModel locationGeneratorModel = new LocationGeneratorModel();
         public LocationGenerator()
         {
             InitializeComponent();
+            this.DataContext = locationGeneratorModel;
+        }
+
+        private void GenerateButton_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            Console.WriteLine("Generate Button Pressed");
+        }
+
+        private void SaveButton_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            Console.WriteLine("Save Button Pressed");
         }
     }
 }
