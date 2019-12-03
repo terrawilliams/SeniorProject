@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,9 +10,9 @@ namespace ChaoticCreation.NpcGenerator
     class NpcGeneratorModel
     {
         #region Members
-        private List<string> npcRace = new List<string>();
-        private List<string> npcGender = new List<string>();
-        private List<string> npcOccupation = new List<string>();
+        private ObservableCollection<string> npcRace = new ObservableCollection<string>();
+        private ObservableCollection<string> npcGender = new ObservableCollection<string>();
+        private ObservableCollection<string> npcOccupation = new ObservableCollection<string>();
 
         private string currentNpcRace;
         private string currentNpcGender;
@@ -19,18 +20,20 @@ namespace ChaoticCreation.NpcGenerator
 
         private string npcName;
         private string npcDesctiption;
+
+        private Random rand = new Random();
         #endregion
 
         #region Getters and Setters
-        public List<string> NpcRace
+        public ObservableCollection<string> NpcRace
         {
             get { return npcRace; }
         }
-        public List<string> NpcGender
+        public ObservableCollection<string> NpcGender
         {
             get { return npcGender; }
         }
-        public List<string> NpcOccupation
+        public ObservableCollection<string> NpcOccupation
         { 
             get { return npcOccupation; }
         }
@@ -103,7 +106,11 @@ namespace ChaoticCreation.NpcGenerator
 
         public void GenerateNewNpc()
         {
-            Console.WriteLine("Generate NPC Button Pressed");
+            string race = (currentNpcRace.Equals("Any") ? npcRace.ElementAt(rand.Next(1, npcRace.Count)): currentNpcRace);
+            string gender = (currentNpcGender.Equals("Any") ? npcGender.ElementAt(rand.Next(1, npcGender.Count)) : currentNpcGender);
+            string occupation = (currentNpcOccupation.Equals("Any") ? npcOccupation.ElementAt(rand.Next(1, npcOccupation.Count)) : currentNpcOccupation);
+
+            Console.WriteLine("Generate NPC Button Pressed: " + race + " " + gender + " " + occupation);
         }
 
         public void SaveCurrentNpc()
