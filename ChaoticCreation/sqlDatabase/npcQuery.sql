@@ -11,7 +11,8 @@ INNER JOIN Items i ON i.ItemID == oi.ItemID
 INNER JOIN OccAction oa ON oa.OccID == occ.OccID
 INNER JOIN Actions a ON a.ActionID == oa.ActionID
 
+WHERE occ.OccName == 'Artisan'
+
 ORDER BY
 	RANDOM()
 LIMIT 1;
-
