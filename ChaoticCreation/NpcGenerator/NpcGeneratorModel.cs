@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace ChaoticCreation.NpcGenerator
 {
-    class NpcGeneratorModel
+    class NpcGeneratorModel : INotifyPropertyChanged
     {
         #region Members
         private ObservableCollection<string> npcRace = new ObservableCollection<string>();
@@ -19,9 +20,11 @@ namespace ChaoticCreation.NpcGenerator
         private string currentNpcOccupation;
 
         private string npcName;
-        private string npcDesctiption;
+        private string npcDescription;
 
         private Random rand = new Random();
+
+        public event PropertyChangedEventHandler PropertyChanged;
         #endregion
 
         #region Getters and Setters
@@ -56,12 +59,24 @@ namespace ChaoticCreation.NpcGenerator
         public string NpcName
         {
             get { return npcName; }
-            set { npcName = value; }
+            set 
+            {
+                if (npcName == value)
+                    return;
+                npcName = value;
+                OnPropertyChanged("NpcName");
+            }
         }
         public string NpcDescription
         {
-            get { return npcDesctiption; }
-            set { npcDesctiption = value; }
+            get { return npcDescription; }
+            set
+            {
+                if (npcDescription == value)
+                    return;
+                npcDescription = value;
+                OnPropertyChanged("NpcDescription");
+            }
         }
 
         #endregion
@@ -100,7 +115,7 @@ namespace ChaoticCreation.NpcGenerator
             currentNpcOccupation = npcOccupation.First();
 
             npcName = "ex name";
-            npcDesctiption = "ex description";
+            npcDescription = "ex description";
         }
         #endregion
 
@@ -110,12 +125,21 @@ namespace ChaoticCreation.NpcGenerator
             string gender = (currentNpcGender.Equals("Any") ? npcGender.ElementAt(rand.Next(1, npcGender.Count)) : currentNpcGender);
             string occupation = (currentNpcOccupation.Equals("Any") ? npcOccupation.ElementAt(rand.Next(1, npcOccupation.Count)) : currentNpcOccupation);
 
+            //GenerateNPC(race, gender, occupation);
+            NpcName = race;
+            NpcDescription = gender + " " + occupation;
             Console.WriteLine("Generate NPC Button Pressed: " + race + " " + gender + " " + occupation);
         }
 
         public void SaveCurrentNpc()
         {
             Console.WriteLine("Save NPC Button Pressed");
+        }
+
+        private void OnPropertyChanged(string property)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(property));
         }
     }
 }
