@@ -20,9 +20,27 @@ namespace ChaoticCreation.RandomTables
     /// </summary>
     public partial class RandomTables : UserControl
     {
+        RandomGeneratorModel randomGeneratorModel = new RandomGeneratorModel();
+
         public RandomTables()
         {
             InitializeComponent();
+            this.DataContext = randomGeneratorModel;
+        }
+
+        private void GenerateButton_Click(object sender, RoutedEventArgs e)
+        {
+            randomGeneratorModel.GenerateRandomTableSelection();
+        }
+
+        private void SaveSelectionButton_Click(object sender, RoutedEventArgs e)
+        {
+            randomGeneratorModel.SaveRandomTableSelection();
+        }
+
+        private void RollButton_Click(object sender, RoutedEventArgs e)
+        {
+            randomGeneratorModel.RollDie();
         }
     }
 }
