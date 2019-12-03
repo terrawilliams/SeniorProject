@@ -104,6 +104,11 @@ namespace ChaoticCreation.NpcGenerator
         public void GenerateNewNpc()
         {
             Console.WriteLine("Generate NPC Button Pressed");
+            NpcQuerry_Gen generator = new NpcQuerry_Gen();
+            List<string> userSpecifiedData = new List<string>();
+            userSpecifiedData.Add("'Bard'");
+            generator.NpcQuery(userSpecifiedData);
+            //Console.WriteLine(generator.NpcQuery(userSpecifiedData)["OccName"]);
         }
 
         public void SaveCurrentNpc()
