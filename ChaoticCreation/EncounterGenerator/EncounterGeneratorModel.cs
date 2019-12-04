@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -15,7 +16,7 @@ namespace ChaoticCreation.EncounterGenerator
         private List<string> terrain = new List<string>();
         private List<string> difficulty = new List<string>();
 
-        private List<string> encounterMonsters = new List<string>();
+        private ObservableCollection<string> encounterMonsters = new ObservableCollection<string>();
 
         private int currentPartySize;
         private int currentPartyLevel;
@@ -41,7 +42,7 @@ namespace ChaoticCreation.EncounterGenerator
             get { return difficulty; }
         }
 
-        public List<string> Monsters
+        public ObservableCollection<string> Monsters
         {
             get { return encounterMonsters; }
             set { encounterMonsters = value; }
@@ -102,8 +103,6 @@ namespace ChaoticCreation.EncounterGenerator
             currentPartyLevel = partyLevel.First();
             currentTerrain = terrain.First();
             currentDifficulty = difficulty.First();
-
-            encounterMonsters.Add("Monsters");
         }
         #endregion
 

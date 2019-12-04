@@ -94,7 +94,8 @@
             Grid.Row="2"
             VerticalAlignment="Center"
             HorizontalAlignment="Center"
-            Width="{Binding ElementName=SaveSelectionButton, Path=ActualWidth}">
+            Width="{Binding ElementName=SaveSelectionButton, Path=ActualWidth}"
+            Click="GenerateButton_Click">
             Generate            
         </Button>
 
@@ -114,7 +115,12 @@
             Padding="5" Margin="10"
             Background="{StaticResource DarkThemeBackgroundSecondary}"
             BorderBrush="White" BorderThickness=".5">
-            
+            <ListBox 
+                    FontSize="24"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Left"
+                    ItemsSource="{Binding Path=RandomTableResult, Mode=TwoWay}">
+            </ListBox>
         </Border>
 
         <Button
@@ -122,7 +128,8 @@
             Grid.Column="1"
             Grid.Row="2"
             VerticalAlignment="Center"
-            HorizontalAlignment="Center">
+            HorizontalAlignment="Center"
+            Click="SaveSelectionButton_Click">
             Save Selection
         </Button>
 
@@ -139,7 +146,8 @@
             Grid.Row="2"
             VerticalAlignment="Center"
             HorizontalAlignment="Center"
-            Width="{Binding ElementName=SaveSelectionButton, Path=ActualWidth}">
+            Width="{Binding ElementName=SaveSelectionButton, Path=ActualWidth}"
+            Click="RollButton_Click">
             Roll 
         </Button>
     </Grid>
