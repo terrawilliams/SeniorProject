@@ -63,6 +63,7 @@
       <DependentUpon>EncounterGenerator.xaml</DependentUpon>
     </Compile>
     <Compile Include="EncounterGenerator\EncounterGeneratorModel.cs" />
+    <Compile Include="GeneratorTypesEnum.cs" />
     <Compile Include="HomeTab\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
     </Compile>

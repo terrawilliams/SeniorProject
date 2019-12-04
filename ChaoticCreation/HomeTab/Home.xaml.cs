@@ -20,9 +20,11 @@ namespace ChaoticCreation.HomeTab
     /// </summary>
     public partial class Home : UserControl
     {
+        HomeTabModel homeTabModel = new HomeTabModel();
         public Home()
         {
             InitializeComponent();
+            this.DataContext = homeTabModel;
         }
     }
 }
