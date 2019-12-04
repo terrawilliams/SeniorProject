@@ -1,0 +1,199 @@
+ActionID,ActionDescription
+8,reading a magazine
+9,reading a comic
+10,reading a manual
+11,reading a newspaper
+12,reading poetry
+13,reading a travel brochure
+14,reading an encyclopedia
+15,reading a recipe book
+16,reading a dictionary
+17,reading a play script
+18,reading an atlas
+19,reading a sign
+20,reading about  alchemy and potions 
+21,reading about  art and architecture 
+22,reading about  astronomy and astrology 
+23,reading about  beast lore 
+24,reading about  demonology 
+25,reading about  divination 
+26,reading about  healing arts 
+27,reading about  herb lore 
+28,reading about  history 
+29,reading about  languages 
+30,reading about  literary fiction 
+31,reading about  mining and mineralogy 
+32,reading about  music and songs 
+33,reading about  necromancy 
+34,reading about  plays 
+35,reading about  poetry and poems 
+36,reading about  prophecies and omens 
+37,reading about  theology 
+38,reading about  true magic 
+39,reading about  travel and trade 
+40,reading about  healing tonics
+41,reading about  fortresses and palaces
+42,reading about  comets
+43,reading about  domestic beasts
+44,reading about  conjurings
+45,reading about  anthropomancy
+46,reading about  alchemical remedies
+47,reading about  healing herbs
+48,reading about  ancient
+50,reading about  adventure
+51,reading about  gems
+52,reading about  heroic ballads
+53,reading about  animation
+54,reading about  comedy
+55,reading about  ballads
+56,reading about  apocalypse
+57,reading about  afterlife
+58,reading about  elementalism
+59,reading about  ancient ruins
+60,reading about  metallurgy
+61,reading about  painting
+62,reading about  constellations
+63,reading about  habits
+64,reading about  exorcisms
+65,reading about  crystal gazing
+66,reading about  anatomy
+67,reading about  mushrooms
+68,reading about  cultural
+69,reading about  forbidden
+70,reading about  fairy tales
+71,reading about  metals
+72,reading about  love ballads
+73,reading about  corpses
+74,reading about  drama
+75,reading about  epic poetry
+76,reading about  astronomical events
+77,reading about  rituals and practices
+78,reading about  enchantment
+79,reading about  exotic travelogue
+80,reading about  pyromancy
+81,reading about  sketching
+82,reading about  moon
+83,reading about  handling
+84,reading about  fiendish bargains
+85,reading about  oneiromancy
+86,reading about  herbal remedies
+87,reading about  poisons
+88,reading about  economic
+89,reading about  exotic
+90,reading about  folk tales
+91,reading about  mining sties
+95,reading about  love poetry
+96,reading about  birds
+97,reading about  religious history
+98,reading about  illusions
+99,reading about  economics and taxation
+100,reading about  poisoncraft
+101,reading about  sculpture
+102,reading about  sun
+103,reading about  husbandry
+104,reading about  fiendish bestiary
+105,reading about  palm reading
+106,reading about  prayers
+107,reading about  roots
+108,reading about  military
+109,reading about  grammar and punctuation
+110,reading about  murder mystery
+111,reading about  strategy
+112,reading about  dirges and laments
+113,reading about  spirits and souls
+114,reading about  romance
+115,reading about  lyric poetry
+116,reading about  dreams
+117,reading about  saints and martyrs
+118,reading about  summoning
+119,reading about  foreign cultures
+120,reading about  potionmaking
+121,reading about  stonemasonry
+122,reading about  stars
+123,reading about  poisonous beasts
+124,reading about  fiendish realms
+125,reading about  tarot cards
+126,reading about  rituals
+127,reading about  trees
+131,reading about  rocks
+132,reading about  hymns
+133,reading about  undead bestiary
+134,reading about  satire
+135,reading about  odes and laments
+136,reading about  visions
+137,reading about  sacred symbols
+138,reading about  teleportation and travel
+139,reading about  regional landmarks and terrain
+140,reading about  recipes
+141,reading about  temples and tombs
+142,reading about  strange phenomena
+143,reading about  regional bestiary
+144,reading about  fiendish symbols
+145,reading about  tea leaves
+146,reading about  surgery
+147,reading about  wildflowers
+152,reading about  works of a celebrated singer
+153,reading about  vampirism
+154,reading about  tragedy
+155,reading about  works of a celebrated poet
+156,reading about  weather
+157,reading about  sacred texts
+158,reading about  warding
+159,reading about  trade routes
+160,building a wardrobe
+161,building a piano
+162,building a couch
+163,building a table
+164,building a chair
+165,building a mirror
+166,building a clock
+167,building a lute
+168,building a flute
+169,building a harp
+170,building a sword
+171,building an axe
+172,building a lance
+173,building a dagger
+174,building a bow
+175,building a crossbow
+176,building a shield
+177,building a helmet
+178,building a breastplate
+179,pushing a car
+180,pushing a door open
+181,pushing the envelope
+182,pushing their luck
+183,pushing a wardrobe
+184,pushing a piano
+185,pushing a couch
+186,pushing a table
+187,pushing a chair
+188,pushing someone on a swing
+189,pushing buttons
+190,pushing a wheelbarrow
+191,playing a cittern
+192,playing a fiddle
+193,playing a harp
+194,playing a lute
+195,playing a lyre
+196,playing a mandolin
+197,playing a  Set of castanets
+198,playing a  Pair of cymbals
+199,playing a  Single-headed drum
+200,playing a  Two-headed drum
+201,playing a  Pair of maracas
+202,playing a  Tambourine
+203,dancing the hustle
+204,dancing the robot
+205,dancing the bachata
+206,dancing the cha cha
+207,dancing the mambo
+208,dancing the rumba
+209,dancing the tango
+210,dancing the merengue
+211,dancing the salsa
+212,dancing the twist
+213,dancing the jitterbug
+214,dancing the jive
+215,dancing the lindy hop
+216,dancing the charleston

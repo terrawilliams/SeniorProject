@@ -20,9 +20,11 @@ namespace ChaoticCreation.AboutTab
     /// </summary>
     public partial class About : UserControl
     {
+        AboutModel aboutModel = new AboutModel();
         public About()
         {
             InitializeComponent();
+            this.DataContext = aboutModel;
         }
     }
 }

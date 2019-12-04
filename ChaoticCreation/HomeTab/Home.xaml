@@ -32,10 +32,13 @@
             Padding="5" Margin="10"
             Background="{StaticResource DarkThemeBackgroundSecondary}"
             BorderBrush="White" BorderThickness=".5">
-            <ListBox FontSize="16">
-                <ListBoxItem Content="Challenge 0-4 Treasure Hoard"/>
-                <ListBoxItem Content="Scanlan Shorthalt"/>
-                <ListBoxItem Content="The Might Weasel"/>
+            <ListBox FontSize="16"
+                     ItemsSource="{Binding Path=RecentCreations}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Path=name}"/>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
             </ListBox>
         </Border>
 
@@ -49,7 +52,7 @@
                 Foreground="White"
                 FontSize="16"
                 Margin="10"
-                Text="Chaotic Creations is a website made for Dungeon Masters of the fifth edition of Dungeons and Dragons..."/>
+                Text="{Binding Path=ApplicationDescription}"/>
         </Border>
 
     </Grid>
