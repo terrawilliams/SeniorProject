@@ -11,7 +11,7 @@ INNER JOIN Items i ON i.ItemID == oi.ItemID
 INNER JOIN OccAction oa ON oa.OccID == occ.OccID
 INNER JOIN Actions a ON a.ActionID == oa.ActionID
 
-WHERE occ.OccName == 'Artisan'
+/*WHERE occ.OccName == 'Artisan'*/ 
 
 ORDER BY
 	RANDOM()
@@ -19,7 +19,7 @@ LIMIT 1;</sql><sql name="nameQuery.sql">SELECT 	Name,
 		d.Description
 FROM Names
 INNER JOIN Descriptor d
-WHERE Names.Gender == 'M' AND d.Gender == Names.Gender
+/*WHERE Names.Gender == 'M' AND d.Gender == Names.Gender*/
 
 ORDER BY
 	RANDOM()
@@ -31,5 +31,5 @@ ORDER BY
 	RANDOM()
 LIMIT 1;</sql><sql name="raceQuery.sql">SELECT Race.RaceAdj
 FROM Race
-WHERE Race.Race == LOWER('Gnome')
+/*WHERE Race.Race == LOWER('Gnome')*/
 </sql><current_tab id="2"/></tab_sql></sqlb_project>

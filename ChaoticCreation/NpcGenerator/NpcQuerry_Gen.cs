@@ -3,12 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace ChaoticCreation.NpcGenerator
 {
-    class NpcDetails
+    class NpcQuerry_Gen : GeneralGenerator
     {
         #region Members
+        private string query = "SELECT occ.OccName, q.QualityDescription, i.ItemDescription, a.ActionDescription FROM Occupation occ LEFT JOIN Quality q ON q.QualityID == occ.OccQuality INNER JOIN OccItems oi ON oi.OccID == occ.OccID INNER JOIN Items i ON i.ItemID == oi.ItemID INNER JOIN OccAction oa ON oa.OccID == occ.OccID INNER JOIN Actions a ON a.ActionID == oa.ActionID ORDER BY RANDOM() LIMIT 1;";
+        private string colorQuery = "SELECT c.Color FROM Color c ORDER BY RANDOM() LIMIT 1;";
+        private string raceQuery = "SELECT Race.RaceAdj FROM Race WHERE Race.Race == LOWER('Gnome')";
+
         //actions
         private int actionID;
             //string?
@@ -57,6 +62,10 @@ namespace ChaoticCreation.NpcGenerator
         #endregion
 
         #region Getters and Setters
+        public string CurrantQuery {
+            get { return CurrantQuery; }
+            set { query = value; }
+        }
         public int CurrantActionID {
             get { return CurrantActionID; }
             set { actionID = value; }
@@ -136,6 +145,21 @@ namespace ChaoticCreation.NpcGenerator
         public string CurrentRaceAdj {
             get { return CurrentRaceAdj; }
             set { raceAdj = value; }
+        }
+        #endregion
+
+        #region Methods
+        public Dictionary<string, string> NpcQuery(List<string> userSpecifiedData)
+        {
+            foreach (string userData in userSpecifiedData)
+            {
+                query = QueryEdit("occ.OccName", userSpecifiedData[0], query);
+            }
+            //Console.WriteLine(query);
+            Dictionary<string, string> data = QueryDatabase("..\\..\\sqlDatabase\\NPC.db", query);
+
+            return data;
+
         }
         #endregion
 
