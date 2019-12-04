@@ -27,8 +27,9 @@
             <StackPanel
                 Orientation="Vertical"
                 VerticalAlignment="Center">
-                <TextBlock
-                    Text="Image of team here"/>
+                <Image
+                    Source="../Images/ddpic.jpg"
+                    Height="250"/>
 
                 <TextBlock
                     Grid.Column="1"
@@ -37,7 +38,7 @@
                     FontSize="18"
                     VerticalAlignment="Top"
                     HorizontalAlignment="Center"
-                    Text="Caption for group picture"/>
+                    Text="{Binding Path=Caption}"/>
             </StackPanel>
         </Border>
 
@@ -49,7 +50,7 @@
                 TextWrapping="Wrap"
                 Foreground="White"
                 Margin="10"
-                Text="The team behind Chaotic Creations is a group of seniors in Computer Science at The University of Nevada..."/>
+                Text="{Binding Path=Description}"/>
         </Border>
 
     </Grid>
