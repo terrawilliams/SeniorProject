@@ -30,20 +30,21 @@ namespace ChaoticCreation
         #endregion
 
         #region Methods
-        
+        //edit the query so that we can have searches
         protected string QueryEdit(string first, string fromFrontEnd, string query)
         {
             string temp;
 
             temp = " WHERE ";
             temp += first;
-            temp += " == ";
+            temp += " == '";
             temp += fromFrontEnd;
-            temp += " ";
+            temp += "' ";
 
             return query.Insert(query.LastIndexOf("ORDER BY"), temp);
         }
-        protected Dictionary<string, string> QueryDatabase(string filePath, string query) 
+        //query the database
+        protected DataSet QueryDatabase(string filePath, string query) 
         {
             string temp = "Data Source=";
             temp += filePath;
@@ -58,36 +59,7 @@ namespace ChaoticCreation
             dataSet.Reset();
             data.Fill(dataSet);
 
-            Dictionary<string, string> returnValue = new Dictionary<string, string>();
-
-            foreach (DataTable table in dataSet.Tables)
-            {
-                foreach (DataRow row in table.Rows)
-                {
-                    List<string> xComp = new List<string>();
-                    List<string> yComp = new List<string>();
-
-                    foreach (object y in row.ItemArray)
-                    {
-                        yComp.Add(y.ToString());
-                    }
-                    foreach (DataColumn x in table.Columns)
-                    {
-                        xComp.Add(x.ToString());
-                    }
-                    Console.WriteLine(xComp.Count);
-                    for (int i = 0; i < xComp.Count; i++)
-                    {
-                        //x and y comp should be the same size
-                        //Console.WriteLine(xComp[i]);
-                        returnValue.Add(xComp[i], yComp[i]);
-                    }
-                }
-            }
-
-            
-
-            return returnValue;
+            return dataSet;
         }
         
         #endregion
