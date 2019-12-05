@@ -129,7 +129,7 @@ namespace ChaoticCreation.NpcGenerator
 
             bool gender;
             string name;
-            if (userSpecifiedData[1] == "M")
+            if (userSpecifiedData[1] == "Male")
             {
                 name = maleNames[rand.Next(0, maleNames.Count)];
                 gender = true;
