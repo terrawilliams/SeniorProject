@@ -81,30 +81,31 @@ namespace ChaoticCreation.NpcGenerator
         public NpcGeneratorModel()
         {
             npcRace.Add("Any");
-            npcRace.Add("Dragonborn");
-            npcRace.Add("Dwarf");
-            npcRace.Add("Elf");
-            npcRace.Add("Gnome");
-            npcRace.Add("Half-Elf");
-            npcRace.Add("Halfling");
-            npcRace.Add("Half-Orc");
-            npcRace.Add("Human");
-            npcRace.Add("Tiefling");
+            npcRace.Add("dragonborn");
+            npcRace.Add("dwarf");
+            npcRace.Add("elf");
+            npcRace.Add("gnome");
+            npcRace.Add("half-elf");
+            npcRace.Add("halfling");
+            npcRace.Add("half-orc");
+            npcRace.Add("human");
+            npcRace.Add("tiefling");
+            npcRace.Add("eladrin");
 
             npcGender.Add("Any");
             npcGender.Add("Male");
             npcGender.Add("Female");
 
+            //KEEP ONLY THESE HERE FOR NOW OR ELSE YOU BREAK THINGS
             npcOccupation.Add("Any");
-            npcOccupation.Add("Adventurer");
-            npcOccupation.Add("Artist");
-            npcOccupation.Add("Bartender");
-            npcOccupation.Add("Blacksmith");
-            npcOccupation.Add("Guard");
-            npcOccupation.Add("Innkeeper");
-            npcOccupation.Add("Musician");
-            npcOccupation.Add("Royalty");
-            npcOccupation.Add("Shopkeep");
+            npcOccupation.Add("Academic");
+            npcOccupation.Add("Apothecary");
+            npcOccupation.Add("Athlete");
+            npcOccupation.Add("Celebrity");
+            npcOccupation.Add("Assassin");
+            npcOccupation.Add("Artisan");
+            //Doesn't work anything after :
+            //npcOccupation.Add("Colonist");
 
             currentNpcRace = npcRace.First();
             currentNpcGender = npcGender.First();
@@ -114,33 +115,10 @@ namespace ChaoticCreation.NpcGenerator
             npcDescription = "ex description";
         }
         #endregion
-
+        
         public void GenerateNewNpc()
         {
-<<<<<<< HEAD
-            string race = (currentNpcRace.Equals("Any") ? npcRace.ElementAt(rand.Next(1, npcRace.Count)): currentNpcRace); //added to master 12/2
-            string gender = (currentNpcGender.Equals("Any") ? npcGender.ElementAt(rand.Next(1, npcGender.Count)) : currentNpcGender); //added to master 12/2
-            string occupation = (currentNpcOccupation.Equals("Any") ? npcOccupation.ElementAt(rand.Next(1, npcOccupation.Count)) : currentNpcOccupation); //added to master 12/2
-
-            List<string> generationArguments = new List<string>(); //added to master 12/2
-            generationArguments.Add(race);  //added to master 12/2
-            generationArguments.Add(gender); //added to master 12/2
-            generationArguments.Add(occupation); //added to master 12/2
-
-            //GenerateNPC(generationArguments); //removed on master 12/2
-
-            NpcName = race; //changed 12/2
-            NpcDescription = gender + " " + occupation; //changed 12/2
-            Console.WriteLine("Generate NPC Button Pressed: " + race + " " + gender + " " + occupation); //changed on master 12/2
-        
             
-            //Console.WriteLine("Generate NPC Button Pressed");
-            //NpcQuerry_Gen generator = new NpcQuerry_Gen(); 
-            List<string> userSpecifiedData = new List<string>(); 
-            userSpecifiedData.Add("'Bard'"); 
-            //generator.NpcQuery(userSpecifiedData); 
-            //Console.WriteLine(generator.NpcQuery(userSpecifiedData)["OccName"]);
-=======
             string race = (currentNpcRace.Equals("Any") ? npcRace.ElementAt(rand.Next(1, npcRace.Count)): currentNpcRace);
             string gender = (currentNpcGender.Equals("Any") ? npcGender.ElementAt(rand.Next(1, npcGender.Count)) : currentNpcGender);
             string occupation = (currentNpcOccupation.Equals("Any") ? npcOccupation.ElementAt(rand.Next(1, npcOccupation.Count)) : currentNpcOccupation);
@@ -149,16 +127,21 @@ namespace ChaoticCreation.NpcGenerator
             generationArguments.Add(race);
             generationArguments.Add(gender);
             generationArguments.Add(occupation);
-
+            
             Dictionary<string, string> generatedNpc = new Dictionary<string, string>();
             generatedNpc.Add(race, gender + " " + occupation);
             //generatedNpc = GenerateNPC(generationArguments);
 
+            //This is what I added @tera
+            NpcQuerry_Gen generator = new NpcQuerry_Gen();
+            generatedNpc = generator.NpcQuery(generationArguments);
+            //end
+            
             NpcName = generatedNpc.First().Key;
             NpcDescription = generatedNpc.First().Value;
 
             Console.WriteLine("Generate NPC Button Pressed: " + race + " " + gender + " " + occupation);
->>>>>>> master
+            
         }
 
         public void SaveCurrentNpc()
