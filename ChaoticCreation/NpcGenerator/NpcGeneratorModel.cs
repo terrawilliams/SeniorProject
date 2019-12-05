@@ -1,15 +1,15 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel; //added on master 12/2/19
-using System.ComponentModel; //added on master 12/2/19
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace ChaoticCreation.NpcGenerator
 {
-    class NpcGeneratorModel : INotifyPropertyChanged //changed on master 12/2/19
-    {    
+    class NpcGeneratorModel : INotifyPropertyChanged
+    {
         #region Members
         private List<string> npcRace = new List<string>();
         private List<string> npcGender = new List<string>();
@@ -22,18 +22,22 @@ namespace ChaoticCreation.NpcGenerator
         private string npcName;
         private string npcDescription;
 
-        private Random rand = new Random(); //added on master 12/2
-        public event PropertyChangedEventHandler PropertyChanged; //added on master 12/2
+        private Random rand = new Random();
+
+        public event PropertyChangedEventHandler PropertyChanged;
         #endregion
 
-#region Getters and Setters
-        public List<string> NpcRace{
+        #region Getters and Setters
+        public List<string> NpcRace
+        {
             get { return npcRace; }
         }
-        public List<string> NpcGender{
+        public List<string> NpcGender
+        {
             get { return npcGender; }
         }
-        public List<string> NpcOccupation{ 
+        public List<string> NpcOccupation
+        { 
             get { return npcOccupation; }
         }
 
@@ -55,9 +59,10 @@ namespace ChaoticCreation.NpcGenerator
         public string NpcName
         {
             get { return npcName; }
-            set {
+            set 
+            {
                 npcName = value;
-                OnPropertyChanged("NpcName"); //added to master 12/2
+                OnPropertyChanged("NpcName");
             }
         }
         public string NpcDescription
@@ -66,7 +71,7 @@ namespace ChaoticCreation.NpcGenerator
             set
             {
                 npcDescription = value;
-                OnPropertyChanged("NpcDescription"); //added to master 12/2
+                OnPropertyChanged("NpcDescription");
             }
         }
 
@@ -112,6 +117,7 @@ namespace ChaoticCreation.NpcGenerator
 
         public void GenerateNewNpc()
         {
+<<<<<<< HEAD
             string race = (currentNpcRace.Equals("Any") ? npcRace.ElementAt(rand.Next(1, npcRace.Count)): currentNpcRace); //added to master 12/2
             string gender = (currentNpcGender.Equals("Any") ? npcGender.ElementAt(rand.Next(1, npcGender.Count)) : currentNpcGender); //added to master 12/2
             string occupation = (currentNpcOccupation.Equals("Any") ? npcOccupation.ElementAt(rand.Next(1, npcOccupation.Count)) : currentNpcOccupation); //added to master 12/2
@@ -134,15 +140,33 @@ namespace ChaoticCreation.NpcGenerator
             userSpecifiedData.Add("'Bard'"); 
             //generator.NpcQuery(userSpecifiedData); 
             //Console.WriteLine(generator.NpcQuery(userSpecifiedData)["OccName"]);
+=======
+            string race = (currentNpcRace.Equals("Any") ? npcRace.ElementAt(rand.Next(1, npcRace.Count)): currentNpcRace);
+            string gender = (currentNpcGender.Equals("Any") ? npcGender.ElementAt(rand.Next(1, npcGender.Count)) : currentNpcGender);
+            string occupation = (currentNpcOccupation.Equals("Any") ? npcOccupation.ElementAt(rand.Next(1, npcOccupation.Count)) : currentNpcOccupation);
+
+            List<string> generationArguments = new List<string>();
+            generationArguments.Add(race);
+            generationArguments.Add(gender);
+            generationArguments.Add(occupation);
+
+            Dictionary<string, string> generatedNpc = new Dictionary<string, string>();
+            generatedNpc.Add(race, gender + " " + occupation);
+            //generatedNpc = GenerateNPC(generationArguments);
+
+            NpcName = generatedNpc.First().Key;
+            NpcDescription = generatedNpc.First().Value;
+
+            Console.WriteLine("Generate NPC Button Pressed: " + race + " " + gender + " " + occupation);
+>>>>>>> master
         }
 
         public void SaveCurrentNpc()
         {
             Console.WriteLine("Save NPC Button Pressed");
         }
-        
-        //added to master 12/2
-         private void OnPropertyChanged(string property)
+
+        private void OnPropertyChanged(string property)
         {
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(property));
