@@ -127,12 +127,9 @@ namespace ChaoticCreation.NpcGenerator
             generationArguments.Add(race);
             generationArguments.Add(gender);
             generationArguments.Add(occupation);
-            
-            Dictionary<string, string> generatedNpc = new Dictionary<string, string>();
-            generatedNpc.Add(race, gender + " " + occupation);
-
+        
             NpcQuery_Gen generator = new NpcQuery_Gen();
-            generatedNpc = generator.NpcQuery(generationArguments);
+            var generatedNpc = generator.NpcQuery(generationArguments);
             
             NpcName = generatedNpc.First().Key;
             NpcDescription = generatedNpc.First().Value;
