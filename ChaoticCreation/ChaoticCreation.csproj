@@ -97,7 +97,7 @@
       <DependentUpon>NpcGenerator.xaml</DependentUpon>
     </Compile>
     <Compile Include="NpcGenerator\NpcGeneratorModel.cs" />
-    <Compile Include="NpcGenerator\NpcQuerry_Gen.cs" />
+    <Compile Include="NpcGenerator\NpcQuery_Gen.cs" />
     <Compile Include="RandomTables\RandomGeneratorModel.cs" />
     <Compile Include="RandomTables\RandomTables.xaml.cs">
       <DependentUpon>RandomTables.xaml</DependentUpon>
@@ -191,7 +191,6 @@
     <Content Include="sqlDatabase\nameQuery.sql" />
     <Content Include="sqlDatabase\npcQuery.sql" />
     <Content Include="sqlDatabase\raceQuery.sql" />
-    <Resource Include="XMLDatabase\5e-Monsters.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

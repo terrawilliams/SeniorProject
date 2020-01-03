@@ -20,6 +20,8 @@ namespace ChaoticCreation
 
         #region Members
         private string fileName;
+        public const string GeneralQuery = "SELECT * FROM table ORDER BY RANDOM() LIMIT 1;";
+
         #endregion
 
         #region Getters and Setters
@@ -30,21 +32,34 @@ namespace ChaoticCreation
         #endregion
 
         #region Methods
-        //edit the query so that we can have searches
-        protected string QueryEdit(string first, string fromFrontEnd, string query)
+
+        //can adapt to many situations
+        //must require at least the table being queried, then it default uses the general query defined in the members of this class, however that can be replaced if need be(see the UI implementation in NpcGeneratorModel)
+        //column and search are for when you are searching for something specfic (user specified) column is the column in the table you want to grab from, and search is the specific thing you are searching for
+        public string QueryEdit(string table, string query = GeneralQuery, string column = null, string search = null)
         {
-            string temp;
+            string retValue = query;
 
-            temp = " WHERE ";
-            temp += first;
-            temp += " == '";
-            temp += fromFrontEnd;
-            temp += "' ";
+            if (search != null)
+            {
+                string temp;
 
-            return query.Insert(query.LastIndexOf("ORDER BY"), temp);
+                temp = " WHERE ";
+                temp += column;
+                temp += " == '";
+                temp += search;
+                temp += "' ";
+                retValue = query.Insert(query.LastIndexOf("ORDER BY"), temp);
+
+            }
+
+            retValue = retValue.Replace("table", table);
+            return retValue;
+
         }
+
         //query the database
-        protected DataSet QueryDatabase(string filePath, string query) 
+        public DataSet QueryDatabase(string filePath, string query) 
         {
             string temp = "Data Source=";
             temp += filePath;
@@ -61,7 +76,26 @@ namespace ChaoticCreation
 
             return dataSet;
         }
-        
+        //Read from database and store into a dictionary holding specific values. column descriptions in db are the key for the dictionary and the info in that column is the data in the dictionary
+        public Dictionary<string, string> Query(DataSet data)
+        {
+            Dictionary<string, string> dataValues = new Dictionary<string, string>();
+
+            DataRowCollection rowValue = data.Tables[0].Rows;
+            DataColumnCollection colValue = data.Tables[0].Columns;
+
+            foreach (DataRow row in rowValue)
+            {
+                int i = 0;
+                foreach (object obj in row.ItemArray)
+                {
+                    dataValues.Add(obj.ToString(), colValue[i++].Caption.ToString());
+                }
+            }
+
+            return dataValues;
+
+        }
         #endregion
     }
 }
