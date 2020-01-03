@@ -82,14 +82,14 @@ namespace ChaoticCreation.NpcGenerator
         #region Constructor
         public NpcGeneratorModel()
         {
-            /*
+            
             NpcQuery_Gen DatabaseToUI = new NpcQuery_Gen();
-            var dictionary = DatabaseToUI.Query(DatabaseToUI.QueryDatabase("..\\..\\sqlDatabase\\NPC.db", "SELECT * FROM Occupations ORDER BY RANDOM();"));
+            var dictionary = DatabaseToUI.Query(DatabaseToUI.QueryDatabase("..\\..\\sqlDatabase\\NPC.db", "SELECT * FROM Occupations;"));
             foreach (KeyValuePair<string,string> iterate in dictionary)
             {
-                npcOccupation.Add(iterate.Value);
+                npcOccupation.Add(iterate.Key);
             }
-            */
+            
             npcRace.Add("Any");
             npcRace.Add("dragonborn");
             npcRace.Add("dwarf");

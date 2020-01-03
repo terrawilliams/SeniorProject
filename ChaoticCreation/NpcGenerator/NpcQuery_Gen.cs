@@ -34,8 +34,7 @@ namespace ChaoticCreation.NpcGenerator
             else
                 description += " woman, she is a";
 
-            string generalDictOut;
-            values[8].TryGetValue("OccName", out generalDictOut);
+            string generalDictOut = values[8].ElementAt(0).Key;
 
             if ((generalDictOut.StartsWith("A")) || (generalDictOut.StartsWith("a")))
                 description += "n ";
@@ -44,42 +43,42 @@ namespace ChaoticCreation.NpcGenerator
             description += generalDictOut;
             description += " their body is ";
 
-            values[0].TryGetValue("d20Body:", out generalDictOut);
+            generalDictOut = values[0].ElementAt(0).Key;
             description += generalDictOut.ToLower();
 
             description += " that stands at a height that is ";
 
-            values[5].TryGetValue("d6Height:", out generalDictOut);
+            generalDictOut = values[5].ElementAt(0).Key;
             description += generalDictOut.ToLower();
 
             description += ". They also have ";
 
-            values[1].TryGetValue("d8Chinorjaw:", out generalDictOut);
+            generalDictOut = values[1].ElementAt(0).Key;
             description += generalDictOut.ToLower();
 
             description += ". Upon closer inspection, they have ";
 
-            values[2].TryGetValue("EarsTbl", out generalDictOut);
+            generalDictOut = values[2].ElementAt(0).Key;
             description += generalDictOut.ToLower();
 
             description += ", they have ";
 
-            values[3].TryGetValue("d20Hair:", out generalDictOut);
+            generalDictOut = values[3].ElementAt(0).Key;
             description += generalDictOut.ToLower();
 
             description += " and they have ";
 
-            values[4].TryGetValue("d6Hands:", out generalDictOut);
+            generalDictOut = values[4].ElementAt(0).Key;
             description += generalDictOut.ToLower();
 
             description += ". Their mouth has ";
 
-            values[6].TryGetValue("d10Mouth:", out generalDictOut);
+            generalDictOut = values[6].ElementAt(0).Key;
             description += generalDictOut.ToLower();
 
             description += ", they also have ";
 
-            values[7].TryGetValue("d12Nose:", out generalDictOut);
+            generalDictOut = values[7].ElementAt(0).Key;
             description += generalDictOut.ToLower();
 
             description += ".";
@@ -88,7 +87,7 @@ namespace ChaoticCreation.NpcGenerator
             {
                 description += " Lastly, they have ";
 
-                values[9].TryGetValue("d12Tattoo:", out generalDictOut);
+                generalDictOut = values[9].ElementAt(0).Key;
                 description += generalDictOut.ToLower();
 
             }
@@ -111,7 +110,7 @@ namespace ChaoticCreation.NpcGenerator
                 int i = 0;
                 foreach (object obj in row.ItemArray)
                 {
-                    dataValues.Add(colValue[i++].Caption.ToString(), obj.ToString());
+                    dataValues.Add(obj.ToString(), colValue[i++].Caption.ToString());
                 }
             }
 
@@ -148,7 +147,7 @@ namespace ChaoticCreation.NpcGenerator
             string queryEditedOccupation = QueryEdit("Occupations");
             if (userSpecifiedData[2] != "Any")
             {
-                queryEditedOccupation = QueryEdit("Occupations", GeneralQuery, "occ.OccName", userSpecifiedData[2]);
+                queryEditedOccupation = QueryEdit("Occupations", GeneralQuery, "OccName", userSpecifiedData[2]);
             }
             queries.Add(queryEditedOccupation);
 
