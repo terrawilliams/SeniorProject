@@ -16,14 +16,15 @@
         Title="Chaotic Generation" Height="600" Width="1100">
     <Grid Background="{StaticResource DarkThemeBackground}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
+            <RowDefinition x:Name="TopRow" Height="1*"/>
             <RowDefinition Height="5*"/>
         </Grid.RowDefinitions>
 
         <Image
             HorizontalAlignment="Left"
             VerticalAlignment="Stretch"
-            Height="70"
+            Margin="15"
+            Height="{Binding ElementName=TopRow, Path=Height}"
             Source="/Images/ChaoticCreationsLogo.png"/>
 
         <UniformGrid Columns="6" Margin="5,0">
@@ -37,7 +38,7 @@
                 HorizontalAlignment="Stretch"
                 Width="{Binding ElementName=uniformGrid, Path=ActualWidth}"
                 Header="Home">
-                <home:Home/>
+                <home:Home Loaded="Home_Loaded"/>
             </TabItem>
             <TabItem
                 HorizontalAlignment="Stretch"
