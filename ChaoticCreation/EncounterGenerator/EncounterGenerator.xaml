@@ -13,20 +13,26 @@
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel 
-            Grid.Row="0"
-            Orientation="Horizontal"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1.15*"/>
+                <ColumnDefinition Width="1.5*"/>
+            </Grid.ColumnDefinitions>
 
             <StackPanel 
                 Orientation="Horizontal"
-                Margin="10">
+                Margin="10"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center">
                 <TextBlock
                     Padding="2"
                     Margin="2"
                     VerticalAlignment="Center"
-                    Foreground="White">
+                    Foreground="White"
+                    FontSize="13">
                     Party Size:
                 </TextBlock>
                 <ComboBox
@@ -40,12 +46,16 @@
 
             <StackPanel 
                 Orientation="Horizontal"
-                Margin="10">
+                Margin="10"
+                Grid.Column="1"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center">
                 <TextBlock
                     Padding="2"
                     Margin="2"
                     VerticalAlignment="Center"
-                    Foreground="White">
+                    Foreground="White"
+                    FontSize="13">
                     Party Level:
                 </TextBlock>
                 <ComboBox
@@ -59,12 +69,16 @@
 
             <StackPanel 
                 Orientation="Horizontal"
-                Margin="10">
+                Margin="10"
+                Grid.Column="2"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center">
                 <TextBlock
                     Padding="2"
                     Margin="2"
                     VerticalAlignment="Center"
-                    Foreground="White">
+                    Foreground="White"
+                    FontSize="13">
                     Terrain:
                 </TextBlock>
                 <ComboBox
@@ -78,12 +92,16 @@
 
             <StackPanel 
                 Orientation="Horizontal"
-                Margin="10">
+                Margin="10"
+                Grid.Column="3"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center">
                 <TextBlock
                     Padding="2"
                     Margin="2"
                     VerticalAlignment="Center"
-                    Foreground="White">
+                    Foreground="White"
+                    FontSize="13">
                     Difficulty Level:
                 </TextBlock>
                 <ComboBox
@@ -96,50 +114,64 @@
             </StackPanel>
 
             <Button
-                VerticalAlignment="Center"
-                Margin="20"
-                Click="GenerateButton_Click">
+                Margin="25"
+                Click="GenerateButton_Click"
+                Grid.Column="4">
                 Generate Encounter
             </Button>
+        </Grid>
 
-        </StackPanel>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
 
-        <StackPanel
-            Grid.Row="1"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center">
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="4*"/>
+                </Grid.RowDefinitions>
 
-            <TextBlock 
+                <TextBlock 
                 Text="Encounter:"
                 Foreground="White"
                 FontSize="24"
                 Padding="10"
-                HorizontalAlignment="Left"/>
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"/>
 
-            <Border
+                <Border
                 Grid.Row="1"
-                Height="200" Width="400"
-                HorizontalAlignment="Center"
+                Height="200"
                 VerticalAlignment="Bottom"
                 Background="{StaticResource DarkThemeBackgroundSecondary}"
                 Margin="10">
-                <ListBox 
+                    <ListBox 
                     FontSize="24"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Left"
                     ItemsSource="{Binding Path=Monsters, Mode=TwoWay}">
-                </ListBox>
+                    </ListBox>
 
-            </Border>
-            
-        </StackPanel>
+                </Border>
+            </Grid>
+        </Grid>
 
-        <Button
-            Grid.Row="2"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            Click="SaveButton_Click">
-            Save Encounter
-        </Button>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+
+            <Button
+                Grid.Column="1"
+                Margin="15"
+                Click="SaveButton_Click">
+                Save Encounter
+            </Button>
+        </Grid>
     </Grid>
 </UserControl>

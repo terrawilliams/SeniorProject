@@ -17,20 +17,25 @@
             <RowDefinition Height="3*"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
-        <StackPanel Orientation="Horizontal"
-                    Margin="10,0,0,0"
-                    HorizontalAlignment="Left">
+
+        <Grid Grid.Row="0"
+              Grid.Column="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition x:Name="SearchImageBox" Width="1*"/>
+                <ColumnDefinition Width="4*"/>
+            </Grid.ColumnDefinitions>
+
             <Image Source="../Images/SearchIcon.png"
                    VerticalAlignment="Center"
-                   HorizontalAlignment="Left"
-                   Height="20"/>
-            <TextBox 
+                   HorizontalAlignment="Center"
+                   Margin="10"
+                   Width="{Binding ElementName=SearchImageBox, Path=Width}"/>
+
+            <TextBox Grid.Column="1"
                 VerticalAlignment="Center"
-                HorizontalAlignment="Stretch"
-                Padding="5" Margin="10"
-                Width="175"/>
-        </StackPanel>
-       
+                Padding="5" Margin="5"/>
+        </Grid>
+
         <Border
             x:Name="ListBorder"
             Grid.Row="1"
