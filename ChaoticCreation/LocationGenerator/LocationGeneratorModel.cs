@@ -107,9 +107,13 @@ namespace ChaoticCreation.LocationGenerator
             arguments.Add(type);
             arguments.Add(size);
 
-            //GenerateLocation(arguments);
-
-            Console.WriteLine("Generate Location Button Pressed");
+            /*
+            LocationQuery_Gen generator = new LocationQuery_Gen();
+            var generatedLocation = generator.LocationQuery(arguments);
+            
+            LocationName = generatedLocation.First().Key;
+            LocationDesctiption = generatedLocation.First().Value;
+            */
         }
 
         public void SaveLocation()
