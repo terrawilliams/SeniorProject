@@ -84,9 +84,6 @@ namespace ChaoticCreation.LocationGenerator
 
             currentLocationType = locationType.First();
             currentPopulationSize = populationSize.First();
-
-            locationName = ("Location Name Here");
-            locationDescription = ("Location Description Here");
         }
         #endregion
 

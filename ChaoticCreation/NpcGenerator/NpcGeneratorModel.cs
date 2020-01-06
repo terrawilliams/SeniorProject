@@ -111,8 +111,6 @@ namespace ChaoticCreation.NpcGenerator
             /*
             currentNpcOccupation = npcOccupation.First();
             */
-            npcName = "ex name";
-            npcDescription = "ex description";
         }
         #endregion
         

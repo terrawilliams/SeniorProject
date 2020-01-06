@@ -123,8 +123,6 @@
                 <Border
                     x:Name="DescriptionBorder"
                     Grid.Row="1"
-                    Height="200"
-                    VerticalAlignment="Bottom"
                     Background="{StaticResource DarkThemeBackgroundSecondary}"
                     Margin="10">
                     <TextBlock 

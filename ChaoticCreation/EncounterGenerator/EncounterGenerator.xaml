@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:ChaoticCreation.EncounterGenerator"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Background="{StaticResource DarkThemeBackground}">
+    <!-- <Grid Background="{StaticResource DarkThemeBackground}">
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="3*" x:Name="centerRow"/>
@@ -144,8 +144,6 @@
 
                 <Border
                 Grid.Row="1"
-                Height="200"
-                VerticalAlignment="Bottom"
                 Background="{StaticResource DarkThemeBackgroundSecondary}"
                 Margin="10">
                     <ListBox 
@@ -173,5 +171,156 @@
                 Save Encounter
             </Button>
         </Grid>
+    </Grid> -->
+
+    <Grid Background="{StaticResource DarkThemeBackground}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3*" x:Name="centerRow"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1.5*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock
+                Padding="2"
+                Margin="2"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Right"
+                Foreground="White"
+                FontSize="20">
+                Party Size:
+            </TextBlock>
+
+            <ComboBox
+                Name="PartySize"
+                Grid.Column="1"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Left"
+                Padding="10" Margin="10"
+                ItemsSource="{Binding Path=PartySize}"
+                SelectedValue="{Binding Path=SelectedPartySize, Mode=TwoWay}">
+            </ComboBox>
+            
+            <TextBlock
+                Grid.Row="1"
+                    Padding="2" Margin="2"
+                    VerticalAlignment="Center"
+                HorizontalAlignment="Right"
+                    Foreground="White"
+                    FontSize="20">
+                    Party Level:
+            </TextBlock>
+
+            <ComboBox
+                Name="PartyLevel"
+                Grid.Row="1" Grid.Column="1"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Left"
+                Padding="10" Margin="10"
+                ItemsSource="{Binding Path=PartyLevel}"
+                SelectedValue="{Binding Path=SelectedPartyLevel, Mode=TwoWay}">
+            </ComboBox>
+
+            <TextBlock
+                Grid.Row="2"
+                Padding="2" Margin="2"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Right"
+                Foreground="White"
+                FontSize="20">
+                Terrain:
+            </TextBlock>
+            
+            <ComboBox
+                Name="Terrain"
+                Grid.Column="1" Grid.Row="2"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Left"
+                Padding="10" Margin="10"
+                ItemsSource="{Binding Path=Terrain}"
+                SelectedValue="{Binding Path=SelectedTerrain, Mode=TwoWay}">
+            </ComboBox>
+
+            <TextBlock
+                Grid.Row="3"
+                Padding="2" Margin="2"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Right"
+                Foreground="White"
+                FontSize="20">
+                Difficulty Level:
+            </TextBlock>
+            
+            <ComboBox
+                Name="Difficulty"
+                Grid.Column="1" Grid.Row="3"
+                Padding="10" Margin="10"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Left"
+                ItemsSource="{Binding Path=Difficulty}"
+                SelectedValue="{Binding Path=SelectedDifficulty, Mode=TwoWay}">
+            </ComboBox>
+        </Grid>
+        
+        <Button
+            Margin="25"
+            Click="GenerateButton_Click"
+            Grid.Row="1"
+            FontSize="20"
+            MaxWidth="300" MaxHeight="75">
+            Generate Encounter
+        </Button>
+
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="5*"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock 
+                Text="Encounter:"
+                Foreground="White"
+                FontSize="26"
+                Padding="10"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"/>
+
+            <Border
+                Grid.Row="1"
+                Background="{StaticResource DarkThemeBackgroundSecondary}"
+                Margin="10">
+                <ListBox 
+                    FontSize="24"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Left"
+                    ItemsSource="{Binding Path=Monsters, Mode=TwoWay}">
+                </ListBox>
+            </Border>
+        </Grid>
+
+        <Button
+            Grid.Column="1" Grid.Row="1"
+            Margin="25"
+            Click="SaveButton_Click"
+            FontSize="20"
+            MaxWidth="300" MaxHeight="75">
+            Save Encounter
+        </Button>
     </Grid>
 </UserControl>
