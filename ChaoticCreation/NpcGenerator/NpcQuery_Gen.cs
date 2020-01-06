@@ -197,7 +197,7 @@ namespace ChaoticCreation.NpcGenerator
             //where we actually query everything
             foreach (string queryStrings in queries)
             {
-                values.Add(Query(QueryDatabase("..\\..\\sqlDatabase\\NPC.db", queryStrings)));
+                values.Add(Query(QueryDatabase("..\\..\\sqlDatabase\\MasterDB.db", queryStrings)));
             }
             //we then format it to be of type dictionary of name, description 
             Dictionary<string, string> returnValue = NpcFormat(values, name, userSpecifiedData[0], gender);

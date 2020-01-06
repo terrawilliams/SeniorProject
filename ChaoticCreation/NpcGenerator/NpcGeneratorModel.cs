@@ -84,7 +84,7 @@ namespace ChaoticCreation.NpcGenerator
         {
             
             NpcQuery_Gen DatabaseToUI = new NpcQuery_Gen();
-            var dictionary = DatabaseToUI.Query(DatabaseToUI.QueryDatabase("..\\..\\sqlDatabase\\NPC.db", "SELECT * FROM Occupations;"));
+            var dictionary = DatabaseToUI.Query(DatabaseToUI.QueryDatabase("..\\..\\sqlDatabase\\MasterDB.db", "SELECT * FROM Occupations;"));
             foreach (KeyValuePair<string,string> iterate in dictionary)
             {
                 npcOccupation.Add(iterate.Key);

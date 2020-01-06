@@ -93,6 +93,7 @@
       <DependentUpon>LocationGenerator.xaml</DependentUpon>
     </Compile>
     <Compile Include="LocationGenerator\LocationGeneratorModel.cs" />
+    <Compile Include="LocationGenerator\LocationQuery_Gen.cs" />
     <Compile Include="NpcGenerator\NpcGenerator.xaml.cs">
       <DependentUpon>NpcGenerator.xaml</DependentUpon>
     </Compile>

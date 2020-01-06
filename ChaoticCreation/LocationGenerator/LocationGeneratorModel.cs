@@ -66,25 +66,21 @@ namespace ChaoticCreation.LocationGenerator
         #region Constructor
         public LocationGeneratorModel()
         {
-            locationType.Add("Any");
-            locationType.Add("Brothel");
-            locationType.Add("Castle");
-            locationType.Add("Home");
-            locationType.Add("Keep");
-            locationType.Add("Mansion");
-            locationType.Add("Orphanage");
-            locationType.Add("Shop");
-            locationType.Add("Shrine");
-            locationType.Add("Tavern");
-            locationType.Add("Temple");
-            locationType.Add("Warehouse");
+            //Pull location options from database
+            LocationQuery_Gen DatabaseToUI = new LocationQuery_Gen();
 
-            populationSize.Add("Any");
-            populationSize.Add("Tiny");
-            populationSize.Add("Small");
-            populationSize.Add("Medium");
-            populationSize.Add("Large");
-            populationSize.Add("Huge");
+            var dictionary = DatabaseToUI.Query(DatabaseToUI.QueryDatabase("..\\..\\sqlDatabase\\MasterDB.db", "SELECT * FROM LocationTypesTbl;"));
+            foreach (KeyValuePair<string, string> iterate in dictionary)
+            {
+                locationType.Add(iterate.Key);
+            }
+
+            //Pull population size options from database
+            dictionary = DatabaseToUI.Query(DatabaseToUI.QueryDatabase("..\\..\\sqlDatabase\\MasterDB.db", "SELECT * FROM LocationSizesTbl;"));
+            foreach (KeyValuePair<string, string> iterate in dictionary)
+            {
+                populationSize.Add(iterate.Key);
+            }
 
             currentLocationType = locationType.First();
             currentPopulationSize = populationSize.First();
@@ -107,13 +103,13 @@ namespace ChaoticCreation.LocationGenerator
             arguments.Add(type);
             arguments.Add(size);
 
-            /*
+            
             LocationQuery_Gen generator = new LocationQuery_Gen();
             var generatedLocation = generator.LocationQuery(arguments);
             
-            LocationName = generatedLocation.First().Key;
-            LocationDesctiption = generatedLocation.First().Value;
-            */
+            LocationName = generatedLocation["name"];
+            LocationDescription = generatedLocation["description"];
+            
         }
 
         public void SaveLocation()
