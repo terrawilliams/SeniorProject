@@ -219,12 +219,12 @@
             
             <TextBlock
                 Grid.Row="1"
-                    Padding="2" Margin="2"
-                    VerticalAlignment="Center"
+                Padding="2" Margin="2"
+                VerticalAlignment="Center"
                 HorizontalAlignment="Right"
-                    Foreground="White"
-                    FontSize="20">
-                    Party Level:
+                Foreground="White"
+                FontSize="20">
+                Party Level:
             </TextBlock>
 
             <ComboBox

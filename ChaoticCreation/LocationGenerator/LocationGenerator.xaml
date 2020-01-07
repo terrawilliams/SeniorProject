@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:ChaoticCreation.LocationGenerator"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Background="{StaticResource DarkThemeBackground}">
+    <!-- <Grid Background="{StaticResource DarkThemeBackground}">
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="3*" x:Name="centerRow"/>
@@ -176,5 +176,139 @@
                 Save Location
             </Button>
         </Grid>
+    </Grid> -->
+
+    <Grid Background="{StaticResource DarkThemeBackground}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1.5*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock
+                Padding="2" Margin="2"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Right"
+                Foreground="White"
+                FontSize="20">
+                Location Type:
+            </TextBlock>
+
+            <ComboBox
+                Grid.Column="1"
+                Padding="10" Margin="10"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Left"
+                ItemsSource="{Binding Path=LocationType}"
+                SelectedValue="{Binding Path=CurrentLocationType, Mode=TwoWay}">
+            </ComboBox>
+
+            <TextBlock
+                Grid.Row="1"
+                Padding="2" Margin="2"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Right"
+                Foreground="White"
+                FontSize="20">
+                Population Size:
+            </TextBlock>
+
+            <ComboBox
+                Grid.Row="1" Grid.Column="1"
+                Padding="10" Margin="10"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Left"
+                ItemsSource="{Binding Path=PopulationSize}"
+                SelectedValue="{Binding Path=CurrentPopulationSize, Mode=TwoWay}">
+            </ComboBox>
+        </Grid>
+
+        <Button
+            Grid.Row="1"
+            Margin="25" FontSize ="20"
+            MaxWidth="300" MaxHeight="75"
+            Click="GenerateButton_Click">
+            Generate Location
+        </Button>
+
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="4*"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock 
+                Text="Location Name:"
+                Foreground="White"
+                FontSize="24"
+                Margin="5"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"/>
+
+            <Border
+                Grid.Row="1"
+                Height="50"
+                VerticalAlignment="Center"
+                Background="{StaticResource DarkThemeBackgroundSecondary}"
+                Margin="5">
+                <TextBlock 
+                    FontSize="18"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Left"
+                    Foreground="White"
+                    Margin="5"
+                    Text="{Binding Path=LocationName}"/>
+            </Border>
+
+            <TextBlock 
+                Grid.Row="2"
+                Text="Location Description:"
+                Foreground="White"
+                FontSize="24"
+                Margin="5"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"/>
+
+            <Border
+                    x:Name="DescriptionBorder"
+                    Grid.Row="3"
+                    Background="{StaticResource DarkThemeBackgroundSecondary}"
+                    Margin="5">
+                <TextBlock 
+                        FontSize="18"
+                        TextWrapping="Wrap"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Left"
+                        Foreground="White"
+                        Padding="10"
+                        Text="{Binding Path=LocationDescription}"/>
+            </Border>
+        </Grid>
+
+        <Button
+            Grid.Column="1" Grid.Row="1"
+            Margin="25"
+            Click="SaveButton_Click"
+            FontSize="20"
+            MaxWidth="300" MaxHeight="75">
+            Save Location
+        </Button>
     </Grid>
 </UserControl>
