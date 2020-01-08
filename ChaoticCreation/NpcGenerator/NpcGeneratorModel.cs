@@ -82,7 +82,8 @@ namespace ChaoticCreation.NpcGenerator
         #region Constructor
         public NpcGeneratorModel()
         {
-            
+            npcOccupation.Add("Any");
+
             NpcQuery_Gen DatabaseToUI = new NpcQuery_Gen();
             var dictionary = DatabaseToUI.Query(DatabaseToUI.QueryDatabase("..\\..\\sqlDatabase\\MasterDB.db", "SELECT * FROM Occupations;"));
             foreach (KeyValuePair<string,string> iterate in dictionary)
@@ -108,9 +109,7 @@ namespace ChaoticCreation.NpcGenerator
 
             currentNpcRace = npcRace.First();
             currentNpcGender = npcGender.First();
-            /*
             currentNpcOccupation = npcOccupation.First();
-            */
         }
         #endregion
         
@@ -119,7 +118,7 @@ namespace ChaoticCreation.NpcGenerator
             
             string race = (currentNpcRace.Equals("Any") ? npcRace.ElementAt(rand.Next(1, npcRace.Count)): currentNpcRace);
             string gender = (currentNpcGender.Equals("Any") ? npcGender.ElementAt(rand.Next(1, npcGender.Count)) : currentNpcGender);
-            string occupation = currentNpcOccupation;
+            string occupation = (currentNpcOccupation.Equals("Any") ? npcOccupation.ElementAt(rand.Next(1, npcOccupation.Count)) : currentNpcOccupation);
 
             List<string> generationArguments = new List<string>();
             generationArguments.Add(race);

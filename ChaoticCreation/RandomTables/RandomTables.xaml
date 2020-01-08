@@ -106,10 +106,10 @@
 
         <TextBlock
             Grid.Column="1"
-            Text="Selection"
-            FontSize="18"
+            Text="Selection:"
+            FontSize="24"
             Foreground="White"
-            VerticalAlignment="Bottom"
+            VerticalAlignment="Center"
             Margin="10"/>
 
         <Border

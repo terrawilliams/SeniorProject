@@ -296,7 +296,7 @@
             <TextBlock 
                 Text="Encounter:"
                 Foreground="White"
-                FontSize="26"
+                FontSize="24"
                 Padding="10"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"/>
