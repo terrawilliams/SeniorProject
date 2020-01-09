@@ -18,6 +18,8 @@ namespace ChaoticCreation.EncounterGenerator
 
         private ObservableCollection<string> encounterMonsters = new ObservableCollection<string>();
 
+        private Random rand = new Random();
+
         private int currentPartySize;
         private int currentPartyLevel;
         private string currentTerrain;
@@ -108,6 +110,23 @@ namespace ChaoticCreation.EncounterGenerator
 
         public void GenerateEncounter()
         {
+            string chosenPartySize = currentPartySize.ToString();
+            string chosenPartyLevel = currentPartyLevel.ToString();
+            string chosenTerrain = (currentTerrain.Equals("Any") ? terrain.ElementAt(rand.Next(1, terrain.Count)) : currentTerrain);
+            string chosenDifficulty = (currentDifficulty.Equals("Any") ? difficulty.ElementAt(rand.Next(1, difficulty.Count)) : currentDifficulty);
+
+            List<string> arguments = new List<string>();
+
+            arguments.Add(chosenPartySize);
+            arguments.Add(chosenPartyLevel);
+            arguments.Add(chosenTerrain);
+            arguments.Add(chosenDifficulty);
+
+            Dictionary<string, string> generation = new Dictionary<string, string>();
+
+            string encounterName = chosenDifficulty + " Level " + chosenPartyLevel + " " + chosenTerrain + " Encounter";
+
+            RecentCreations.Instance.AddCreation(encounterName, GeneratorTypesEnum.Encounter, generation);
 
             Console.WriteLine("Generate Encounter Button Pressed");
         }
