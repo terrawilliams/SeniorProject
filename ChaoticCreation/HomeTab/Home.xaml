@@ -33,10 +33,10 @@
             Background="{StaticResource DarkThemeBackgroundSecondary}"
             BorderBrush="White" BorderThickness=".5">
             <ListBox FontSize="16"
-                     ItemsSource="{Binding Path=RecentCreations}">
+                     ItemsSource="{Binding Path=MostRecentCreations}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding Path=name}"/>
+                        <TextBlock Text="{Binding Path=Name}"/>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>

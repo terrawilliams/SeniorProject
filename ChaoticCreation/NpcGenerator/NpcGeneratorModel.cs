@@ -130,7 +130,8 @@ namespace ChaoticCreation.NpcGenerator
             
             NpcName = generatedNpc.First().Key;
             NpcDescription = generatedNpc.First().Value;
-            
+
+            RecentCreations.Instance.AddCreation(NpcName, GeneratorTypesEnum.NPC, generatedNpc);
         }
 
         public void SaveCurrentNpc()

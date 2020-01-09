@@ -79,6 +79,7 @@
       <DependentUpon>About.xaml</DependentUpon>
     </Compile>
     <Compile Include="AboutTab\AboutModel.cs" />
+    <Compile Include="Creation.cs" />
     <Compile Include="EncounterGenerator\EncounterGenerator.xaml.cs">
       <DependentUpon>EncounterGenerator.xaml</DependentUpon>
     </Compile>
@@ -103,6 +104,7 @@
     <Compile Include="RandomTables\RandomTables.xaml.cs">
       <DependentUpon>RandomTables.xaml</DependentUpon>
     </Compile>
+    <Compile Include="RecentCreations.cs" />
     <Page Include="AboutTab\About.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

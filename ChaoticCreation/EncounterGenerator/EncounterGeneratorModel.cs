@@ -108,6 +108,7 @@ namespace ChaoticCreation.EncounterGenerator
 
         public void GenerateEncounter()
         {
+
             Console.WriteLine("Generate Encounter Button Pressed");
         }
 

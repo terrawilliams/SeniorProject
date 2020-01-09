@@ -106,7 +106,8 @@ namespace ChaoticCreation.LocationGenerator
             
             LocationName = generatedLocation["name"];
             LocationDescription = generatedLocation["description"];
-            
+
+            RecentCreations.Instance.AddCreation(LocationName, GeneratorTypesEnum.Location, generatedLocation);            
         }
 
         public void SaveLocation()
