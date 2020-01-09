@@ -110,6 +110,8 @@ namespace ChaoticCreation.EncounterGenerator
 
         public void GenerateEncounter()
         {
+            encounterMonsters.Clear();
+
             string chosenPartySize = currentPartySize.ToString();
             string chosenPartyLevel = currentPartyLevel.ToString();
             string chosenTerrain = (currentTerrain.Equals("Any") ? terrain.ElementAt(rand.Next(1, terrain.Count)) : currentTerrain);
@@ -122,7 +124,11 @@ namespace ChaoticCreation.EncounterGenerator
             arguments.Add(chosenTerrain);
             arguments.Add(chosenDifficulty);
 
-            Dictionary<string, string> generation = new Dictionary<string, string>();
+            Dictionary<string, string> generation = new Dictionary<string, string>(); //set this equal to the generated dictionary instead
+
+            /*
+             * put code here to add the generated monsters to the encounterMonsters observable collection
+            */
 
             string encounterName = chosenDifficulty + " Level " + chosenPartyLevel + " " + chosenTerrain + " Encounter";
 
