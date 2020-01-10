@@ -109,7 +109,8 @@ namespace ChaoticCreation.NpcGenerator
             }
             
             Dictionary<string, string> retValue = new Dictionary<string, string>();
-            retValue.Add(name, description);
+            retValue.Add("name", name);
+            retValue.Add("description", description);
             return retValue;
         }
  

@@ -126,8 +126,8 @@ namespace ChaoticCreation.NpcGenerator
             NpcQuery_Gen generator = new NpcQuery_Gen();
             var generatedNpc = generator.NpcQuery(generationArguments);
             
-            NpcName = generatedNpc.First().Key;
-            NpcDescription = generatedNpc.First().Value;
+            NpcName = generatedNpc["name"];
+            NpcDescription = generatedNpc["description"];
 
             RecentCreations.Instance.AddCreation(NpcName, GeneratorTypesEnum.NPC, generatedNpc);
         }
