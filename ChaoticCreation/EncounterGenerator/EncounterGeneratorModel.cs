@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ChaoticCreation.EncounterGenerator
 {
-    class EncounterGeneratorModel
+    class EncounterGeneratorModel : INotifyPropertyChanged
     {
         #region Members
         private List<int> partySize = new List<int>();
@@ -16,14 +16,18 @@ namespace ChaoticCreation.EncounterGenerator
         private List<string> terrain = new List<string>();
         private List<string> difficulty = new List<string>();
 
-        private ObservableCollection<string> encounterMonsters = new ObservableCollection<string>();
-
-        private Random rand = new Random();
-
         private int currentPartySize;
         private int currentPartyLevel;
         private string currentTerrain;
         private string currentDifficulty;
+
+        private string encounterDescription; //description returned to front end
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private Random rand = new Random();
+
+        private ObservableCollection<string> encounterMonsters = new ObservableCollection<string>();
+       
         #endregion
 
         #region Getters and Setters
@@ -42,12 +46,6 @@ namespace ChaoticCreation.EncounterGenerator
         public List<string> Difficulty
         {
             get { return difficulty; }
-        }
-
-        public ObservableCollection<string> Monsters
-        {
-            get { return encounterMonsters; }
-            set { encounterMonsters = value; }
         }
 
         public int SelectedPartySize
@@ -70,6 +68,23 @@ namespace ChaoticCreation.EncounterGenerator
             get { return currentDifficulty; }
             set { currentDifficulty = value; }
         }
+
+        public string EncounterDescription
+        {
+            get { return encounterDescription; }
+            set
+            {
+                encounterDescription = value;
+                OnPropertyChanged("EncounterDescription");
+            }
+        }
+
+        public ObservableCollection<string> Monsters
+        {
+            get { return encounterMonsters; }
+            set { encounterMonsters = value; }
+        }
+
         #endregion
 
         #region Constructor
@@ -117,14 +132,22 @@ namespace ChaoticCreation.EncounterGenerator
             string chosenTerrain = (currentTerrain.Equals("Any") ? terrain.ElementAt(rand.Next(1, terrain.Count)) : currentTerrain);
             string chosenDifficulty = (currentDifficulty.Equals("Any") ? difficulty.ElementAt(rand.Next(1, difficulty.Count)) : currentDifficulty);
 
+            //List of user input from UI
             List<string> arguments = new List<string>();
-
             arguments.Add(chosenPartySize);
             arguments.Add(chosenPartyLevel);
             arguments.Add(chosenTerrain);
             arguments.Add(chosenDifficulty);
 
-            Dictionary<string, string> generation = new Dictionary<string, string>(); //set this equal to the generated dictionary instead
+
+            //Send list to Query
+            //EncounterQuery_Gen generator = new EncounterQuery_Gen();
+            //var generatedEncounter = generator.EncounterQuery(arguments);
+            //EncounterDescription = generatedEncounter.First().Value;
+
+            int partyXP = calcPartyXP(currentPartyLevel, SelectedDifficulty);        
+
+        Dictionary<string, string> generation = new Dictionary<string, string>(); //set this equal to the generated dictionary instead
 
             /*
              * put code here to add the generated monsters to the encounterMonsters observable collection
@@ -137,9 +160,24 @@ namespace ChaoticCreation.EncounterGenerator
             Console.WriteLine("Generate Encounter Button Pressed");
         }
 
+        public int calcPartyXP(int PartyLevel, string Difficulty)
+        {
+            int partyXP = 0;
+            //query CharLevelXP table
+
+            //int partyXP = 
+            return partyXP;
+        }
+
         public void SaveCurrentEnocunter()
         {
             Console.WriteLine("Save Encounter Button Clicked");
+        }
+        
+        private void OnPropertyChanged(string property)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(property));
         }
     }
 }

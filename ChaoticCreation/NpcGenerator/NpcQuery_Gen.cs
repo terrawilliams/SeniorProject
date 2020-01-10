@@ -12,7 +12,7 @@ namespace ChaoticCreation.NpcGenerator
 {
     class NpcQuery_Gen : GeneralGenerator
     {
-        #region Members        
+        #region Members       
 
         #endregion
 

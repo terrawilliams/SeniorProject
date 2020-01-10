@@ -36,12 +36,10 @@ namespace ChaoticCreation.NpcGenerator
         {
             get { return npcGender; }
         }
-        
         public List<string> NpcOccupation
         { 
             get { return npcOccupation; }
-        }
-        
+        }        
 
         public string CurrentNpcRace
         {

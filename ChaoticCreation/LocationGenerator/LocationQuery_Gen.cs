@@ -84,7 +84,6 @@ namespace ChaoticCreation.LocationGenerator
 
             return results;
         }
-
         private Dictionary<string, string> Cave(string size)
         {
 
@@ -127,8 +126,6 @@ namespace ChaoticCreation.LocationGenerator
 
             return results;
         }
-
-
         private Dictionary<string, string> Desert(string size)
         {
             Dictionary<string, string> tableList = new Dictionary<string, string>{

@@ -99,7 +99,6 @@ namespace ChaoticCreation.LocationGenerator
 
             arguments.Add(type);
             arguments.Add(size);
-
             
             LocationQuery_Gen generator = new LocationQuery_Gen();
             var generatedLocation = generator.LocationQuery(arguments);
