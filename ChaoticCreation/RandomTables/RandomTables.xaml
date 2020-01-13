@@ -97,9 +97,9 @@
 
         <Button
             Grid.Row="2"
-            VerticalAlignment="Center"
-            HorizontalAlignment="Center"
-            Width="{Binding ElementName=SaveSelectionButton, Path=ActualWidth}"
+            FontSize="20"
+            Margin="25"
+            MaxWidth="300" MaxHeight="75"
             Click="GenerateButton_Click">
             Generate            
         </Button>
@@ -132,9 +132,10 @@
             x:Name="SaveSelectionButton"
             Grid.Column="1"
             Grid.Row="2"
-            VerticalAlignment="Center"
-            HorizontalAlignment="Center"
-            Click="SaveSelectionButton_Click">
+            Margin="25"
+            MaxWidth="300" MaxHeight="75"
+            Click="SaveSelectionButton_Click"
+            FontSize="20">
             <StackPanel Orientation="Horizontal">
                 <TextBlock
                     Text="*"
@@ -159,10 +160,10 @@
         <Button
             Grid.Column="2"
             Grid.Row="2"
-            VerticalAlignment="Center"
-            HorizontalAlignment="Center"
-            Width="{Binding ElementName=SaveSelectionButton, Path=ActualWidth}"
-            Click="RollButton_Click">
+            Margin="25"
+            MaxWidth="300" MaxHeight="75"
+            Click="RollButton_Click"
+            FontSize="20">
             Roll 
         </Button>
     </Grid>
