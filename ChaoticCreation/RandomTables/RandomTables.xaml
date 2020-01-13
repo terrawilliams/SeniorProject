@@ -135,7 +135,17 @@
             VerticalAlignment="Center"
             HorizontalAlignment="Center"
             Click="SaveSelectionButton_Click">
-            Save Selection
+            <StackPanel Orientation="Horizontal">
+                <TextBlock
+                    Text="*"
+                    Visibility="{Binding Path=GenerationNotSaved, Converter={StaticResource BoolToVis}}"/>
+                <TextBlock
+                    Text="Save Selection"
+                    Margin="5"/>
+                <TextBlock
+                    Text="*"
+                    Visibility="{Binding Path=GenerationNotSaved, Converter={StaticResource BoolToVis}}"/>
+            </StackPanel>
         </Button>
 
         <Image

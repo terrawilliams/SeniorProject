@@ -22,6 +22,8 @@ namespace ChaoticCreation.NpcGenerator
         private string npcName;
         private string npcDescription;
 
+        private bool latestGenerationSaved;
+
         private Random rand = new Random();
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -75,11 +77,17 @@ namespace ChaoticCreation.NpcGenerator
             }
         }
 
+        public bool GenerationNotSaved
+        {
+            get { return !latestGenerationSaved; }
+        }
         #endregion
 
         #region Constructor
         public NpcGeneratorModel()
         {
+            latestGenerationSaved = true;
+
             npcOccupation.Add("Any");
 
             NpcQuery_Gen DatabaseToUI = new NpcQuery_Gen();
@@ -113,7 +121,6 @@ namespace ChaoticCreation.NpcGenerator
         
         public void GenerateNewNpc()
         {
-            
             string race = (currentNpcRace.Equals("Any") ? npcRace.ElementAt(rand.Next(1, npcRace.Count)): currentNpcRace);
             string gender = (currentNpcGender.Equals("Any") ? npcGender.ElementAt(rand.Next(1, npcGender.Count)) : currentNpcGender);
             string occupation = (currentNpcOccupation.Equals("Any") ? npcOccupation.ElementAt(rand.Next(1, npcOccupation.Count)) : currentNpcOccupation);
@@ -130,11 +137,19 @@ namespace ChaoticCreation.NpcGenerator
             NpcDescription = generatedNpc["description"];
 
             RecentCreations.Instance.AddCreation(NpcName, GeneratorTypesEnum.NPC, generatedNpc);
+
+            latestGenerationSaved = false;
+            OnPropertyChanged("GenerationNotSaved");
         }
 
         public void SaveCurrentNpc()
         {
-            Console.WriteLine("Save NPC Button Pressed");
+            if (!latestGenerationSaved)
+            {
+                Console.WriteLine("Save NPC Button Pressed");
+                latestGenerationSaved = true;
+                OnPropertyChanged("GenerationNotSaved");
+            }
         }
 
         private void OnPropertyChanged(string property)

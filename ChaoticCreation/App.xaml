@@ -12,6 +12,8 @@
         <SolidColorBrush x:Key="DarkThemeSecondaryColor" Color="MediumOrchid" />
         <SolidColorBrush x:Key="DarkThemeSecondaryColorVariant" Color="Orchid" />
 
+        <BooleanToVisibilityConverter x:Key="BoolToVis" />
+
         <Style TargetType="Label">
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="Background" Value="{StaticResource DarkThemeBackgroundSecondary}"/>

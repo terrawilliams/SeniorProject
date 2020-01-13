@@ -18,6 +18,8 @@ namespace ChaoticCreation.LocationGenerator
         private string locationName;
         private string locationDescription;
 
+        private bool latestGenerationSaved;
+
         private Random rand = new Random();
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -61,11 +63,18 @@ namespace ChaoticCreation.LocationGenerator
                 OnPropertyChanged("LocationDescription");
             }
         }
+
+        public bool GenerationNotSaved
+        {
+            get { return !latestGenerationSaved; }
+        }
         #endregion
 
         #region Constructor
         public LocationGeneratorModel()
         {
+            latestGenerationSaved = true;
+
             //Pull location options from database
             LocationQuery_Gen DatabaseToUI = new LocationQuery_Gen();
 
@@ -106,12 +115,20 @@ namespace ChaoticCreation.LocationGenerator
             LocationName = generatedLocation["name"];
             LocationDescription = generatedLocation["description"];
 
-            RecentCreations.Instance.AddCreation(LocationName, GeneratorTypesEnum.Location, generatedLocation);            
+            RecentCreations.Instance.AddCreation(LocationName, GeneratorTypesEnum.Location, generatedLocation);
+
+            latestGenerationSaved = false;
+            OnPropertyChanged("GenerationNotSaved");
         }
 
         public void SaveLocation()
         {
-            Console.WriteLine("Save Location Button Pressed");
+            if (!latestGenerationSaved)
+            {
+                Console.WriteLine("Save Location Button Pressed");
+                latestGenerationSaved = true;
+                OnPropertyChanged("GenerationNotSaved");
+            }
         }
 
         private void OnPropertyChanged(string property)
