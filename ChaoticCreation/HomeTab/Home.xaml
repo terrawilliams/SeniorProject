@@ -33,7 +33,8 @@
             Background="{StaticResource DarkThemeBackgroundSecondary}"
             BorderBrush="White" BorderThickness=".5">
             <ListBox FontSize="16"
-                     ItemsSource="{Binding Path=MostRecentCreations}">
+                     ItemsSource="{Binding Path=MostRecentCreations}"
+                     SelectedItem="{Binding Path=SelectedRecentCreation}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding Path=Name}"/>
@@ -42,18 +43,39 @@
             </ListBox>
         </Border>
 
-        <Border
-            Grid.Column="1"
+        <Grid
             Grid.Row="1"
-            Background="Transparent"
-            Margin="10">
-            <TextBlock
-                TextWrapping="Wrap"
-                Foreground="White"
-                FontSize="16"
-                Margin="10"
-                Text="{Binding Path=ApplicationDescription}"/>
-        </Border>
+            Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="4*"/>
+            </Grid.RowDefinitions>
+            <Border
+                Background="{StaticResource DarkThemeBackgroundSecondary}"
+                Margin="10">
+                <TextBlock
+                    TextWrapping="Wrap"
+                    Foreground="White"
+                    VerticalAlignment="Center"
+                    FontSize="20"
+                    Margin="5"
+                    Text="{Binding Path=SelectedRecentCreation.Name}"/>
+            </Border>
+
+            <Border
+                Grid.Row="1"
+                Background="{StaticResource DarkThemeBackgroundSecondary}"
+                Margin="10">
+                <TextBlock
+                    TextWrapping="Wrap"
+                    Foreground="White"
+                    FontSize="16"
+                    Margin="5"
+                    Text="{Binding Path=SelectedCreationContent}"/>
+            </Border>
+        </Grid>
+
+        
 
     </Grid>
 </UserControl>
