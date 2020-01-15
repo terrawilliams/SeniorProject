@@ -35,6 +35,16 @@ namespace ChaoticCreation.HomeTab
                     selectedCreationContent = selectedCreation.Generation["description"];
                     OnPropertyChanged("SelectedCreationContent");
                 }
+                else if(selectedCreation.Type == GeneratorTypesEnum.Encounter)
+                {
+                    selectedCreationContent = string.Empty;
+
+                    foreach(KeyValuePair<string, string> monster in selectedCreation.Generation)
+                    {
+                        selectedCreationContent += monster.Key + " " + monster.Value + "\n";
+                        OnPropertyChanged("SelectedCreationContent");
+                    }
+                }
             }
             get { return selectedCreation; }
         }

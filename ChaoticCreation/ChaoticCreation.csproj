@@ -84,6 +84,7 @@
       <DependentUpon>EncounterGenerator.xaml</DependentUpon>
     </Compile>
     <Compile Include="EncounterGenerator\EncounterGeneratorModel.cs" />
+    <Compile Include="EncounterGenerator\EncounterQuery_Gen.cs" />
     <Compile Include="GeneralGenerator.cs" />
     <Compile Include="GeneratorTypesEnum.cs" />
     <Compile Include="HomeTab\Home.xaml.cs">

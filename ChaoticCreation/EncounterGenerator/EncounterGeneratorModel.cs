@@ -153,19 +153,10 @@ namespace ChaoticCreation.EncounterGenerator
             //IF NO RESULTS, NEED TO RESEND QUERY
             Dictionary<string, string> generatedEncounter = generator.EncounterQuery(arguments);
 
-            /*
-            Console.WriteLine("Test returned dictionary:");
-            foreach (KeyValuePair<string, string> kvp in generatedEncounter)
+            foreach( KeyValuePair<string, string> monster in generatedEncounter)
             {
-                Console.WriteLine("Key = " + kvp.Key);
-                Console.WriteLine("Value = " + kvp.Value);
+                encounterMonsters.Add(monster.Value);
             }
-            */
-            
-
-            /*
-             * put code here to add the generated monsters to the encounterMonsters observable collection
-            */
 
             string encounterName = chosenDifficulty + " Level " + chosenPartyLevel + " " + chosenTerrain + " Encounter";
 
