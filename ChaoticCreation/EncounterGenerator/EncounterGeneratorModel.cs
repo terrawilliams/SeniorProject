@@ -88,7 +88,6 @@ namespace ChaoticCreation.EncounterGenerator
         #endregion
 
         #region Constructor
-
         public EncounterGeneratorModel()
         {
             for(int i = 1; i <= 20; i++)
@@ -139,15 +138,21 @@ namespace ChaoticCreation.EncounterGenerator
             arguments.Add(chosenTerrain);
             arguments.Add(chosenDifficulty);
 
+            //Send list to Query Generator
+            EncounterQuery_Gen generator = new EncounterQuery_Gen();
 
-            //Send list to Query
-            //EncounterQuery_Gen generator = new EncounterQuery_Gen();
-            //var generatedEncounter = generator.EncounterQuery(arguments);
-            //EncounterDescription = generatedEncounter.First().Value;
+            //IF NO RESULTS, NEED TO RESEND QUERY
+            Dictionary<string, string> generatedEncounter = generator.EncounterQuery(arguments);
 
-            int partyXP = calcPartyXP(currentPartyLevel, SelectedDifficulty);        
-
-        Dictionary<string, string> generation = new Dictionary<string, string>(); //set this equal to the generated dictionary instead
+            /*
+            Console.WriteLine("Test returned dictionary:");
+            foreach (KeyValuePair<string, string> kvp in generatedEncounter)
+            {
+                Console.WriteLine("Key = " + kvp.Key);
+                Console.WriteLine("Value = " + kvp.Value);
+            }
+            */
+            
 
             /*
              * put code here to add the generated monsters to the encounterMonsters observable collection
@@ -155,18 +160,9 @@ namespace ChaoticCreation.EncounterGenerator
 
             string encounterName = chosenDifficulty + " Level " + chosenPartyLevel + " " + chosenTerrain + " Encounter";
 
-            RecentCreations.Instance.AddCreation(encounterName, GeneratorTypesEnum.Encounter, generation);
+            RecentCreations.Instance.AddCreation(encounterName, GeneratorTypesEnum.Encounter, generatedEncounter);
 
             Console.WriteLine("Generate Encounter Button Pressed");
-        }
-
-        public int calcPartyXP(int PartyLevel, string Difficulty)
-        {
-            int partyXP = 0;
-            //query CharLevelXP table
-
-            //int partyXP = 
-            return partyXP;
         }
 
         public void SaveCurrentEnocunter()
