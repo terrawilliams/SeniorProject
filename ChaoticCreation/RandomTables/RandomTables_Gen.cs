@@ -92,19 +92,19 @@ namespace ChaoticCreation.RandomTables
 
                 Object[] rowData = row.ItemArray;
 
-                newEntry.tableType = (int) rowData[0];
+                newEntry.tableType = int.Parse(rowData[0].ToString());
 
                 if(rowData.Length == 2)
                 {
                     newEntry.lower = i;
                     newEntry.upper = i;
-                    newEntry.description = (string)rowData[1];
+                    newEntry.description = rowData[1].ToString();
                 }
                 else
                 {
-                    newEntry.lower = (int)rowData[1];
-                    newEntry.upper = (int)rowData[2];
-                    newEntry.description = (string)rowData[3];
+                    newEntry.lower = int.Parse(rowData[1].ToString());
+                    newEntry.upper = int.Parse(rowData[2].ToString());
+                    newEntry.description = rowData[3].ToString();
                 }
 
                 newTable.Add(newEntry);
