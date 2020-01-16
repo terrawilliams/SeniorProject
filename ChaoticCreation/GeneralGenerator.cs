@@ -76,7 +76,8 @@ namespace ChaoticCreation
 
             return dataSet;
         }
-        //Read from database and store into a dictionary holding specific values. column descriptions in db are the key for the dictionary and the info in that column is the data in the dictionary
+        //Read from database and store into a dictionary holding specific values. column descriptions in db are the key for the 
+        //dictionary and the info in that column is the data in the dictionary
         public Dictionary<string, string> Query(DataSet data)
         {
             Dictionary<string, string> dataValues = new Dictionary<string, string>();

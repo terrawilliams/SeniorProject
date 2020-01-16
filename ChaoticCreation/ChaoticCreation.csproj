@@ -105,6 +105,7 @@
     <Compile Include="RandomTables\RandomTables.xaml.cs">
       <DependentUpon>RandomTables.xaml</DependentUpon>
     </Compile>
+    <Compile Include="RandomTables\RandomTables_Gen.cs" />
     <Compile Include="RecentCreations.cs" />
     <Page Include="AboutTab\About.xaml">
       <SubType>Designer</SubType>
