@@ -106,7 +106,7 @@ namespace ChaoticCreation.RandomTables
                     newEntry.upper = int.Parse(rowData[2].ToString());
                     newEntry.description = rowData[3].ToString();
                 }
-
+                i++;
                 newTable.Add(newEntry);
                 
             }
