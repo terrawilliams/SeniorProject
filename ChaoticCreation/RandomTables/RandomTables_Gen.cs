@@ -75,7 +75,16 @@ namespace ChaoticCreation.RandomTables
         #region Methods
         public List<RandomTableEntry> GetTable(string tableName)
         {
-            string query = "Select * From " + tableList[tableName] + ";";
+            string query;
+
+            try
+            {
+                query = "Select * From " + tableList[tableName] + ";";
+            }
+            catch (KeyNotFoundException)
+            {
+                return new List<RandomTableEntry>();
+            }
 
             DataSet data = QueryDatabase("..\\..\\sqlDatabase\\MasterDB.db", query);
 
