@@ -73,7 +73,7 @@ namespace ChaoticCreation.RandomTables
         #endregion
 
         #region Methods
-        List<RandomTableEntry> GetTable(string tableName)
+        public List<RandomTableEntry> GetTable(string tableName)
         {
             string query = "Select * From " + tableList[tableName] + ";";
 
@@ -115,7 +115,7 @@ namespace ChaoticCreation.RandomTables
             return newTable;
         }
 
-        private RandomTableCategory InitializeRandomTableList()
+        public RandomTableCategory InitializeRandomTableList()
         {
             RandomTableCategory listOfTables = new RandomTableCategory("Random Tables");
             listOfTables.SubCategories.Add(InitializeArtObjectsList());

@@ -24,12 +24,16 @@ namespace ChaoticCreation.RandomTables
     {
         #region Members
         private string currentTable;
+        private List<RandomTableEntry> currentTableContents = new List<RandomTableEntry>();
+        private ObservableCollection<string> currentTableEntries = new ObservableCollection<string>();
 
         private RandomTableCategory listOfTables = new RandomTableCategory("Random Tables");
 
         private ObservableCollection<string> randomTableResult = new ObservableCollection<string>();
 
         private bool latestGenerationSaved;
+
+        private RandomTables_Gen randomTables_Gen = new RandomTables_Gen();
 
         public event PropertyChangedEventHandler PropertyChanged;
         #endregion
@@ -42,7 +46,14 @@ namespace ChaoticCreation.RandomTables
             { 
                 currentTable = value;
                 OnPropertyChanged("CurrentTable");
+
+                ShowSelectedTable();
             }
+        }
+
+        public ObservableCollection<string> CurrentTableEntries
+        {
+            get { return currentTableEntries; }
         }
 
         public ObservableCollection<string> RandomTableResults
@@ -66,11 +77,22 @@ namespace ChaoticCreation.RandomTables
         {
             latestGenerationSaved = true;
 
-            //InitializeRandomTableList();
+            listOfTables = randomTables_Gen.InitializeRandomTableList();
         }
         #endregion
 
         #region Methods
+        private void ShowSelectedTable()
+        {
+            currentTableContents = randomTables_Gen.GetTable(currentTable);
+
+            foreach(RandomTableEntry entry in currentTableContents)
+            {
+                string newEntry = entry.lower + ((entry.lower != entry.lower)? "":(" - " + entry.upper)) + "\t" + entry.description;
+
+                currentTableEntries.Add(newEntry);
+            }
+        }
 
         public void GenerateRandomTableSelection()
         {

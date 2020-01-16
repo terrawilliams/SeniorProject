@@ -98,7 +98,7 @@
                     FontSize="24"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Left"
-                    ItemsSource="{Binding Path=RandomTableResult, Mode=TwoWay}">
+                    ItemsSource="{Binding Path=CurrentTableEntries}">
             </ListBox>
         </Border>
 
