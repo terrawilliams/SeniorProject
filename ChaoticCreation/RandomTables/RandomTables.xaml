@@ -95,7 +95,6 @@
             Background="{StaticResource DarkThemeBackgroundSecondary}"
             BorderBrush="White" BorderThickness=".5">
             <ListBox 
-                    FontSize="24"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Left"
                     ItemsSource="{Binding Path=CurrentTableEntries}">
