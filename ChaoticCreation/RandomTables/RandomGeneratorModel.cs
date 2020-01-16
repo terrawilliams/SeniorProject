@@ -24,12 +24,16 @@ namespace ChaoticCreation.RandomTables
     {
         #region Members
         private string currentTable;
+        private List<RandomTableEntry> currentTableContents = new List<RandomTableEntry>();
+        private ObservableCollection<string> currentTableEntries = new ObservableCollection<string>();
 
         private RandomTableCategory listOfTables = new RandomTableCategory("Random Tables");
 
         private ObservableCollection<string> randomTableResult = new ObservableCollection<string>();
 
         private bool latestGenerationSaved;
+
+        private RandomTables_Gen randomTables_Gen = new RandomTables_Gen();
 
         public event PropertyChangedEventHandler PropertyChanged;
         #endregion
@@ -42,7 +46,14 @@ namespace ChaoticCreation.RandomTables
             { 
                 currentTable = value;
                 OnPropertyChanged("CurrentTable");
+
+                ShowSelectedTable();
             }
+        }
+
+        public ObservableCollection<string> CurrentTableEntries
+        {
+            get { return currentTableEntries; }
         }
 
         public ObservableCollection<string> RandomTableResults
@@ -66,74 +77,22 @@ namespace ChaoticCreation.RandomTables
         {
             latestGenerationSaved = true;
 
-            //InitializeRandomTableList();
+            listOfTables = randomTables_Gen.InitializeRandomTableList();
         }
         #endregion
 
         #region Methods
-        //private void InitializeRandomTableList()
-        //{
-        //    listOfTables.SubCategories.Add(InitializeArtObjectsList());
-        //    listOfTables.SubCategories.Add(InitializeGemstonesList());
-        //    listOfTables.SubCategories.Add(InitializeMagicEffectsList());
-        //    listOfTables.SubCategories.Add(InitializeMagicItemsList());
-        //    listOfTables.SubCategories.Add(new RandomTableCategory("Trinkets"));
-        //}
+        private void ShowSelectedTable()
+        {
+            currentTableContents = randomTables_Gen.GetTable(currentTable);
 
-        //private RandomTableCategory InitializeArtObjectsList()
-        //{
-        //    RandomTableCategory artObjects = new RandomTableCategory("Art Objects");
+            foreach(RandomTableEntry entry in currentTableContents)
+            {
+                string newEntry = entry.lower + ((entry.lower != entry.lower)? "":(" - " + entry.upper)) + "\t" + entry.description;
 
-        //    artObjects.SubCategories.Add(new RandomTableCategory("25 GP Art Objects"));
-        //    artObjects.SubCategories.Add(new RandomTableCategory("250 GP Art Objects"));
-        //    artObjects.SubCategories.Add(new RandomTableCategory("750 GP Art Objects"));
-        //    artObjects.SubCategories.Add(new RandomTableCategory("2,500 GP Art Objects"));
-        //    artObjects.SubCategories.Add(new RandomTableCategory("7,500 GP Art Objects"));
-
-        //    return artObjects;
-        //}
-
-        //private RandomTableCategory InitializeGemstonesList()
-        //{
-        //    RandomTableCategory gemstones = new RandomTableCategory("Gemstones");
-
-        //    gemstones.SubCategories.Add(new RandomTableCategory("10 GP Gemstones"));
-        //    gemstones.SubCategories.Add(new RandomTableCategory("50 GP Gemstones"));
-        //    gemstones.SubCategories.Add(new RandomTableCategory("100 GP Gemstones"));
-        //    gemstones.SubCategories.Add(new RandomTableCategory("500 GP Gemstones"));
-        //    gemstones.SubCategories.Add(new RandomTableCategory("1,000 GP Gemstones"));
-        //    gemstones.SubCategories.Add(new RandomTableCategory("5,000 GP Gemstones"));
-
-        //    return gemstones;
-        //}
-
-        //private RandomTableCategory InitializeMagicEffectsList()
-        //{
-        //    RandomTableCategory magicEffects = new RandomTableCategory("Magic Effects");
-
-        //    magicEffects.SubCategories.Add(new RandomTableCategory("Potions"));
-        //    magicEffects.SubCategories.Add(new RandomTableCategory("Necromancy"));
-        //    magicEffects.SubCategories.Add(new RandomTableCategory("Wild Magic Surge"));
-
-        //    return magicEffects;
-        //}
-
-        //private RandomTableCategory InitializeMagicItemsList()
-        //{
-        //    RandomTableCategory magicItems = new RandomTableCategory("Magic Items");
-
-        //    magicItems.SubCategories.Add(new RandomTableCategory("Magic Items Table A"));
-        //    magicItems.SubCategories.Add(new RandomTableCategory("Magic Items Table B"));
-        //    magicItems.SubCategories.Add(new RandomTableCategory("Magic Items Table C"));
-        //    magicItems.SubCategories.Add(new RandomTableCategory("Magic Items Table D"));
-        //    magicItems.SubCategories.Add(new RandomTableCategory("Magic Items Table E"));
-        //    magicItems.SubCategories.Add(new RandomTableCategory("Magic Items Table F"));
-        //    magicItems.SubCategories.Add(new RandomTableCategory("Magic Items Table G"));
-        //    magicItems.SubCategories.Add(new RandomTableCategory("Magic Items Table H"));
-        //    magicItems.SubCategories.Add(new RandomTableCategory("Magic Items Table I"));
-
-        //    return magicItems;
-        //}
+                currentTableEntries.Add(newEntry);
+            }
+        }
 
         public void GenerateRandomTableSelection()
         {

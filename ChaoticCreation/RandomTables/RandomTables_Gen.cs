@@ -32,7 +32,7 @@ namespace ChaoticCreation.RandomTables
     {
         #region Constructors
 
-        RandomTables_Gen()
+        public RandomTables_Gen()
         {
             tableList = new Dictionary<string, string>
             {
@@ -73,7 +73,7 @@ namespace ChaoticCreation.RandomTables
         #endregion
 
         #region Methods
-        List<RandomTableEntry> GetTable(string tableName)
+        public List<RandomTableEntry> GetTable(string tableName)
         {
             string query = "Select * From " + tableList[tableName] + ";";
 
@@ -84,7 +84,7 @@ namespace ChaoticCreation.RandomTables
 
             List<RandomTableEntry> newTable = new List<RandomTableEntry>(); 
 
-            int i = 0;
+            int i = 1;
 
             foreach (DataRow row in rowValue)
             {
@@ -115,7 +115,7 @@ namespace ChaoticCreation.RandomTables
             return newTable;
         }
 
-        private RandomTableCategory InitializeRandomTableList()
+        public RandomTableCategory InitializeRandomTableList()
         {
             RandomTableCategory listOfTables = new RandomTableCategory("Random Tables");
             listOfTables.SubCategories.Add(InitializeArtObjectsList());
