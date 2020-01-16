@@ -32,7 +32,7 @@ namespace ChaoticCreation.RandomTables
     {
         #region Constructors
 
-        RandomTables_Gen()
+        public RandomTables_Gen()
         {
             tableList = new Dictionary<string, string>
             {
@@ -84,7 +84,7 @@ namespace ChaoticCreation.RandomTables
 
             List<RandomTableEntry> newTable = new List<RandomTableEntry>(); 
 
-            int i = 0;
+            int i = 1;
 
             foreach (DataRow row in rowValue)
             {
