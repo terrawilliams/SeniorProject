@@ -84,6 +84,8 @@ namespace ChaoticCreation.RandomTables
         #region Methods
         private void ShowSelectedTable()
         {
+            currentTableEntries.Clear();
+
             currentTableContents = randomTables_Gen.GetTable(currentTable);
 
             foreach(RandomTableEntry entry in currentTableContents)
