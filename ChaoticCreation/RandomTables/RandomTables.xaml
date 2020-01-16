@@ -45,53 +45,17 @@
             Background="{StaticResource DarkThemeBackgroundSecondary}"
             BorderBrush="White" BorderThickness=".5">
             <TreeView
-                    Foreground="White"
-                    Background="Transparent"
-                    BorderBrush="Transparent">
-                <TreeViewItem Header="World Event">
-                    <TreeViewItem Header="Cataclysmic Event"/>
-                </TreeViewItem>
-
-                <TreeViewItem Header="Magic Items">
-                    <TreeViewItem Header="Armor">
-                        <TreeViewItem Header="Uncommon"/>
-                        <TreeViewItem Header="Rare"/>
-                        <TreeViewItem Header="Very Rare"/>
-                        <TreeViewItem Header="Legendary"/>
-                    </TreeViewItem>
-
-                    <TreeViewItem Header="Weapons">
-                        <TreeViewItem Header="Uncommon"/>
-                        <TreeViewItem Header="Rare"/>
-                        <TreeViewItem Header="Very Rare"/>
-                        <TreeViewItem Header="Legendary"/>
-                    </TreeViewItem>
-
-                    <TreeViewItem Header="Wondrous Items">
-                        <TreeViewItem Header="Uncommon"/>
-                        <TreeViewItem Header="Rare"/>
-                        <TreeViewItem Header="Very Rare"/>
-                        <TreeViewItem Header="Legendary"/>
-                    </TreeViewItem>
-                </TreeViewItem>
-
-                <TreeViewItem Header="Treasure">
-                    <TreeViewItem Header="Challenge 0-4"/>
-                    <TreeViewItem Header="Challenge 5-10"/>
-                    <TreeViewItem Header="Challenge 11-16"/>
-                    <TreeViewItem Header="Challenge 17+"/>
-                </TreeViewItem>
-
-                <TreeViewItem Header="Treasure Hoard">
-                    <TreeViewItem Header="Challenge 0-4"/>
-                    <TreeViewItem Header="Challenge 5-10"/>
-                    <TreeViewItem Header="Challenge 11-16"/>
-                    <TreeViewItem Header="Challenge 17+"/>
-                </TreeViewItem>
-
-                <TreeViewItem Header="Villain Motivation">
-                    <TreeViewItem Header="Challenge 0-4"/>
-                </TreeViewItem>
+                x:Name="randomTablesTree"
+                SelectedItemChanged="randomTablesTree_SelectedItemChanged"
+                Foreground="White"
+                Background="Transparent"
+                BorderBrush="Transparent"
+                SelectedValuePath="Name">
+                <TreeView.ItemTemplate>
+                    <HierarchicalDataTemplate DataType="{x:Type local:RandomTableCategory}" ItemsSource="{Binding Path=SubCategories}">
+                        <Label Content="{Binding Path=Name}"/>
+                    </HierarchicalDataTemplate>
+                </TreeView.ItemTemplate>
             </TreeView>
         </Border>
 
@@ -104,13 +68,23 @@
             Generate            
         </Button>
 
-        <TextBlock
-            Grid.Column="1"
-            Text="Selection:"
-            FontSize="24"
-            Foreground="White"
-            VerticalAlignment="Center"
-            Margin="10"/>
+        <StackPanel Grid.Column="1"
+                    Orientation="Horizontal">
+            <TextBlock
+                Text="Selection:"
+                FontSize="24"
+                Foreground="White"
+                VerticalAlignment="Center"
+                Margin="10"/>
+
+            <TextBlock
+                x:Name="SelectedTableName"
+                Text="{Binding Path=CurrentTable}"
+                FontSize="24"
+                Foreground="White"
+                VerticalAlignment="Center"
+                Margin="10"/>
+        </StackPanel>
 
         <Border
             Grid.Column="1"
