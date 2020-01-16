@@ -82,6 +82,8 @@ namespace ChaoticCreation
         {
             Dictionary<string, string> dataValues = new Dictionary<string, string>();
 
+            Console.WriteLine(data.Tables.Count);
+
             DataRowCollection rowValue = data.Tables[0].Rows;
             DataColumnCollection colValue = data.Tables[0].Columns;
 
