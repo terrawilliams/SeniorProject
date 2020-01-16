@@ -21,7 +21,10 @@ namespace ChaoticCreation.EncounterGenerator
         private string currentTerrain;
         private string currentDifficulty;
 
+        private bool latestGenerationSaved;
+
         private string encounterDescription; //description returned to front end
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         private Random rand = new Random();
@@ -85,11 +88,17 @@ namespace ChaoticCreation.EncounterGenerator
             set { encounterMonsters = value; }
         }
 
+        public bool GenerationNotSaved
+        {
+            get { return !latestGenerationSaved; }
+        }
         #endregion
 
         #region Constructor
         public EncounterGeneratorModel()
         {
+            latestGenerationSaved = true;
+
             for(int i = 1; i <= 20; i++)
             {
                 partySize.Add(i);
@@ -144,30 +153,29 @@ namespace ChaoticCreation.EncounterGenerator
             //IF NO RESULTS, NEED TO RESEND QUERY
             Dictionary<string, string> generatedEncounter = generator.EncounterQuery(arguments);
 
-            /*
-            Console.WriteLine("Test returned dictionary:");
-            foreach (KeyValuePair<string, string> kvp in generatedEncounter)
+            foreach( KeyValuePair<string, string> monster in generatedEncounter)
             {
-                Console.WriteLine("Key = " + kvp.Key);
-                Console.WriteLine("Value = " + kvp.Value);
+                encounterMonsters.Add(monster.Value);
             }
-            */
-            
-
-            /*
-             * put code here to add the generated monsters to the encounterMonsters observable collection
-            */
 
             string encounterName = chosenDifficulty + " Level " + chosenPartyLevel + " " + chosenTerrain + " Encounter";
 
             RecentCreations.Instance.AddCreation(encounterName, GeneratorTypesEnum.Encounter, generatedEncounter);
 
             Console.WriteLine("Generate Encounter Button Pressed");
+
+            latestGenerationSaved = false;
+            OnPropertyChanged("GenerationNotSaved");
         }
 
         public void SaveCurrentEnocunter()
         {
-            Console.WriteLine("Save Encounter Button Clicked");
+            if (!latestGenerationSaved)
+            {
+                Console.WriteLine("Save Encounter Button Clicked");
+                latestGenerationSaved = true;
+                OnPropertyChanged("GenerationNotSaved");
+            }
         }
         
         private void OnPropertyChanged(string property)

@@ -320,7 +320,17 @@
             Click="SaveButton_Click"
             FontSize="20"
             MaxWidth="300" MaxHeight="75">
-            Save Encounter
+            <StackPanel Orientation="Horizontal">
+                <TextBlock
+                    Text="*"
+                    Visibility="{Binding Path=GenerationNotSaved, Converter={StaticResource BoolToVis}}"/>
+                <TextBlock
+                    Text="Save Encounter"
+                    Margin="5"/>
+                <TextBlock
+                    Text="*"
+                    Visibility="{Binding Path=GenerationNotSaved, Converter={StaticResource BoolToVis}}"/>
+            </StackPanel>
         </Button>
     </Grid>
 </UserControl>
