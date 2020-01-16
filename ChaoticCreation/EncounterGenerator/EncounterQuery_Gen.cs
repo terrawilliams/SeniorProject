@@ -26,6 +26,8 @@ namespace ChaoticCreation.EncounterGenerator
             int monsterNum = getMonsterNum(); //Returns random number of monsters
             double monsterMultiplier = getMonsterMultiplier(monsterNum); //Returns multiplier based on number of monsters
             int monsterTotalXp = Convert.ToInt32(partyXP / monsterMultiplier); //Total XP for all monsters
+            
+            
             int eachMonsterXp = monsterTotalXp / monsterNum; //Gives XP for individual monsters
             double monsterCR = getCR(eachMonsterXp); //Returns the CR value for the given XP value
             
@@ -34,7 +36,7 @@ namespace ChaoticCreation.EncounterGenerator
             Console.WriteLine("TEST: monsterCR = " + monsterCR);
             Console.WriteLine("terrain = " + terrain);
             //Console.WriteLine("monsterMultiplier = " +  monsterMultiplier);
-            //Console.WriteLine("monsterTotalXp = " + monsterTotalXp);
+            Console.WriteLine("monsterTotalXp = " + monsterTotalXp);
             //Console.WriteLine("TEST: eachMonsterXp = " + eachMonsterXp);
             //Console.WriteLine("partyXP = " + partyXP);
 
