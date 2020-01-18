@@ -87,40 +87,77 @@
         </StackPanel>
 
         <Border
+            x:Name="RandomTableContentBorder"
             Grid.Column="1"
             Grid.Row="1"
-            HorizontalAlignment="Stretch"
-            VerticalAlignment="Stretch"
             Padding="5" Margin="10"
             Background="{StaticResource DarkThemeBackgroundSecondary}"
             BorderBrush="White" BorderThickness=".5">
             <ListBox 
-                    VerticalAlignment="Center"
-                    HorizontalAlignment="Left"
-                    ItemsSource="{Binding Path=CurrentTableEntries}">
+                VerticalAlignment="Center"
+                HorizontalAlignment="Stretch"
+                ItemsSource="{Binding Path=CurrentTableEntries}"
+                SelectedItem="{Binding Path=SelectedEntry, Mode=OneWay}"
+                ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Left"
+                            MaxWidth="{Binding ElementName=RandomTableContentBorder, Path=Width}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="3*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock
+                                Text="{Binding Path=Key}"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                                Foreground="White"
+                                Margin="5"/>
+                            <TextBlock 
+                                Grid.Column="1"
+                                Text="{Binding Path=Value}"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Left"
+                                TextWrapping="Wrap"
+                                Foreground="White"
+                                Margin="5"
+                                MaxWidth="{Binding ElementName=RandomTableContentBorder, Path=Width}"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
             </ListBox>
         </Border>
 
-        <Button
-            x:Name="SaveSelectionButton"
-            Grid.Column="1"
-            Grid.Row="2"
-            Margin="25"
-            MaxWidth="300" MaxHeight="75"
-            Click="SaveSelectionButton_Click"
-            FontSize="20">
-            <StackPanel Orientation="Horizontal">
+        <Border
+            Grid.Column="1" Grid.Row="2"
+            Padding="5" Margin="10"
+            Background="{StaticResource DarkThemeBackgroundSecondary}"
+            BorderBrush="White" BorderThickness=".5">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="4*"/>
+                </Grid.ColumnDefinitions>
+
                 <TextBlock
-                    Text="*"
-                    Visibility="{Binding Path=GenerationNotSaved, Converter={StaticResource BoolToVis}}"/>
+                    Foreground="White"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    Text="{Binding Path=SelectedEntry.Key}"/>
+
                 <TextBlock
-                    Text="Save Selection"
-                    Margin="5"/>
-                <TextBlock
-                    Text="*"
-                    Visibility="{Binding Path=GenerationNotSaved, Converter={StaticResource BoolToVis}}"/>
-            </StackPanel>
-        </Button>
+                    Grid.Column="1"
+                    Foreground="White"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Left"
+                    TextWrapping="Wrap"
+                    Text="{Binding Path=SelectedEntry.Value}"/>
+            </Grid>
+        </Border>
+
+        
 
         <Image
             Grid.Column="2"
