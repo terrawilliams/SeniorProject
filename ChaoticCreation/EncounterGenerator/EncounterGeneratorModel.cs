@@ -150,12 +150,12 @@ namespace ChaoticCreation.EncounterGenerator
             //Send list to Query Generator
             EncounterQuery_Gen generator = new EncounterQuery_Gen();
 
-            //IF NO RESULTS, NEED TO RESEND QUERY
+            //Key = monsterName, Value = count of monster
             Dictionary<string, string> generatedEncounter = generator.EncounterQuery(arguments);
 
             foreach( KeyValuePair<string, string> monster in generatedEncounter)
             {
-                encounterMonsters.Add(monster.Value);
+                encounterMonsters.Add(monster.Key); //Leah changed from Value to Key
             }
 
             string encounterName = chosenDifficulty + " Level " + chosenPartyLevel + " " + chosenTerrain + " Encounter";
