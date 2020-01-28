@@ -41,7 +41,15 @@ namespace ChaoticCreation.RandomTables
 
         private void RollButton_Click(object sender, RoutedEventArgs e)
         {
-            randomGeneratorModel.RollDie();
+            try
+            {
+                int result = Int32.Parse(DiceSize.Text);
+                dieFace.Text = randomGeneratorModel.RollDie(result).ToString();
+            }
+            catch (FormatException)
+            {
+                dieFace.Text = "Error";
+            }
         }
 
         private void randomTablesTree_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Windows;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -134,9 +135,11 @@ namespace ChaoticCreation.RandomTables
             }
         }
 
-        public void RollDie()
+        public int RollDie(int size)
         {
-            Console.WriteLine("Roll Die Button Pressed");
+            Random num = new Random();
+            int Number = num.Next(1, size);
+            return Number;
         }
 
         private void OnPropertyChanged(string property)
