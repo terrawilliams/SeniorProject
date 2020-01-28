@@ -103,8 +103,7 @@
                     <DataTemplate>
                         <Grid
                             VerticalAlignment="Center"
-                            HorizontalAlignment="Left"
-                            MaxWidth="{Binding ElementName=RandomTableContentBorder, Path=Width}">
+                            HorizontalAlignment="Left">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="1*"/>
                                 <ColumnDefinition Width="3*"/>
@@ -122,8 +121,7 @@
                                 HorizontalAlignment="Left"
                                 TextWrapping="Wrap"
                                 Foreground="White"
-                                Margin="5"
-                                MaxWidth="{Binding ElementName=RandomTableContentBorder, Path=Width}"/>
+                                Margin="5"/>
                         </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>

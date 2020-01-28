@@ -103,13 +103,20 @@ namespace ChaoticCreation.RandomTables
                 currentTableEntries.Add(newEntry);
             }
 
-            dieToRoll = currentTableContents.Last().upper;
+            if (currentTableContents.Count > 0)
+                dieToRoll = currentTableContents.Last().upper;
+            else
+                dieToRoll = 0;
+            
             OnPropertyChanged("DieToRoll");
         }
 
         public void GenerateRandomTableSelection()
         {
             Console.WriteLine("Generate Random Table Selection Button Pressed");
+
+            if (dieToRoll == 0)
+                return;
 
             int dieRoll = rand.Next(1, dieToRoll);
             string selectedDescription = string.Empty;

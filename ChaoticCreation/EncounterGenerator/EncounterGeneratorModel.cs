@@ -29,7 +29,7 @@ namespace ChaoticCreation.EncounterGenerator
 
         private Random rand = new Random();
 
-        private ObservableCollection<string> encounterMonsters = new ObservableCollection<string>();
+        private ObservableCollection<KeyValuePair<string, string>> encounterMonsters = new ObservableCollection<KeyValuePair<string, string>>();
        
         #endregion
 
@@ -82,7 +82,7 @@ namespace ChaoticCreation.EncounterGenerator
             }
         }
 
-        public ObservableCollection<string> Monsters
+        public ObservableCollection<KeyValuePair<string, string>> Monsters
         {
             get { return encounterMonsters; }
             set { encounterMonsters = value; }
@@ -155,7 +155,7 @@ namespace ChaoticCreation.EncounterGenerator
 
             foreach( KeyValuePair<string, string> monster in generatedEncounter)
             {
-                encounterMonsters.Add(monster.Key); //Leah changed from Value to Key
+                encounterMonsters.Add(monster); //Leah changed from Value to Key
             }
 
             string encounterName = chosenDifficulty + " Level " + chosenPartyLevel + " " + chosenTerrain + " Encounter";
