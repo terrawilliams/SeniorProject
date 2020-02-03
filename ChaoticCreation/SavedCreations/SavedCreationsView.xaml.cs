@@ -13,18 +13,23 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ChaoticCreation.AboutTab
+namespace ChaoticCreation.SavedCreations
 {
     /// <summary>
-    /// Interaction logic for About.xaml
+    /// Interaction logic for SavedCreationsView.xaml
     /// </summary>
-    public partial class About : UserControl
+    public partial class SavedCreationsView : UserControl
     {
-        AboutModel aboutModel = new AboutModel();
-        public About()
+        private SavedCreationsModel savedCreationsModel = new SavedCreationsModel();
+        public SavedCreationsView()
         {
             InitializeComponent();
-            this.DataContext = aboutModel;
+            this.DataContext = savedCreationsModel;
+        }
+
+        private void savedCreationsTree_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+
         }
     }
 }

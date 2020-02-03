@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ChaoticCreation"
         xmlns:home="clr-namespace:ChaoticCreation.HomeTab"
-        xmlns:about="clr-namespace:ChaoticCreation.AboutTab"
+        xmlns:savedCreations="clr-namespace:ChaoticCreation.SavedCreations"
         xmlns:npc="clr-namespace:ChaoticCreation.NpcGenerator"
         xmlns:location="clr-namespace:ChaoticCreation.LocationGenerator"
         xmlns:random="clr-namespace:ChaoticCreation.RandomTables"
@@ -67,8 +67,8 @@
             <TabItem
                 HorizontalAlignment="Stretch"
                 Width="{Binding ElementName=uniformGrid, Path=ActualWidth}"
-                Header="About">
-                <about:About/>
+                Header="Saved Creations">
+                <savedCreations:SavedCreationsView/>
             </TabItem>
         </TabControl>
     </Grid>
