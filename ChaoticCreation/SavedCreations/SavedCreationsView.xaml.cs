@@ -23,9 +23,8 @@ namespace ChaoticCreation.SavedCreations
         private SavedCreationsModel savedCreationsModel = new SavedCreationsModel();
         public SavedCreationsView()
         {
-            this.DataContext = savedCreationsModel;
-
             InitializeComponent();
+            this.DataContext = savedCreationsModel;
         }
 
         private void savedCreationsTree_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
