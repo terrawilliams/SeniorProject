@@ -1,10 +1,11 @@
 using System;
-using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data;
 using System.Data.SQLite;
+using System.Collections.Generic;
 
 namespace ChaoticCreation.EncounterGenerator
 {
@@ -45,14 +46,18 @@ namespace ChaoticCreation.EncounterGenerator
             }
             
             List<KeyValuePair<string, int>> tempDictionary = SelectMonsters(queryResult, monsterNum, monsterTotalXp);
-            
             Dictionary<string, string> generatedEncounter = CombineMonsters(tempDictionary);
-            
             Console.WriteLine("Generated Encounter");
             foreach (KeyValuePair<string, string> item in generatedEncounter)
             {
                 Console.WriteLine("Key: " + item.Key + " Value: " + item.Value);
             }
+
+            float cr = getCR(monsterTotalXp);
+            //Console.WriteLine("CR: " + cr);
+            
+            Dictionary<string, int> lootDict = new Dictionary<string, int>();
+            lootDict = lootCalc(cr, monsterNum);
 
             return generatedEncounter;
         }
@@ -120,7 +125,6 @@ namespace ChaoticCreation.EncounterGenerator
 
             return generatedEncounter;
         }
-
         private int calcTotalXP(string partySize, string partyLevel, string difficulty)
         {
             int size = Int32.Parse(partySize);
@@ -163,7 +167,164 @@ namespace ChaoticCreation.EncounterGenerator
 
             return multiplier;
         }
-        
+        private float getCR(int xp)
+        {
+            string queryString = "SELECT cr FROM CRtoXPTbl WHERE xp > " + xp + " ORDER BY xp ASC LIMIT 1;";
+            float cr;
+            string temp = "Data Source=..\\..\\sqlDatabase\\MasterDB.db;Version=3;New=False;Compress=False";
+
+            SQLiteConnection connection = new SQLiteConnection(temp); // Create a new database connection:
+            connection.Open();
+            SQLiteCommand command = new SQLiteCommand(queryString, connection);
+            SQLiteDataReader reader = command.ExecuteReader();
+            
+            reader.Read();
+            cr = reader.GetFloat(0);
+            connection.Close();
+            
+            return cr;
+        }
+        private Dictionary<string, int> lootCalc(float CR, int monsterNum)
+        {
+            string lootStr;
+            Dictionary<string, int> coinDict = new Dictionary<string, int>();
+
+            if(CR < 1)
+            {
+                CR = 0;
+            }
+            
+            if (monsterNum == 1)
+            {
+                coinDict = CoinQuery(CR, false);
+            }
+            else if(monsterNum > 1)
+            {
+                Console.WriteLine("CR = " + CR);
+                coinDict = CoinQuery(CR, true);
+                //HoardQuery(CR);
+            }
+
+            foreach (KeyValuePair<string, int> item in coinDict)
+            {
+                Console.WriteLine(item.Key + ": " + item.Value);
+            }
+
+            return coinDict;
+        }
+
+        private Dictionary<string, int> CoinQuery(float CR, bool hoardTbl)
+        {
+            Random rand = new Random();
+            int d100 = rand.Next(1, 100);
+            string tblName = "tmpTableName";
+            string queryString = "tmpStr";
+            Dictionary<string, string> coinQuery = new Dictionary<string, string>();
+            Dictionary<string, int> coinDict = new Dictionary<string, int>();
+
+            //Get table name
+            if(hoardTbl == true)
+            {
+                tblName = "CoinHoardTbl";
+                queryString = "SELECT * FROM " + tblName + " WHERE CR == " + CR + ";";
+
+            }
+            else if (CR <= 4)
+            {
+                tblName = "CoinTbl1";
+                queryString = "SELECT * FROM " + tblName + " WHERE d100 == " + d100 + ";";
+
+            }
+            else if (CR <= 10)
+            {
+                tblName = "CoinTbl2"; 
+                queryString = "SELECT * FROM " + tblName + " WHERE d100 == " + d100 + ";";
+
+            }
+            else if (CR <= 16)
+            {
+                tblName = "CoinTbl3";
+                queryString = "SELECT * FROM " + tblName + " WHERE d100 == " + d100 + ";";
+
+            }
+            else if (CR >= 17)
+            {
+                tblName = "CoinTbl4";
+                queryString = "SELECT * FROM " + tblName + " WHERE d100 == " + d100 + ";";
+
+            }
+
+            coinQuery = QueryCoinTbl(queryString); //key="cp", value=string for calculation
+            
+            foreach (KeyValuePair<string, string> item in coinQuery) //convert query dict to calculated totals
+            {
+                int[] parseArr = new int[2];
+                int rollNum = 0;
+                int multiplier = 0;
+                int coinTotal = 0;
+                if (item.Value != "")
+                {
+                    parseArr = CoinStringParser(item.Value);
+                    rollNum = parseArr[0];
+                    multiplier = parseArr[2];
+                }                
+
+                for(int i=0; i<=rollNum; i++) //calculate string
+                {
+                    coinTotal += rand.Next(1, 6);
+                }
+                coinTotal *= multiplier;
+                coinDict.Add(item.Key, coinTotal);
+            }
+
+            return coinDict;
+        }
+        private int[] CoinStringParser(string tmpStr)
+        {
+            int[] parsedArray = new int[3];
+            int i = 0;
+            char[] delimiterChars = { 'd', 'x' };
+            string[] words = tmpStr.Split(delimiterChars);
+            
+            foreach (string word in words)
+            {
+                parsedArray[i] = Int32.Parse(word);
+                i++;
+            }
+
+            return parsedArray;
+        } 
+        private void HoardQuery(float CR)
+        {
+            //CoinHoardQuery
+            //HoardQuery
+        }
+
+        private Dictionary<string, string> QueryCoinTbl(string queryString)
+        {
+            Console.WriteLine(queryString);
+            Dictionary<string, string> queryDict = new Dictionary<string, string>(); //key=colName (CP, SP, etc), value=string (ex. 2d6x100)
+            DataTable dataTable = new DataTable();
+            string connectionStr = "Data Source=..\\..\\sqlDatabase\\MasterDB.db;Version=3;New=False;Compress=False";
+            SQLiteConnection connection = new SQLiteConnection(connectionStr); // string connString = @"your connection string here";
+            SQLiteCommand command = new SQLiteCommand(queryString, connection);
+            connection.Open();
+            SQLiteDataAdapter dataAdapter = new SQLiteDataAdapter(command); // create data adapter
+            dataAdapter.Fill(dataTable); // query db and return the result to your datatable
+            dataAdapter.Dispose();
+            connection.Close();
+
+            var coinArray = dataTable.Rows[0].ItemArray.Select(x => x.ToString()).ToArray();
+
+            queryDict.Add("CP", coinArray[1]);
+            queryDict.Add("SP", coinArray[2]);
+            queryDict.Add("EP", coinArray[3]);
+            queryDict.Add("GP", coinArray[4]);
+            queryDict.Add("PP", coinArray[5]);
+
+            return queryDict;
+        }
+
         #endregion
     }
 }
