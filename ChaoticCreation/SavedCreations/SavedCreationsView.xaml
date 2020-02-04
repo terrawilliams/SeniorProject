@@ -41,13 +41,16 @@
                 BorderBrush="Transparent"
                 SelectedValuePath="Name">
                 <TreeViewItem 
-                    Header="Encounters">
+                    Header="Encounters"
+                    ItemsSource="{Binding Path=SavedEncounters}">
                 </TreeViewItem>
                 <TreeViewItem
-                    Header="Locations">
+                    Header="Locations"
+                    ItemsSource="{Binding Path=SavedLocations}">
                 </TreeViewItem>
                 <TreeViewItem
-                    Header="NPCs">
+                    Header="NPCs"
+                    ItemsSource="{Binding Path=SavedNpcs}">
                 </TreeViewItem>
             </TreeView>
         </Border>
