@@ -95,14 +95,10 @@ namespace ChaoticCreation.RandomTables
 
             foreach(RandomTableEntry entry in currentTableContents)
             {
-<<<<<<< HEAD
-                string newEntry = entry.lower + ((entry.lower == entry.upper)? "":(" - " + entry.upper)) + "\t" + entry.description;
-=======
                 string range = entry.lower + ((entry.lower == entry.upper)? "":(" - " + entry.upper));
                 string description = entry.description;
 
                 KeyValuePair<string, string> newEntry = new KeyValuePair<string, string>(range, description);
->>>>>>> master
 
                 currentTableEntries.Add(newEntry);
             }
