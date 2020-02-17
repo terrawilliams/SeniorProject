@@ -90,7 +90,7 @@ namespace ChaoticCreation.RandomTables
 
             foreach(RandomTableEntry entry in currentTableContents)
             {
-                string newEntry = entry.lower + ((entry.lower == entry.lower)? "":(" - " + entry.upper)) + "\t" + entry.description;
+                string newEntry = entry.lower + ((entry.lower == entry.upper)? "":(" - " + entry.upper)) + "\t" + entry.description;
 
                 currentTableEntries.Add(newEntry);
             }
