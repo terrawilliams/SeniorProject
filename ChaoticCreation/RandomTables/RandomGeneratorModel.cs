@@ -25,15 +25,17 @@ namespace ChaoticCreation.RandomTables
         #region Members
         private string currentTable;
         private List<RandomTableEntry> currentTableContents = new List<RandomTableEntry>();
-        private ObservableCollection<string> currentTableEntries = new ObservableCollection<string>();
+        private ObservableCollection<KeyValuePair<string, string>> currentTableEntries = new ObservableCollection<KeyValuePair<string, string>>();
+        private int dieToRoll;
+        private KeyValuePair<string, string> selectedEntry;
 
         private RandomTableCategory listOfTables = new RandomTableCategory("Random Tables");
 
         private ObservableCollection<string> randomTableResult = new ObservableCollection<string>();
 
-        private bool latestGenerationSaved;
-
         private RandomTables_Gen randomTables_Gen = new RandomTables_Gen();
+
+        private Random rand = new Random();
 
         public event PropertyChangedEventHandler PropertyChanged;
         #endregion
@@ -51,19 +53,24 @@ namespace ChaoticCreation.RandomTables
             }
         }
 
-        public ObservableCollection<string> CurrentTableEntries
+        public ObservableCollection<KeyValuePair<string, string>> CurrentTableEntries
         {
             get { return currentTableEntries; }
+        }
+
+        public int DieToRoll
+        {
+            get { return dieToRoll; }
+        }
+
+        public KeyValuePair<string, string> SelectedEntry
+        {
+            get { return selectedEntry; }
         }
 
         public ObservableCollection<string> RandomTableResults
         {
             get { return randomTableResult; }
-        }
-
-        public bool GenerationNotSaved
-        {
-            get { return !latestGenerationSaved; }
         }
 
         public RandomTableCategory ListOfTables 
@@ -75,8 +82,6 @@ namespace ChaoticCreation.RandomTables
         #region Constructor
         public RandomGeneratorModel()
         {
-            latestGenerationSaved = true;
-
             listOfTables = randomTables_Gen.InitializeRandomTableList();
         }
         #endregion
@@ -90,27 +95,53 @@ namespace ChaoticCreation.RandomTables
 
             foreach(RandomTableEntry entry in currentTableContents)
             {
+<<<<<<< HEAD
                 string newEntry = entry.lower + ((entry.lower == entry.upper)? "":(" - " + entry.upper)) + "\t" + entry.description;
+=======
+                string range = entry.lower + ((entry.lower == entry.upper)? "":(" - " + entry.upper));
+                string description = entry.description;
+
+                KeyValuePair<string, string> newEntry = new KeyValuePair<string, string>(range, description);
+>>>>>>> master
 
                 currentTableEntries.Add(newEntry);
             }
+
+            if (currentTableContents.Count > 0)
+                dieToRoll = currentTableContents.Last().upper;
+            else
+                dieToRoll = 0;
+            
+            OnPropertyChanged("DieToRoll");
         }
 
         public void GenerateRandomTableSelection()
         {
             Console.WriteLine("Generate Random Table Selection Button Pressed");
 
-            latestGenerationSaved = false;
-            OnPropertyChanged("GenerationNotSaved");
-        }
+            if (dieToRoll == 0)
+                return;
 
-        public void SaveRandomTableSelection()
-        {
-            if (!latestGenerationSaved)
+            int dieRoll = rand.Next(1, dieToRoll);
+            string selectedDescription = string.Empty;
+
+            foreach(RandomTableEntry entry in currentTableContents)
             {
-                Console.WriteLine("Save Random Table Selection Button Pressed");
-                latestGenerationSaved = true;
-                OnPropertyChanged("GenerationNotSaved");
+                if(entry.lower <= dieRoll && entry.upper >= dieRoll)
+                {
+                    selectedDescription = entry.description;
+                    break;
+                }
+            }
+
+            foreach(KeyValuePair<string, string> entry in currentTableEntries)
+            {
+                if(entry.Value == selectedDescription)
+                {
+                    selectedEntry = entry;
+                    OnPropertyChanged("SelectedEntry");
+                    break;
+                }
             }
         }
 

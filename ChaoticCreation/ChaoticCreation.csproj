@@ -75,10 +75,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="AboutTab\About.xaml.cs">
-      <DependentUpon>About.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="AboutTab\AboutModel.cs" />
     <Compile Include="Creation.cs" />
     <Compile Include="EncounterGenerator\EncounterGenerator.xaml.cs">
       <DependentUpon>EncounterGenerator.xaml</DependentUpon>
@@ -108,10 +104,10 @@
     </Compile>
     <Compile Include="RandomTables\RandomTables_Gen.cs" />
     <Compile Include="RecentCreations.cs" />
-    <Page Include="AboutTab\About.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
+    <Compile Include="SavedCreations\SavedCreationsModel.cs" />
+    <Compile Include="SavedCreations\SavedCreationsView.xaml.cs">
+      <DependentUpon>SavedCreationsView.xaml</DependentUpon>
+    </Compile>
     <Page Include="EncounterGenerator\EncounterGenerator.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -141,6 +137,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="RandomTables\RandomTables.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SavedCreations\SavedCreationsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

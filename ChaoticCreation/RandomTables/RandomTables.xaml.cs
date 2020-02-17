@@ -39,11 +39,6 @@ namespace ChaoticCreation.RandomTables
             randomGeneratorModel.GenerateRandomTableSelection();
         }
 
-        private void SaveSelectionButton_Click(object sender, RoutedEventArgs e)
-        {
-            randomGeneratorModel.SaveRandomTableSelection();
-        }
-
         private void RollButton_Click(object sender, RoutedEventArgs e)
         {
             randomGeneratorModel.RollDie();

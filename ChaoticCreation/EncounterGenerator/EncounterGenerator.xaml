@@ -308,8 +308,34 @@
                 <ListBox 
                     FontSize="24"
                     VerticalAlignment="Center"
-                    HorizontalAlignment="Left"
-                    ItemsSource="{Binding Path=Monsters, Mode=TwoWay}">
+                    HorizontalAlignment="Stretch"
+                    ItemsSource="{Binding Path=Monsters}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Left">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="3*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock
+                                Text="{Binding Path=Value}"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                                Foreground="White"
+                                Margin="5"/>
+                                <TextBlock 
+                                Grid.Column="1"
+                                Text="{Binding Path=Key}"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Left"
+                                TextWrapping="Wrap"
+                                Foreground="White"
+                                Margin="5"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
                 </ListBox>
             </Border>
         </Grid>
