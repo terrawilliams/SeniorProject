@@ -30,7 +30,18 @@ namespace ChaoticCreation
 
             string insert = "INSERT INTO SavedCreationsTbl (CreationName, CreationDescription, CreationType)" +
                 "VALUES " +
-                "(" + creation.Name + ", " + description + ", " + creation.Type + ")";
+                "(" + creation.Name + ", " + description + ", " + creation.Type + ");";
+
+            string temp = "Data Source=";
+            temp += "..\\sqlDatabase\\MasterDB.db";
+            temp += ";Version=3;New=False;Compress=False";
+
+            SQLiteConnection db = new SQLiteConnection(temp);
+            db.Open();
+            var cmd = new SQLiteCommand(db);
+            cmd.CommandText = insert;
+            cmd.ExecuteNonQuery();
+            db.Close();
         }
 
         string createEncounterDescription(Dictionary<String, String> encounter)
