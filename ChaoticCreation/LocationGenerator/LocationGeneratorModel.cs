@@ -18,11 +18,17 @@ namespace ChaoticCreation.LocationGenerator
         private string locationName;
         private string locationDescription;
 
+        private Dictionary<string, string> currentGeneration = new Dictionary<string, string>();
+
         private bool latestGenerationSaved;
 
         private Random rand = new Random();
 
+        private Save save = new Save();
+        private LocationQuery_Gen generator = new LocationQuery_Gen();
+
         public event PropertyChangedEventHandler PropertyChanged;
+
         #endregion
 
         #region Getters and Setters
@@ -108,14 +114,13 @@ namespace ChaoticCreation.LocationGenerator
 
             arguments.Add(type);
             arguments.Add(size);
-            
-            LocationQuery_Gen generator = new LocationQuery_Gen();
-            var generatedLocation = generator.LocationQuery(arguments);
-            
-            LocationName = generatedLocation["name"];
-            LocationDescription = generatedLocation["description"];
 
-            RecentCreations.Instance.AddCreation(LocationName, GeneratorTypesEnum.Location, generatedLocation);
+            currentGeneration = generator.LocationQuery(arguments);
+            
+            LocationName = currentGeneration["name"];
+            LocationDescription = currentGeneration["description"];
+
+            RecentCreations.Instance.AddCreation(LocationName, GeneratorTypesEnum.Location, currentGeneration);
 
             latestGenerationSaved = false;
             OnPropertyChanged("GenerationNotSaved");
@@ -125,9 +130,12 @@ namespace ChaoticCreation.LocationGenerator
         {
             if (!latestGenerationSaved)
             {
-                Console.WriteLine("Save Location Button Pressed");
                 latestGenerationSaved = true;
                 OnPropertyChanged("GenerationNotSaved");
+
+                Creation savedCreation = new Creation(LocationName, GeneratorTypesEnum.Location, currentGeneration);
+
+                save.Creation(savedCreation);
             }
         }
 

@@ -13,7 +13,7 @@ namespace ChaoticCreation
 {
     class Save
     {
-        void Creation(Creation creation)
+        public void Creation(Creation creation)
         {
 
             string description = "";

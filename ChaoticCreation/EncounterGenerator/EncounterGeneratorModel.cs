@@ -29,6 +29,8 @@ namespace ChaoticCreation.EncounterGenerator
 
         private Random rand = new Random();
 
+        private Save save = new Save();
+
         private ObservableCollection<KeyValuePair<string, string>> encounterMonsters = new ObservableCollection<KeyValuePair<string, string>>();
        
         #endregion
