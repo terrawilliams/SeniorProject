@@ -184,6 +184,7 @@ namespace ChaoticCreation.EncounterGenerator
             
             return cr;
         }
+
         private Dictionary<string, int> lootCalc(float CR, int monsterNum)
         {
             string lootStr;
@@ -212,7 +213,6 @@ namespace ChaoticCreation.EncounterGenerator
 
             return coinDict;
         }
-
         private Dictionary<string, int> CoinQuery(float CR, bool hoardTbl)
         {
             Random rand = new Random();
@@ -299,7 +299,6 @@ namespace ChaoticCreation.EncounterGenerator
             //CoinHoardQuery
             //HoardQuery
         }
-
         private Dictionary<string, string> QueryCoinTbl(string queryString)
         {
             Console.WriteLine(queryString);
