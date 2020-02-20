@@ -25,9 +25,16 @@ namespace ChaoticCreation.EncounterGenerator
 
         private string encounterDescription; //description returned to front end
 
+        private string encounterName;
+        private Dictionary<string, string> currentEncounter = new Dictionary<string, string>();
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         private Random rand = new Random();
+
+        private EncounterQuery_Gen generator = new EncounterQuery_Gen();
+
+        private Save save = new Save();
 
         private ObservableCollection<KeyValuePair<string, string>> encounterMonsters = new ObservableCollection<KeyValuePair<string, string>>();
        
@@ -148,19 +155,18 @@ namespace ChaoticCreation.EncounterGenerator
             arguments.Add(chosenDifficulty);
 
             //Send list to Query Generator
-            EncounterQuery_Gen generator = new EncounterQuery_Gen();
 
             //Key = monsterName, Value = count of monster
-            Dictionary<string, string> generatedEncounter = generator.EncounterQuery(arguments);
+            currentEncounter = generator.EncounterQuery(arguments);
 
-            foreach( KeyValuePair<string, string> monster in generatedEncounter)
+            foreach( KeyValuePair<string, string> monster in currentEncounter)
             {
                 encounterMonsters.Add(monster); //Leah changed from Value to Key
             }
 
-            string encounterName = chosenDifficulty + " Level " + chosenPartyLevel + " " + chosenTerrain + " Encounter";
+            encounterName = chosenDifficulty + " Level " + chosenPartyLevel + " " + chosenTerrain + " Encounter";
 
-            RecentCreations.Instance.AddCreation(encounterName, GeneratorTypesEnum.Encounter, generatedEncounter);
+            RecentCreations.Instance.AddCreation(encounterName, GeneratorTypesEnum.Encounter, currentEncounter);
 
             Console.WriteLine("Generate Encounter Button Pressed");
 
@@ -172,9 +178,12 @@ namespace ChaoticCreation.EncounterGenerator
         {
             if (!latestGenerationSaved)
             {
-                Console.WriteLine("Save Encounter Button Clicked");
                 latestGenerationSaved = true;
                 OnPropertyChanged("GenerationNotSaved");
+
+                Creation savedCreation = new Creation(encounterName, GeneratorTypesEnum.Encounter, currentEncounter);
+
+                save.Creation(savedCreation);
             }
         }
         

@@ -22,9 +22,15 @@ namespace ChaoticCreation.NpcGenerator
         private string npcName;
         private string npcDescription;
 
+        private Dictionary<string, string> currentNpc = new Dictionary<string, string>();
+
         private bool latestGenerationSaved;
 
+        NpcQuery_Gen generator = new NpcQuery_Gen();
+
         private Random rand = new Random();
+
+        private Save save = new Save();
 
         public event PropertyChangedEventHandler PropertyChanged;
         #endregion
@@ -129,14 +135,13 @@ namespace ChaoticCreation.NpcGenerator
             generationArguments.Add(race);
             generationArguments.Add(gender);
             generationArguments.Add(occupation);
-        
-            NpcQuery_Gen generator = new NpcQuery_Gen();
-            var generatedNpc = generator.NpcQuery(generationArguments);
-            
-            NpcName = generatedNpc["name"];
-            NpcDescription = generatedNpc["description"];
 
-            RecentCreations.Instance.AddCreation(NpcName, GeneratorTypesEnum.NPC, generatedNpc);
+            currentNpc = generator.NpcQuery(generationArguments);
+            
+            NpcName = currentNpc["name"];
+            NpcDescription = currentNpc["description"];
+
+            RecentCreations.Instance.AddCreation(NpcName, GeneratorTypesEnum.NPC, currentNpc);
 
             latestGenerationSaved = false;
             OnPropertyChanged("GenerationNotSaved");
@@ -146,9 +151,12 @@ namespace ChaoticCreation.NpcGenerator
         {
             if (!latestGenerationSaved)
             {
-                Console.WriteLine("Save NPC Button Pressed");
                 latestGenerationSaved = true;
                 OnPropertyChanged("GenerationNotSaved");
+
+                Creation savedCreation = new Creation(NpcName, GeneratorTypesEnum.NPC, currentNpc);
+
+                save.Creation(savedCreation);
             }
         }
 
