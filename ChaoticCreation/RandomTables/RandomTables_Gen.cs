@@ -56,8 +56,8 @@ namespace ChaoticCreation.RandomTables
                 {"Magic Items Table G", "MagicItemsGTbl"},
                 {"Magic Items Table H", "MagicItemsHTbl"},
                 {"Magic Items Table I", "MagicItemsITbl"},
-                {"Random Necromantic Effects", "NecromancyEffectsTbl" },
-                {"Random Potion Effects", "PotionEffectsTbl" },
+                {"Necromancy", "NecromancyEffectsTbl" },
+                {"Potions", "PotionEffectsTbl" },
                 {"Trinkets", "TrinketsTbl" },
                 {"Wild Magic Surge", "WildMagicTbl"}
             };

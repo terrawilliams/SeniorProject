@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Windows;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -104,13 +103,20 @@ namespace ChaoticCreation.RandomTables
                 currentTableEntries.Add(newEntry);
             }
 
-            dieToRoll = currentTableContents.Last().upper;
+            if (currentTableContents.Count > 0)
+                dieToRoll = currentTableContents.Last().upper;
+            else
+                dieToRoll = 0;
+            
             OnPropertyChanged("DieToRoll");
         }
 
         public void GenerateRandomTableSelection()
         {
             Console.WriteLine("Generate Random Table Selection Button Pressed");
+
+            if (dieToRoll == 0)
+                return;
 
             int dieRoll = rand.Next(1, dieToRoll);
             string selectedDescription = string.Empty;
@@ -138,7 +144,7 @@ namespace ChaoticCreation.RandomTables
         public int RollDie(int size)
         {
             Random num = new Random();
-            int Number = num.Next(1, size);
+            int Number = num.Next(1, size+1);
             return Number;
         }
 
@@ -149,4 +155,5 @@ namespace ChaoticCreation.RandomTables
         }
         #endregion
     }
+
 }
