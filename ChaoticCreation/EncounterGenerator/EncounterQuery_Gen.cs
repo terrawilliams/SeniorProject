@@ -78,6 +78,7 @@ namespace ChaoticCreation.EncounterGenerator
             {
                 queryDict.Add(reader.GetString(0), reader.GetInt32(1));
             }
+            reader.Close();
             connection.Close();
 
             return queryDict; 
@@ -180,6 +181,7 @@ namespace ChaoticCreation.EncounterGenerator
             
             reader.Read();
             cr = reader.GetFloat(0);
+            reader.Close();
             connection.Close();
             
             return cr;
