@@ -14,7 +14,7 @@ namespace ChaoticCreation.EncounterGenerator
         #region Members        
         #endregion
 
-        #region Methods
+         #region Methods
         public Dictionary<string, string> EncounterQuery(List<string> userSpecifiedData)
         {
             //userSpecifiedData[0] = size, [1] = level, etc
@@ -45,8 +45,11 @@ namespace ChaoticCreation.EncounterGenerator
                 queryResult = QueryMonsterTbl("..\\..\\sqlDatabase\\MasterDB.db", queryString);
             }
             
+
+
             List<KeyValuePair<string, int>> tempDictionary = SelectMonsters(queryResult, monsterNum, monsterTotalXp);
             Dictionary<string, string> generatedEncounter = CombineMonsters(tempDictionary);
+            
             
             Console.WriteLine("Generated Encounter");
             foreach (KeyValuePair<string, string> item in generatedEncounter)
@@ -59,13 +62,15 @@ namespace ChaoticCreation.EncounterGenerator
             
             Dictionary<string, string> lootDict = new Dictionary<string, string>();
             lootDict = lootCalc(cr, monsterNum, generatedEncounter);
-/*
+
             Console.WriteLine("CALCULATED LOOT");
             foreach(KeyValuePair<string,string> item in lootDict)
             {
                 Console.WriteLine("Key: " + item.Key + " Value: " + item.Value);
             }
-*/
+            reader.Close();
+            connection.Close();
+
             return generatedEncounter;
         }
         private Dictionary<string, string> lootCalc(float CR, int monsterNum, Dictionary<string, string> monsterList)
@@ -85,12 +90,13 @@ namespace ChaoticCreation.EncounterGenerator
                 coinDict = CoinQuery(CR, true);
                 for (int i = 0; i < 5; i++)
                 {
-                    //Console.WriteLine("coinArr[" + i + " ] = " + coinArr[i]);
+                    Console.WriteLine("coinArr[" + i + " ] = " + coinArr[i]);
                     coinArr[i] += coinDict.ElementAt(i).Value;
                 }
             }
             
-            else if(monsterNum > 1){
+            else if(monsterNum > 1)
+            {
                 //Sort Monster List by CR
                 Dictionary<string, int> sortedList = SortMonsterList(monsterList);
                 int count = sortedList.Count;
@@ -104,7 +110,7 @@ namespace ChaoticCreation.EncounterGenerator
                 for (int i = 0; i < 5; i++)
                 {
                     coinArr[i] += coinDict.ElementAt(i).Value;
-                    //Console.WriteLine("coinArr[" + i + " ] = " + coinArr[i]);
+                    Console.WriteLine("coinArr[" + i + " ] = " + coinArr[i]);
                 }
 
                 int j = 1; //monster list index
@@ -134,6 +140,7 @@ namespace ChaoticCreation.EncounterGenerator
 
             return lootDict;
         }
+
         Dictionary<string, int> SortMonsterList(Dictionary<string, string> monsterList)
         {
             Dictionary<string, int> sortedList = new Dictionary<string, int>();
@@ -143,6 +150,11 @@ namespace ChaoticCreation.EncounterGenerator
             }
             return sortedList;
         }
+
+
+
+
+
         private Dictionary<string, string> CalcHoard(float CR)
         {
             Dictionary<string, string> hoardDict = new Dictionary<string, string>();
@@ -290,6 +302,11 @@ namespace ChaoticCreation.EncounterGenerator
 
             return magStr;
         }
+
+
+
+
+
         private Dictionary<string, int> CoinQuery(float CR, bool hoardTbl)
         {
             Random rand = new Random();
@@ -396,6 +413,7 @@ namespace ChaoticCreation.EncounterGenerator
 
             return parsedArray;
         }
+
         private Dictionary<string, int> QueryMonsterTbl(string filePath, string queryString)
         {
             Dictionary<string, int> queryDict = new Dictionary<string, int>();
@@ -413,7 +431,6 @@ namespace ChaoticCreation.EncounterGenerator
             {
                 queryDict.Add(reader.GetString(0), reader.GetInt32(1));
             }
-            reader.Close();
             connection.Close();
 
             return queryDict;
@@ -516,7 +533,6 @@ namespace ChaoticCreation.EncounterGenerator
 
             reader.Read();
             cr = reader.GetFloat(0);
-            reader.Close();
             connection.Close();
 
             return cr;
