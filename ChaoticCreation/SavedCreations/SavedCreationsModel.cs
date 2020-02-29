@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace ChaoticCreation.SavedCreations
 {
-    class SavedCreationsModel
+    class SavedCreationsModel : INotifyPropertyChanged
     {
         #region Members
 
@@ -18,6 +19,8 @@ namespace ChaoticCreation.SavedCreations
         private ObservableCollection<string> savedEncountersNames = new ObservableCollection<string>();
         private ObservableCollection<string> savedLocationsNames = new ObservableCollection<string>();
         private ObservableCollection<string> savedNpcsNames = new ObservableCollection<string>();
+
+        public event PropertyChangedEventHandler PropertyChanged;
         #endregion
 
         #region Getters and Setters
@@ -58,6 +61,11 @@ namespace ChaoticCreation.SavedCreations
         #endregion
 
         #region Methods
+        private void OnPropertyChanged(string property)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(property));
+        }
 
         #endregion
     }
