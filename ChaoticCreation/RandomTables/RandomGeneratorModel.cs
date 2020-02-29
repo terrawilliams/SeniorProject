@@ -141,9 +141,11 @@ namespace ChaoticCreation.RandomTables
             }
         }
 
-        public void RollDie()
+        public int RollDie(int size)
         {
-            Console.WriteLine("Roll Die Button Pressed");
+            Random num = new Random();
+            int Number = num.Next(1, size+1);
+            return Number;
         }
 
         private void OnPropertyChanged(string property)
@@ -153,4 +155,5 @@ namespace ChaoticCreation.RandomTables
         }
         #endregion
     }
+
 }
