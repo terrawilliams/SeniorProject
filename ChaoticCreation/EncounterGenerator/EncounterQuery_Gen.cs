@@ -56,7 +56,7 @@ namespace ChaoticCreation.EncounterGenerator
                 " AND environment LIKE '%" + terrain + "%' ORDER BY cr;";
 
             //Returns all monsters below total XP threshold
-            Dictionary<string, int> queryResult = QueryMonsterTbl("..\\..\\sqlDatabase\\MasterDB.db", queryString);
+            Dictionary<string, float> queryResult = QueryMonsterTbl("..\\..\\sqlDatabase\\MasterDB.db", queryString);
             
             //If the query result is empty, remove terrain
             if (queryResult.Count() == 0)
@@ -67,7 +67,7 @@ namespace ChaoticCreation.EncounterGenerator
             }            
 
             //Returns list of monsters for cr level
-            List<KeyValuePair<string, int>> tempDictionary = SelectMonsters(queryResult, monsterNum, monsterTotalXp);
+            List<KeyValuePair<string, float>> tempDictionary = SelectMonsters(queryResult, monsterNum, monsterTotalXp);
             
             //Returns Dictionary<monster name, amt of that monster>
             Dictionary<string, string> generatedEncounter = CombineMonsters(tempDictionary);
@@ -414,9 +414,9 @@ namespace ChaoticCreation.EncounterGenerator
 
             return parsedArray;
         }
-        private Dictionary<string, int> QueryMonsterTbl(string filePath, string queryString)
+        private Dictionary<string, float> QueryMonsterTbl(string filePath, string queryString)
         {
-            Dictionary<string, int> queryDict = new Dictionary<string, int>();
+            Dictionary<string, float> queryDict = new Dictionary<string, float>();
 
             string temp = "Data Source=";
             temp += filePath;
@@ -429,18 +429,18 @@ namespace ChaoticCreation.EncounterGenerator
             SQLiteDataReader reader = command.ExecuteReader();
             while (reader.Read())
             {
-                queryDict.Add(reader.GetString(0), reader.GetInt32(1));
+                queryDict.Add(reader.GetString(0), reader.GetFloat(1));
             }
             reader.Close();
             connection.Close();
 
             return queryDict;
         }
-        private List<KeyValuePair<string, int>> SelectMonsters(Dictionary<string, int> queryList, int monsterNum, int monstTotalXp)
+        private List<KeyValuePair<string, float>> SelectMonsters(Dictionary<string, float> queryList, int monsterNum, int monstTotalXp)
         {
             int listSize = queryList.Count();
             Random rand = new Random();
-            List<KeyValuePair<string, int>> list = new List<KeyValuePair<string, int>>();
+            List<KeyValuePair<string, float>> list = new List<KeyValuePair<string, float>>();
 
             for (int i=0; i<monsterNum; i++)
             {
@@ -475,9 +475,9 @@ namespace ChaoticCreation.EncounterGenerator
 
             return list;
         }
-        private Dictionary<string, string> CombineMonsters(List<KeyValuePair<string, int>> monstersList)
+        private Dictionary<string, string> CombineMonsters(List<KeyValuePair<string, float>> monstersList)
         {
-            List<KeyValuePair<string, int>> list = monstersList.ToList();
+            List<KeyValuePair<string, float>> list = monstersList.ToList();
             Dictionary<string, string> generatedEncounter = new Dictionary<string, string>();
 
             var q = from x in list
