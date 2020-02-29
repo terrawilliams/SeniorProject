@@ -68,8 +68,6 @@ namespace ChaoticCreation.EncounterGenerator
             {
                 Console.WriteLine("Key: " + item.Key + " Value: " + item.Value);
             }
-            reader.Close();
-            connection.Close();
 
             return generatedEncounter;
         }

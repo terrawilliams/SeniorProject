@@ -44,8 +44,8 @@ namespace ChaoticCreation.RandomTables
         public string CurrentTable
         {
             get { return currentTable; }
-            set 
-            { 
+            set
+            {
                 currentTable = value;
                 OnPropertyChanged("CurrentTable");
 
@@ -73,7 +73,7 @@ namespace ChaoticCreation.RandomTables
             get { return randomTableResult; }
         }
 
-        public RandomTableCategory ListOfTables 
+        public RandomTableCategory ListOfTables
         {
             get { return listOfTables; }
         }
@@ -93,9 +93,9 @@ namespace ChaoticCreation.RandomTables
 
             currentTableContents = randomTables_Gen.GetTable(currentTable);
 
-            foreach(RandomTableEntry entry in currentTableContents)
+            foreach (RandomTableEntry entry in currentTableContents)
             {
-                string range = entry.lower + ((entry.lower == entry.upper)? "":(" - " + entry.upper));
+                string range = entry.lower + ((entry.lower == entry.upper) ? "" : (" - " + entry.upper));
                 string description = entry.description;
 
                 KeyValuePair<string, string> newEntry = new KeyValuePair<string, string>(range, description);
@@ -107,7 +107,7 @@ namespace ChaoticCreation.RandomTables
                 dieToRoll = currentTableContents.Last().upper;
             else
                 dieToRoll = 0;
-            
+
             OnPropertyChanged("DieToRoll");
         }
 
@@ -121,18 +121,18 @@ namespace ChaoticCreation.RandomTables
             int dieRoll = rand.Next(1, dieToRoll);
             string selectedDescription = string.Empty;
 
-            foreach(RandomTableEntry entry in currentTableContents)
+            foreach (RandomTableEntry entry in currentTableContents)
             {
-                if(entry.lower <= dieRoll && entry.upper >= dieRoll)
+                if (entry.lower <= dieRoll && entry.upper >= dieRoll)
                 {
                     selectedDescription = entry.description;
                     break;
                 }
             }
 
-            foreach(KeyValuePair<string, string> entry in currentTableEntries)
+            foreach (KeyValuePair<string, string> entry in currentTableEntries)
             {
-                if(entry.Value == selectedDescription)
+                if (entry.Value == selectedDescription)
                 {
                     selectedEntry = entry;
                     OnPropertyChanged("SelectedEntry");
@@ -141,11 +141,9 @@ namespace ChaoticCreation.RandomTables
             }
         }
 
-        public int RollDie(int size)
+        public void RollDie()
         {
-            Random num = new Random();
-            int Number = num.Next(1, size+1);
-            return Number;
+            Console.WriteLine("Roll Die Button Pressed");
         }
 
         private void OnPropertyChanged(string property)
@@ -155,5 +153,4 @@ namespace ChaoticCreation.RandomTables
         }
         #endregion
     }
-
 }
