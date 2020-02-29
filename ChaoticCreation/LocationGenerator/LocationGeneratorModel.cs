@@ -24,7 +24,6 @@ namespace ChaoticCreation.LocationGenerator
 
         private Random rand = new Random();
 
-        private Save save = new Save();
         private LocationQuery_Gen generator = new LocationQuery_Gen();
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -135,7 +134,7 @@ namespace ChaoticCreation.LocationGenerator
 
                 Creation savedCreation = new Creation(LocationName, GeneratorTypesEnum.Location, currentGeneration);
 
-                save.Creation(savedCreation);
+                Save.Instance.Creation(savedCreation);
             }
         }
 

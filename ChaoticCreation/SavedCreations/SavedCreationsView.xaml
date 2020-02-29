@@ -13,8 +13,8 @@
             <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="4*"/>
+            <RowDefinition Height=".5*"/>
+            <RowDefinition Height="3*"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
 
@@ -38,8 +38,7 @@
                 SelectedItemChanged="savedCreationsTree_SelectedItemChanged"
                 Foreground="White"
                 Background="Transparent"
-                BorderBrush="Transparent"
-                SelectedValuePath="Name">
+                BorderBrush="Transparent">
                 <TreeViewItem 
                     Header="Encounters"
                     ItemsSource="{Binding Path=SavedEncounters}">
@@ -71,7 +70,7 @@
                     VerticalAlignment="Center"
                     FontSize="20"
                     Margin="5"
-                    Text="{Binding Path=SelectedRecentCreation.Name}"/>
+                    Text="{Binding Path=SelectedCreationName}"/>
             </Border>
 
             <Border
@@ -83,8 +82,17 @@
                     Foreground="White"
                     FontSize="18"
                     Margin="5"
-                    Text="{Binding Path=SelectedCreationContent}"/>
+                    Text="{Binding Path=SelectedCreationDescription}"/>
             </Border>
         </Grid>
+
+        <Button
+            Grid.Column="1" Grid.Row="2"
+            Margin="25"
+            MaxWidth="300" MaxHeight="75"
+            FontSize="20"
+            Click="DeleteButton_Click">
+            Delete Creation
+        </Button>
     </Grid>
 </UserControl>

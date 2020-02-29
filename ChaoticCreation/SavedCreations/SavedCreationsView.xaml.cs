@@ -29,7 +29,12 @@ namespace ChaoticCreation.SavedCreations
 
         private void savedCreationsTree_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
+            savedCreationsModel.SelectedCreationName = savedCreationsTree.SelectedValue.ToString();
+        }
 
+        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+            savedCreationsModel.DeleteSelectedCreation();
         }
     }
 }

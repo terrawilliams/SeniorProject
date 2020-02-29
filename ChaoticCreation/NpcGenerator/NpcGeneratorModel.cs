@@ -30,8 +30,6 @@ namespace ChaoticCreation.NpcGenerator
 
         private Random rand = new Random();
 
-        private Save save = new Save();
-
         public event PropertyChangedEventHandler PropertyChanged;
         #endregion
 
@@ -156,7 +154,7 @@ namespace ChaoticCreation.NpcGenerator
 
                 Creation savedCreation = new Creation(NpcName, GeneratorTypesEnum.NPC, currentNpc);
 
-                save.Creation(savedCreation);
+                Save.Instance.Creation(savedCreation);
             }
         }
 

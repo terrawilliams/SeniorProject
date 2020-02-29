@@ -24,10 +24,5 @@ namespace ChaoticCreation
         {
             InitializeComponent();
         }
-
-        private void Home_Loaded(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }

@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Data.SQLite;
 //dataset
 using System.Data;
+using System.Collections.ObjectModel;
 
 namespace ChaoticCreation
 {
@@ -19,8 +20,68 @@ namespace ChaoticCreation
     }
     class Save : GeneralGenerator
     {
+        #region Members
+        private static ObservableCollection<Creation> currentlySavedCreations = new ObservableCollection<Creation>();
+        private static ObservableCollection<string> savedNpcNames = new ObservableCollection<string>();
+        private static ObservableCollection<string> savedLocationNames = new ObservableCollection<string>();
+        private static ObservableCollection<string> savedEncounterNames = new ObservableCollection<string>();
+        private static Save instance = new Save();
+        #endregion
+
+        #region Getters and Setters
+        public static Save Instance
+        {
+            get { return instance; }
+        }
+
+        public static ObservableCollection<Creation> CurrentlySavedCreations
+        {
+            get { return currentlySavedCreations; }
+        }
+
+        public static ObservableCollection<string> SavedNpcNames
+        {
+            get { return savedNpcNames;}
+        }
+
+        public static ObservableCollection<string> SavedLocationNames
+        {
+            get { return savedLocationNames; }
+        }
+
+        public static ObservableCollection<string> SavedEncounterNames
+        {
+            get { return savedEncounterNames; }
+        }
+        #endregion
+
+        #region Constructor
+        private Save()
+        {
+            currentlySavedCreations = RetrieveSavedCreations();
+
+            foreach(Creation creation in currentlySavedCreations)
+            {
+                if (creation.Type == GeneratorTypesEnum.NPC)
+                    savedNpcNames.Add(creation.Name);
+                else if (creation.Type == GeneratorTypesEnum.Location)
+                    savedLocationNames.Add(creation.Name);
+                else
+                    savedEncounterNames.Add(creation.Name);
+            }
+        }
+        #endregion
+
         public void Creation(Creation creation)
         {
+            currentlySavedCreations.Add(creation);
+
+            if (creation.Type == GeneratorTypesEnum.NPC)
+                savedNpcNames.Add(creation.Name);
+            else if (creation.Type == GeneratorTypesEnum.Location)
+                savedLocationNames.Add(creation.Name);
+            else
+                savedEncounterNames.Add(creation.Name);
             
             string description = "";
 
@@ -73,14 +134,14 @@ namespace ChaoticCreation
             return encounter;
         }
 
-        List<Creation> RetrieveSavedCreations()
+        ObservableCollection<Creation> RetrieveSavedCreations()
         {
 
             List<dataEntry> values = new List<dataEntry>();
 
             values = QueryForCreations();
 
-            List<Creation> creations = new List<Creation>(); 
+            ObservableCollection<Creation> creations = new ObservableCollection<Creation>(); 
 
             foreach(dataEntry creation in values)
             {
@@ -148,7 +209,5 @@ namespace ChaoticCreation
 
             return entries;
         }
-
-        
     }
 }
