@@ -48,5 +48,16 @@ namespace ChaoticCreation.RandomTables
         {
             randomGeneratorModel.CurrentTable = randomTablesTree.SelectedValue.ToString();
         }
+
+        private void SearchBar_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            randomGeneratorModel.TrimTablesTree(SearchBar.Text);
+            randomTablesTree.Items.Clear();
+
+            foreach (RandomTableCategory randomTableCategory in randomGeneratorModel.TrimmedListOfTables.SubCategories)
+            {
+                randomTablesTree.Items.Add(randomTableCategory);
+            }
+        }
     }
 }

@@ -31,9 +31,11 @@
                    Margin="10"
                    Width="{Binding ElementName=SearchImageBox, Path=Width}"/>
 
-            <TextBox Grid.Column="1"
-                VerticalAlignment="Center"
-                Padding="5" Margin="5"/>
+            <TextBox x:Name="SearchBar"
+                     Grid.Column="1"
+                     VerticalAlignment="Center"
+                     Padding="5" Margin="5"
+                     TextChanged="SearchBar_TextChanged"/>
         </Grid>
 
         <Border

@@ -87,7 +87,7 @@
         </Grid>
 
         <Button
-            Grid.Column="1" Grid.Row="2"
+            Grid.Column="0" Grid.Row="2"
             Margin="25"
             MaxWidth="300" MaxHeight="75"
             FontSize="20"

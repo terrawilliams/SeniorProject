@@ -14,10 +14,12 @@ namespace ChaoticCreation.RandomTables
         {
             Name = newName;
             SubCategories = new ObservableCollection<RandomTableCategory>();
+            IsVisible = true;
         }
 
         public string Name { get; set; }
         public ObservableCollection<RandomTableCategory> SubCategories { get; set; }
+        public bool IsVisible { get; set; }
     }
 
     class RandomGeneratorModel : INotifyPropertyChanged
@@ -30,6 +32,7 @@ namespace ChaoticCreation.RandomTables
         private KeyValuePair<string, string> selectedEntry;
 
         private RandomTableCategory listOfTables = new RandomTableCategory("Random Tables");
+        private RandomTableCategory trimmedListOfTables = new RandomTableCategory("Trimmed Random Tables");
 
         private ObservableCollection<string> randomTableResult = new ObservableCollection<string>();
 
@@ -76,6 +79,11 @@ namespace ChaoticCreation.RandomTables
         public RandomTableCategory ListOfTables
         {
             get { return listOfTables; }
+        }
+
+        public RandomTableCategory TrimmedListOfTables
+        {
+            get { return trimmedListOfTables; }
         }
         #endregion
 
@@ -144,6 +152,52 @@ namespace ChaoticCreation.RandomTables
         public void RollDie()
         {
             Console.WriteLine("Roll Die Button Pressed");
+        }
+
+        public void TrimTablesTree(string filter)
+        {
+            if (filter == string.Empty)
+            {
+                trimmedListOfTables = listOfTables;
+            }
+            else
+            {
+                trimmedListOfTables.SubCategories.Clear();
+                foreach(RandomTableCategory category in listOfTables.SubCategories)
+                {
+                    if (category.SubCategories.Count == 0)
+                    {
+                        if (category.Name.ToLower().Contains(filter.ToLower()))
+                            trimmedListOfTables.SubCategories.Add(category);
+                    }
+                    else
+                    {
+                        trimmedListOfTables.SubCategories.Add(TrimTablesTreeHelper(category, filter));
+                    }
+                }
+            }
+        }
+
+        public RandomTableCategory TrimTablesTreeHelper(RandomTableCategory currentNode, string filter)
+        {
+            RandomTableCategory newCategory = new RandomTableCategory(currentNode.Name);
+
+            foreach(RandomTableCategory node in currentNode.SubCategories)
+            {
+                if(node.SubCategories.Count == 0)
+                {
+                    if(node.Name.ToLower().Contains(filter.ToLower()))
+                    {
+                        newCategory.SubCategories.Add(node);
+                    }
+                }
+                else
+                {
+                    newCategory.SubCategories.Add(TrimTablesTreeHelper(node, filter));
+                }
+            }
+
+            return newCategory;
         }
 
         private void OnPropertyChanged(string property)
