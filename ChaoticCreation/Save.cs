@@ -69,6 +69,18 @@ namespace ChaoticCreation
                 else
                     savedEncounterNames.Add(creation.Name);
             }
+
+            List<string> orderedNpcName = savedNpcNames.OrderBy(p => p).ToList<string>();
+            List<string> orderedLocationName = savedLocationNames.OrderBy(p => p).ToList<string>();
+            List<string> orderedEncounterName = SavedEncounterNames.OrderBy(p => p).ToList<string>();
+
+            savedNpcNames.Clear();
+            savedLocationNames.Clear();
+            SavedEncounterNames.Clear();
+
+            orderedNpcName.ForEach(savedNpcNames.Add);
+            orderedLocationName.ForEach(savedLocationNames.Add);
+            orderedEncounterName.ForEach(SavedEncounterNames.Add);
         }
         #endregion
 
@@ -83,7 +95,7 @@ namespace ChaoticCreation
             else
                 savedEncounterNames.Add(creation.Name);
             
-            string description = "";
+            string description = string.Empty;
 
             if (creation.Type == GeneratorTypesEnum.Encounter)
             {
