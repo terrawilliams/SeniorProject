@@ -99,6 +99,8 @@ namespace ChaoticCreation.RandomTables
         {
             currentTableEntries.Clear();
 
+            if (currentTable == null) return;
+
             currentTableContents = randomTables_Gen.GetTable(currentTable);
 
             foreach (RandomTableEntry entry in currentTableContents)
@@ -156,6 +158,7 @@ namespace ChaoticCreation.RandomTables
 
         public void TrimTablesTree(string filter)
         {
+            
             if (filter == string.Empty)
             {
                 trimmedListOfTables = listOfTables;

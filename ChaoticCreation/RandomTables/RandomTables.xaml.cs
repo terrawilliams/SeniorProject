@@ -46,7 +46,7 @@ namespace ChaoticCreation.RandomTables
 
         private void randomTablesTree_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            randomGeneratorModel.CurrentTable = randomTablesTree.SelectedValue.ToString();
+            randomGeneratorModel.CurrentTable = randomTablesTree.SelectedValue?.ToString();
         }
 
         private void SearchBar_TextChanged(object sender, TextChangedEventArgs e)
