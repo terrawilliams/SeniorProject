@@ -85,7 +85,17 @@ namespace ChaoticCreation.SavedCreations
 
         public void DeleteSelectedCreation()
         {
+            if (selectedCreationName == string.Empty)
+                return;
 
+            foreach (Creation creation in Save.CurrentlySavedCreations)
+            {
+                if(creation.Name == selectedCreationName)
+                {
+                    Save.Instance.deleteCreation(creation);
+                    return;
+                }
+            }
         }
 
         private void OnPropertyChanged(string property)

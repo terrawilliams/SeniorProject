@@ -84,6 +84,7 @@ namespace ChaoticCreation
         }
         #endregion
 
+        #region Methods
         public void Creation(Creation creation)
         {
             currentlySavedCreations.Add(creation);
@@ -124,8 +125,23 @@ namespace ChaoticCreation
 
         }
 
-        void deleteCreation(Creation to_be_deleted)
+        public void deleteCreation(Creation to_be_deleted)
         {
+            if(to_be_deleted.Type == GeneratorTypesEnum.NPC)
+            {
+                savedNpcNames.Remove(to_be_deleted.Name);
+            }
+            else if(to_be_deleted.Type == GeneratorTypesEnum.Location)
+            {
+                savedLocationNames.Remove(to_be_deleted.Name);
+            }
+            else if(to_be_deleted.Type == GeneratorTypesEnum.Encounter)
+            {
+                savedEncounterNames.Remove(to_be_deleted.Name);
+            }
+
+            currentlySavedCreations.Remove(currentlySavedCreations.Where(i => i.Name == to_be_deleted.Name).Single());
+
             string delete = "DELETE FROM SavedCreationsTbl WHERE \"" + to_be_deleted.Name + "\" = CreationName;";
 
             string temp = "Data Source=";
@@ -224,5 +240,7 @@ namespace ChaoticCreation
 
             return entries;
         }
+
+        #endregion
     }
 }
