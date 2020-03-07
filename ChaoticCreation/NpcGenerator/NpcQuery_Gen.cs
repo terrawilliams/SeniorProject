@@ -35,7 +35,7 @@ namespace ChaoticCreation.NpcGenerator
 
         public Dictionary<string, string> NpcQuery(Dictionary<string, string> userSpecifiedData)
         {
-
+            
             race = userSpecifiedData["race"];
             gender = userSpecifiedData["gender"];
             occupation = userSpecifiedData["occupation"];
@@ -62,7 +62,7 @@ namespace ChaoticCreation.NpcGenerator
                 { "last", "LastNamesTbl"},
             };
 
-            if (gender == "Female")
+            if(gender == "Female")
             {
                 tableList["first"] = "FemaleNamesTbl";
             }
@@ -111,7 +111,7 @@ namespace ChaoticCreation.NpcGenerator
 
             return results;
         }
-
+        
         private Dictionary<string, string> runQueries(Dictionary<string, string> tables)
         {
             List<string> queries = new List<string>();
@@ -145,5 +145,5 @@ namespace ChaoticCreation.NpcGenerator
 
         #endregion
     }
-
+ 
 }
