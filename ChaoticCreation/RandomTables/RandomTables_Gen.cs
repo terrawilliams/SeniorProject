@@ -103,7 +103,7 @@ namespace ChaoticCreation.RandomTables
 
                 newEntry.tableType = int.Parse(rowData[0].ToString());
 
-                if(rowData.Length == 2)
+                if(rowData.Length == 3 || rowData.Length == 2)
                 {
                     newEntry.lower = i;
                     newEntry.upper = i;

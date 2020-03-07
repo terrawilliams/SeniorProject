@@ -97,23 +97,20 @@ namespace ChaoticCreation.NpcGenerator
             npcOccupation.Add("Any");
 
             NpcQuery_Gen DatabaseToUI = new NpcQuery_Gen();
-            var dictionary = DatabaseToUI.Query(DatabaseToUI.QueryDatabase("..\\..\\sqlDatabase\\MasterDB.db", "SELECT * FROM Occupations;"));
+            var dictionary = DatabaseToUI.Query(DatabaseToUI.QueryDatabase("..\\..\\sqlDatabase\\MasterDB.db", "SELECT * FROM Occupations ORDER BY OccName ASC;"));
             foreach (KeyValuePair<string,string> iterate in dictionary)
             {
                 npcOccupation.Add(iterate.Key);
             }
-            
+
+
             npcRace.Add("Any");
-            npcRace.Add("dragonborn");
-            npcRace.Add("dwarf");
-            npcRace.Add("elf");
-            npcRace.Add("gnome");
-            npcRace.Add("half-elf");
-            npcRace.Add("halfling");
-            npcRace.Add("half-orc");
-            npcRace.Add("human");
-            npcRace.Add("tiefling");
-            npcRace.Add("eladrin");
+            NpcQuery_Gen DatabaseToUI2 = new NpcQuery_Gen();
+            var dictionary2 = DatabaseToUI.Query(DatabaseToUI.QueryDatabase("..\\..\\sqlDatabase\\MasterDB.db", "SELECT Race FROM NPCRaces ORDER BY Race ASC;"));
+            foreach (KeyValuePair<string, string> iterate in dictionary2)
+            {
+                npcRace.Add(iterate.Key);
+            }
 
             npcGender.Add("Any");
             npcGender.Add("Male");
@@ -129,12 +126,12 @@ namespace ChaoticCreation.NpcGenerator
         {
             string race = (currentNpcRace.Equals("Any") ? npcRace.ElementAt(rand.Next(1, npcRace.Count)): currentNpcRace);
             string gender = (currentNpcGender.Equals("Any") ? npcGender.ElementAt(rand.Next(1, npcGender.Count)) : currentNpcGender);
-            string occupation = (currentNpcOccupation.Equals("Any") ? npcOccupation.ElementAt(rand.Next(1, npcOccupation.Count)) : currentNpcOccupation);
+            string occupation = currentNpcOccupation;
 
-            List<string> generationArguments = new List<string>();
-            generationArguments.Add(race);
-            generationArguments.Add(gender);
-            generationArguments.Add(occupation);
+            Dictionary<string,string> generationArguments = new Dictionary<string,string>();
+            generationArguments["race"] = race;
+            generationArguments["gender"] = gender;
+            generationArguments["occupation"] = occupation;
 
             currentNpc = generator.NpcQuery(generationArguments);
             

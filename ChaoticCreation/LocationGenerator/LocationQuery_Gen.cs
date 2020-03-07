@@ -22,6 +22,7 @@ namespace ChaoticCreation.LocationGenerator
                 {"Jungle", Jungle},
                 {"Mine", Mine},
                 {"Mountain", Mountain},
+                {"Tavern", Tavern},
                 {"Temple", Temple}
             };
 
@@ -316,6 +317,94 @@ namespace ChaoticCreation.LocationGenerator
 
             return results;
         }
+
+        private Dictionary<string, string> Tavern(string size)
+        {
+            Dictionary<string, string> tableList = new Dictionary<string, string>{
+                {"entertainment", "TavernEntertainmentTbl" },
+                {"patrons", "TavernPatronsTbl" },
+                {"drink", "TavernDrinksTbl" }
+            };
+
+            Dictionary<string, string> values = runQueries(tableList);
+
+            string tavernName = createTavernName();
+
+            string description =
+                values["patrons"] +
+                " " + values["entertainment"] +
+                "\n\nSpecialty Drink: " +
+                values["drink"];
+
+            Dictionary<string, string> results = new Dictionary<string, string>
+            {
+                {"name", tavernName},
+                {"description", description}
+            };
+
+            return results;
+        }
+
+        private string createTavernName()
+        {
+            string table = "TavernNameTbl";
+            List<string> queries = new List<string>();
+
+            queries.Add("SELECT Verb FROM " + table + " ORDER BY RANDOM() LIMIT 1;");
+            queries.Add("SELECT Adjective FROM " + table + " ORDER BY RANDOM() LIMIT 1;");
+            queries.Add("SELECT Noun1 FROM " + table + " ORDER BY RANDOM() LIMIT 1;");
+            queries.Add("SELECT Noun2 FROM " + table + " ORDER BY RANDOM() LIMIT 1;");
+
+            List<Dictionary<string, string>> values = new List<Dictionary<string, string>>();
+
+            foreach (string queryString in queries)
+            {
+                values.Add(Query(QueryDatabase("..\\..\\sqlDatabase\\MasterDB.db", queryString)));
+            }
+
+            string verb = values[0].ElementAt(0).Key;
+            string adjective = values[1].ElementAt(0).Key;
+            string noun1 = values[2].ElementAt(0).Key;
+            string noun2 = values[3].ElementAt(0).Key;
+
+            Random rando = new Random();
+
+            string name = "";
+
+            switch (rando.Next(1, 4))
+            {
+                case 1:
+                    name = "The " + adjective + " " + noun1;
+                    break;
+                case 2:
+                    if (rando.Next(0, 1) != 0)
+                    {
+                        name = "The " + noun1 + " and " + noun2;
+                    }
+                    else
+                    {
+                        name = "The " + noun1 + " and the " + noun2;
+                    }
+                    break;
+                case 3:
+                    name = "The " + noun1 + "'s " + noun2;
+                    break;
+                case 4:
+                    if (rando.Next(0, 1) != 0)
+                    {
+                        name = "The " + verb + " " + noun1;
+                    }
+                    else
+                    {
+                        name = "The " + verb + " " + noun2;
+                    }
+                    break;
+            }
+
+
+            return name;
+        }
+
         private Dictionary<string, string> Temple(string size)
         {
             Dictionary<string, string> tableList = new Dictionary<string, string>{
