@@ -124,6 +124,22 @@ namespace ChaoticCreation
 
         }
 
+        void deleteCreation(Creation to_be_deleted)
+        {
+            string delete = "DELETE FROM SavedCreationsTbl WHERE \"" + to_be_deleted.Name + "\" = CreationName;";
+
+            string temp = "Data Source=";
+            temp += "..\\..\\sqlDatabase\\MasterDB.db";
+            temp += ";Version=3;New=False;Compress=False";
+
+            SQLiteConnection db = new SQLiteConnection(temp);
+            db.Open();
+            var cmd = new SQLiteCommand(db);
+            cmd.CommandText = delete;
+            cmd.ExecuteNonQuery();
+            db.Close();
+        }
+
         string createEncounterDescription(Dictionary<String, String> encounter)
         {
             return string.Join(":", encounter.Select(monster => monster.Key + "," + monster.Value).ToArray());
@@ -175,19 +191,6 @@ namespace ChaoticCreation
                 }
 
                 creations.Add(new Creation(name, type, generation));
-            }
-
-            Console.WriteLine("-------------SAVED BOIS--------------");
-            foreach (Creation boi in creations)
-            {
-                Console.WriteLine("Name: " + boi.Name );
-                Console.WriteLine("Type: " + boi.Type);
-                foreach(KeyValuePair<string, string> thing in boi.Generation) 
-                {
-                    Console.WriteLine("Key: " + thing.Key);
-                    Console.WriteLine("Value: " + thing.Value);
-                }
-                
             }
 
             return creations;
