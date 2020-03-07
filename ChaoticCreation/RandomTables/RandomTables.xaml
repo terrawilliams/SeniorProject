@@ -31,9 +31,11 @@
                    Margin="10"
                    Width="{Binding ElementName=SearchImageBox, Path=Width}"/>
 
-            <TextBox Grid.Column="1"
-                VerticalAlignment="Center"
-                Padding="5" Margin="5"/>
+            <TextBox x:Name="SearchBar"
+                     Grid.Column="1"
+                     VerticalAlignment="Center"
+                     Padding="5" Margin="5"
+                     TextChanged="SearchBar_TextChanged"/>
         </Grid>
 
         <Border
@@ -65,7 +67,7 @@
             Margin="25"
             MaxWidth="300" MaxHeight="75"
             Click="GenerateButton_Click">
-            Generate            
+            Generate
         </Button>
 
         <StackPanel Grid.Column="1"
@@ -155,7 +157,7 @@
             </Grid>
         </Border>
 
-        
+
 
         <Image
             Grid.Column="2"
@@ -172,7 +174,7 @@
             MaxWidth="300" MaxHeight="75"
             Click="RollButton_Click"
             FontSize="20">
-            Roll 
+            Roll
         </Button>
     </Grid>
 </UserControl>

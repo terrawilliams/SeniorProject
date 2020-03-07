@@ -1,63 +1,98 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace ChaoticCreation.SavedCreations
 {
-    class SavedCreationsModel
+    class SavedCreationsModel : INotifyPropertyChanged
     {
         #region Members
+        private string selectedCreationName;
+        private string selectedCreationDescription;
 
-        private ObservableCollection<Creation> savedEncounters = new ObservableCollection<Creation>();
-        private ObservableCollection<Creation> savedLocations = new ObservableCollection<Creation>();
-        private ObservableCollection<Creation> savedNpcs = new ObservableCollection<Creation>();
-
-        private ObservableCollection<string> savedEncountersNames = new ObservableCollection<string>();
-        private ObservableCollection<string> savedLocationsNames = new ObservableCollection<string>();
-        private ObservableCollection<string> savedNpcsNames = new ObservableCollection<string>();
+        public event PropertyChangedEventHandler PropertyChanged;
         #endregion
 
         #region Getters and Setters
         public ObservableCollection<string> SavedEncounters
         {
-            get { return savedEncountersNames; }
+            get { return Save.SavedEncounterNames; }
         }
 
         public ObservableCollection<string> SavedLocations
         {
-            get { return savedLocationsNames; }
+            get { return Save.SavedLocationNames; }
         }
 
         public ObservableCollection<string> SavedNpcs
         {
-            get { return savedNpcsNames; }
+            get { return Save.SavedNpcNames; }
+        }
+
+        public string SelectedCreationName
+        {
+            get { return selectedCreationName; }
+            set 
+            { 
+                selectedCreationName = value;
+                OnPropertyChanged("SelectedCreationName");
+                DisplaySelectedCreation();
+            }
+        }
+
+        public string SelectedCreationDescription
+        {
+            get { return selectedCreationDescription; }
         }
         #endregion
 
         #region Constructor
         public SavedCreationsModel()
         {
-            Dictionary<string, string> sampleCreation = new Dictionary<string, string>();
-            sampleCreation.Add("Sample", "data");
-
-            Creation sampleEncounter = new Creation("Encounter 1", GeneratorTypesEnum.Encounter, sampleCreation);
-            savedEncounters.Add(sampleEncounter);
-            savedEncountersNames.Add(sampleEncounter.Name);
-
-            Creation sampleLocation = new Creation("Location 1", GeneratorTypesEnum.Location, sampleCreation);
-            savedLocations.Add(sampleLocation);
-            savedLocationsNames.Add(sampleLocation.Name);
-
-            Creation sampleNpc = new Creation("NPC 1", GeneratorTypesEnum.NPC, sampleCreation);
-            savedNpcs.Add(sampleNpc);
-            savedNpcsNames.Add(sampleNpc.Name);
+            
         }
         #endregion
 
         #region Methods
+        private void DisplaySelectedCreation()
+        {
+            foreach (Creation creation in Save.CurrentlySavedCreations)
+            {
+                if(creation.Name == selectedCreationName)
+                {
+                    if(creation.Type == GeneratorTypesEnum.Encounter)
+                    {
+                        selectedCreationDescription = string.Empty;
+
+                        foreach (KeyValuePair<string, string> monster in creation.Generation)
+                        {
+                            selectedCreationDescription += monster.Key + " " + monster.Value + "\n";
+                        }
+                    }
+                    else
+                    {
+                        selectedCreationDescription = creation.Generation["description"];
+                    }
+                    OnPropertyChanged("SelectedCreationDescription");
+                    return;
+                }
+            }
+        }
+
+        public void DeleteSelectedCreation()
+        {
+
+        }
+
+        private void OnPropertyChanged(string property)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(property));
+        }
 
         #endregion
     }

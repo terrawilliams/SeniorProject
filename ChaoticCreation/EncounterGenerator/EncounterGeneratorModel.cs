@@ -34,8 +34,6 @@ namespace ChaoticCreation.EncounterGenerator
 
         private EncounterQuery_Gen generator = new EncounterQuery_Gen();
 
-        private Save save = new Save();
-
         private ObservableCollection<KeyValuePair<string, string>> encounterMonsters = new ObservableCollection<KeyValuePair<string, string>>();
        
         #endregion
@@ -183,7 +181,7 @@ namespace ChaoticCreation.EncounterGenerator
 
                 Creation savedCreation = new Creation(encounterName, GeneratorTypesEnum.Encounter, currentEncounter);
 
-                save.Creation(savedCreation);
+                Save.Instance.Creation(savedCreation);
             }
         }
         

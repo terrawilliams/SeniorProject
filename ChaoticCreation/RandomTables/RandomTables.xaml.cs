@@ -27,11 +27,11 @@ namespace ChaoticCreation.RandomTables
             InitializeComponent();
             this.DataContext = randomGeneratorModel;
 
-            foreach(RandomTableCategory randomTableCategory in randomGeneratorModel.ListOfTables.SubCategories)
+            foreach (RandomTableCategory randomTableCategory in randomGeneratorModel.ListOfTables.SubCategories)
             {
                 randomTablesTree.Items.Add(randomTableCategory);
             }
-            
+
         }
 
         private void GenerateButton_Click(object sender, RoutedEventArgs e)
@@ -46,7 +46,18 @@ namespace ChaoticCreation.RandomTables
 
         private void randomTablesTree_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            randomGeneratorModel.CurrentTable = randomTablesTree.SelectedValue.ToString();
+            randomGeneratorModel.CurrentTable = randomTablesTree.SelectedValue?.ToString();
+        }
+
+        private void SearchBar_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            randomGeneratorModel.TrimTablesTree(SearchBar.Text);
+            randomTablesTree.Items.Clear();
+
+            foreach (RandomTableCategory randomTableCategory in randomGeneratorModel.TrimmedListOfTables.SubCategories)
+            {
+                randomTablesTree.Items.Add(randomTableCategory);
+            }
         }
     }
 }

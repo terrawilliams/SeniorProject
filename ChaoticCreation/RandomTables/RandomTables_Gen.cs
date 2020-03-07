@@ -91,7 +91,7 @@ namespace ChaoticCreation.RandomTables
             DataRowCollection rowValue = data.Tables[0].Rows;
             DataColumnCollection colValue = data.Tables[0].Columns;
 
-            List<RandomTableEntry> newTable = new List<RandomTableEntry>(); 
+            List<RandomTableEntry> newTable = new List<RandomTableEntry>();
 
             int i = 1;
 
@@ -117,7 +117,7 @@ namespace ChaoticCreation.RandomTables
                 }
                 i++;
                 newTable.Add(newEntry);
-                
+
             }
 
 

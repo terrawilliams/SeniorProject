@@ -14,10 +14,12 @@ namespace ChaoticCreation.RandomTables
         {
             Name = newName;
             SubCategories = new ObservableCollection<RandomTableCategory>();
+            IsVisible = true;
         }
 
         public string Name { get; set; }
         public ObservableCollection<RandomTableCategory> SubCategories { get; set; }
+        public bool IsVisible { get; set; }
     }
 
     class RandomGeneratorModel : INotifyPropertyChanged
@@ -30,6 +32,7 @@ namespace ChaoticCreation.RandomTables
         private KeyValuePair<string, string> selectedEntry;
 
         private RandomTableCategory listOfTables = new RandomTableCategory("Random Tables");
+        private RandomTableCategory trimmedListOfTables = new RandomTableCategory("Trimmed Random Tables");
 
         private ObservableCollection<string> randomTableResult = new ObservableCollection<string>();
 
@@ -44,8 +47,8 @@ namespace ChaoticCreation.RandomTables
         public string CurrentTable
         {
             get { return currentTable; }
-            set 
-            { 
+            set
+            {
                 currentTable = value;
                 OnPropertyChanged("CurrentTable");
 
@@ -73,9 +76,14 @@ namespace ChaoticCreation.RandomTables
             get { return randomTableResult; }
         }
 
-        public RandomTableCategory ListOfTables 
+        public RandomTableCategory ListOfTables
         {
             get { return listOfTables; }
+        }
+
+        public RandomTableCategory TrimmedListOfTables
+        {
+            get { return trimmedListOfTables; }
         }
         #endregion
 
@@ -91,11 +99,13 @@ namespace ChaoticCreation.RandomTables
         {
             currentTableEntries.Clear();
 
+            if (currentTable == null) return;
+
             currentTableContents = randomTables_Gen.GetTable(currentTable);
 
-            foreach(RandomTableEntry entry in currentTableContents)
+            foreach (RandomTableEntry entry in currentTableContents)
             {
-                string range = entry.lower + ((entry.lower == entry.upper)? "":(" - " + entry.upper));
+                string range = entry.lower + ((entry.lower == entry.upper) ? "" : (" - " + entry.upper));
                 string description = entry.description;
 
                 KeyValuePair<string, string> newEntry = new KeyValuePair<string, string>(range, description);
@@ -107,7 +117,7 @@ namespace ChaoticCreation.RandomTables
                 dieToRoll = currentTableContents.Last().upper;
             else
                 dieToRoll = 0;
-            
+
             OnPropertyChanged("DieToRoll");
         }
 
@@ -121,18 +131,18 @@ namespace ChaoticCreation.RandomTables
             int dieRoll = rand.Next(1, dieToRoll);
             string selectedDescription = string.Empty;
 
-            foreach(RandomTableEntry entry in currentTableContents)
+            foreach (RandomTableEntry entry in currentTableContents)
             {
-                if(entry.lower <= dieRoll && entry.upper >= dieRoll)
+                if (entry.lower <= dieRoll && entry.upper >= dieRoll)
                 {
                     selectedDescription = entry.description;
                     break;
                 }
             }
 
-            foreach(KeyValuePair<string, string> entry in currentTableEntries)
+            foreach (KeyValuePair<string, string> entry in currentTableEntries)
             {
-                if(entry.Value == selectedDescription)
+                if (entry.Value == selectedDescription)
                 {
                     selectedEntry = entry;
                     OnPropertyChanged("SelectedEntry");
@@ -144,6 +154,53 @@ namespace ChaoticCreation.RandomTables
         public void RollDie()
         {
             Console.WriteLine("Roll Die Button Pressed");
+        }
+
+        public void TrimTablesTree(string filter)
+        {
+            
+            if (filter == string.Empty)
+            {
+                trimmedListOfTables = listOfTables;
+            }
+            else
+            {
+                trimmedListOfTables.SubCategories.Clear();
+                foreach(RandomTableCategory category in listOfTables.SubCategories)
+                {
+                    if (category.SubCategories.Count == 0)
+                    {
+                        if (category.Name.ToLower().Contains(filter.ToLower()))
+                            trimmedListOfTables.SubCategories.Add(category);
+                    }
+                    else
+                    {
+                        trimmedListOfTables.SubCategories.Add(TrimTablesTreeHelper(category, filter));
+                    }
+                }
+            }
+        }
+
+        public RandomTableCategory TrimTablesTreeHelper(RandomTableCategory currentNode, string filter)
+        {
+            RandomTableCategory newCategory = new RandomTableCategory(currentNode.Name);
+
+            foreach(RandomTableCategory node in currentNode.SubCategories)
+            {
+                if(node.SubCategories.Count == 0)
+                {
+                    if(node.Name.ToLower().Contains(filter.ToLower()))
+                    {
+                        newCategory.SubCategories.Add(node);
+                    }
+                }
+                else
+                {
+                    newCategory.SubCategories.Add(TrimTablesTreeHelper(node, filter));
+                }
+            }
+
+            return newCategory;
         }
 
         private void OnPropertyChanged(string property)

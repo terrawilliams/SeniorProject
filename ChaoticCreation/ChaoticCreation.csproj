@@ -193,6 +193,12 @@
     <Resource Include="Images\ddpic.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Images\d10Outline.png" />
+    <Resource Include="Images\d12Outline.png" />
+    <Resource Include="Images\d20Outline.png" />
+    <Resource Include="Images\d4Outline.png" />
+    <Resource Include="Images\d6Outline.png" />
+    <Resource Include="Images\d8Outline.png" />
     <Content Include="sqlDatabase\colorQuery.sql" />
     <Content Include="sqlDatabase\nameQuery.sql" />
     <Content Include="sqlDatabase\npcQuery.sql" />
