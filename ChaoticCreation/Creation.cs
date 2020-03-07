@@ -46,8 +46,5 @@ namespace ChaoticCreation
         #region Methods
 
         #endregion
-        
-
-            
     }
 }

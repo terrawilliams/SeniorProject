@@ -39,6 +39,14 @@ namespace ChaoticCreation.SavedCreations
             set 
             { 
                 selectedCreationName = value;
+
+                if(!Save.SavedNpcNames.Contains(selectedCreationName) && 
+                   !Save.SavedLocationNames.Contains(selectedCreationName) && 
+                   !Save.SavedEncounterNames.Contains(selectedCreationName))
+                {
+                    selectedCreationName = string.Empty;
+                }
+
                 OnPropertyChanged("SelectedCreationName");
                 DisplaySelectedCreation();
             }
@@ -60,6 +68,13 @@ namespace ChaoticCreation.SavedCreations
         #region Methods
         private void DisplaySelectedCreation()
         {
+            if(selectedCreationName == string.Empty)
+            {
+                selectedCreationDescription = string.Empty;
+                OnPropertyChanged("SelectedCreationDescription");
+                return;
+            }
+
             foreach (Creation creation in Save.CurrentlySavedCreations)
             {
                 if(creation.Name == selectedCreationName)
