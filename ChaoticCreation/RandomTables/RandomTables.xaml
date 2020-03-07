@@ -1,4 +1,5 @@
-﻿<UserControl x:Class="ChaoticCreation.RandomTables.RandomTables"
+﻿<UserControl x:Name="RandomTablesView"
+             x:Class="ChaoticCreation.RandomTables.RandomTables"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -157,15 +158,47 @@
             </Grid>
         </Border>
 
+        <local:D4DiceRoller
+            x:Name="d4DiceRoller"
+            Grid.Column="2" Grid.Row="1"
+            DataContext="{Binding ElementName=RandomTablesView, Path=DataContext}"
+            Visibility="{Binding Path=IsD4, Converter={StaticResource BoolToVis}}"/>
 
+        <local:D6DiceRoller
+            x:Name="d6DiceRoller"
+            Grid.Column="2" Grid.Row="1"
+            DataContext="{Binding ElementName=RandomTablesView, Path=DataContext}"
+            Visibility="{Binding Path=IsD6, Converter={StaticResource BoolToVis}}"/>
 
-        <Image
-            Grid.Column="2"
-            Grid.Row="1"
-            Source="../Images/d20.png"
-            VerticalAlignment="Center"
-            HorizontalAlignment="Center"
-            Height="200"/>
+        <local:D8DiceRoller
+            x:Name="d8DiceRoller"
+            Grid.Column="2" Grid.Row="1"
+            DataContext="{Binding ElementName=RandomTablesView, Path=DataContext}"
+            Visibility="{Binding Path=IsD8, Converter={StaticResource BoolToVis}}"/>
+
+        <local:D10DiceRoller
+            x:Name="d10DiceRoller"
+            Grid.Column="2" Grid.Row="1"
+            DataContext="{Binding ElementName=RandomTablesView, Path=DataContext}"
+            Visibility="{Binding Path=IsD10, Converter={StaticResource BoolToVis}}"/>
+
+        <local:D12DiceRoller
+            x:Name="d12DiceRoller"
+            Grid.Column="2" Grid.Row="1"
+            DataContext="{Binding ElementName=RandomTablesView, Path=DataContext}"
+            Visibility="{Binding Path=IsD12, Converter={StaticResource BoolToVis}}"/>
+
+        <local:D20DiceRoller
+            x:Name="d20DiceRoller"
+            Grid.Column="2" Grid.Row="1"
+            DataContext="{Binding ElementName=RandomTablesView, Path=DataContext}"
+            Visibility="{Binding Path=IsD20, Converter={StaticResource BoolToVis}}"/>
+
+        <local:D100DiceRoller
+            x:Name="d100DiceRoller"
+            Grid.Column="2" Grid.Row="1"
+            DataContext="{Binding ElementName=RandomTablesView, Path=DataContext}"
+            Visibility="{Binding Path=IsD100, Converter={StaticResource BoolToVis}}"/>
 
         <Button
             Grid.Column="2"

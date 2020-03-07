@@ -29,6 +29,7 @@ namespace ChaoticCreation.RandomTables
         private List<RandomTableEntry> currentTableContents = new List<RandomTableEntry>();
         private ObservableCollection<KeyValuePair<string, string>> currentTableEntries = new ObservableCollection<KeyValuePair<string, string>>();
         private int dieToRoll;
+        private int dieResult;
         private KeyValuePair<string, string> selectedEntry;
 
         private RandomTableCategory listOfTables = new RandomTableCategory("Random Tables");
@@ -66,6 +67,11 @@ namespace ChaoticCreation.RandomTables
             get { return dieToRoll; }
         }
 
+        public int DieResult
+        {
+            get { return dieResult; }
+        }
+
         public KeyValuePair<string, string> SelectedEntry
         {
             get { return selectedEntry; }
@@ -85,6 +91,41 @@ namespace ChaoticCreation.RandomTables
         {
             get { return trimmedListOfTables; }
         }
+
+        public bool IsD4
+        {
+            get { return (dieToRoll == 4); }
+        }
+
+        public bool IsD6
+        {
+            get { return (dieToRoll == 6); }
+        }
+
+        public bool IsD8
+        {
+            get { return (dieToRoll == 8); }
+        }
+
+        public bool IsD10
+        {
+            get { return (dieToRoll == 10); }
+        }
+
+        public bool IsD12
+        {
+            get { return (dieToRoll == 12); }
+        }
+
+        public bool IsD20
+        {
+            get { return (dieToRoll == 20); }
+        }
+
+        public bool IsD100
+        {
+            get { return (dieToRoll == 100); }
+        }
         #endregion
 
         #region Constructor
@@ -98,6 +139,8 @@ namespace ChaoticCreation.RandomTables
         private void ShowSelectedTable()
         {
             currentTableEntries.Clear();
+            selectedEntry = new KeyValuePair<string, string>();
+            OnPropertyChanged("SelectedEntry");
 
             if (currentTable == null) return;
 
@@ -118,22 +161,22 @@ namespace ChaoticCreation.RandomTables
             else
                 dieToRoll = 0;
 
-            OnPropertyChanged("DieToRoll");
+            UpdateDieToRoll();
         }
 
         public void GenerateRandomTableSelection()
         {
-            Console.WriteLine("Generate Random Table Selection Button Pressed");
-
             if (dieToRoll == 0)
                 return;
 
-            int dieRoll = rand.Next(1, dieToRoll);
+            dieResult = rand.Next(1, dieToRoll + 1);
+            OnPropertyChanged("DieResult");
+
             string selectedDescription = string.Empty;
 
             foreach (RandomTableEntry entry in currentTableContents)
             {
-                if (entry.lower <= dieRoll && entry.upper >= dieRoll)
+                if (entry.lower <= dieResult && entry.upper >= dieResult)
                 {
                     selectedDescription = entry.description;
                     break;
@@ -154,6 +197,41 @@ namespace ChaoticCreation.RandomTables
         public void RollDie()
         {
             Console.WriteLine("Roll Die Button Pressed");
+
+            if (dieToRoll == 0)
+                return;
+
+            PreliminaryRoll();
+
+            System.Threading.Thread.Sleep(250);
+
+            PreliminaryRoll();
+
+            System.Threading.Thread.Sleep(250);
+
+            PreliminaryRoll();
+
+            System.Threading.Thread.Sleep(250);
+
+            GenerateRandomTableSelection();
+        }
+
+        private void PreliminaryRoll()
+        {
+            dieResult = rand.Next(1, dieToRoll + 1);
+            OnPropertyChanged("DieResult");
+        }
+
+        private void UpdateDieToRoll()
+        {
+            OnPropertyChanged("DieToRoll");
+            OnPropertyChanged("IsD4");
+            OnPropertyChanged("IsD6");
+            OnPropertyChanged("IsD8");
+            OnPropertyChanged("IsD10");
+            OnPropertyChanged("IsD12");
+            OnPropertyChanged("IsD20");
+            OnPropertyChanged("IsD100");
         }
 
         public void TrimTablesTree(string filter)

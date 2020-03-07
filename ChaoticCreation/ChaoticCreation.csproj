@@ -87,6 +87,27 @@
       <DependentUpon>Home.xaml</DependentUpon>
     </Compile>
     <Compile Include="HomeTab\HomeTabModel.cs" />
+    <Compile Include="RandomTables\D100DiceRoller.xaml.cs">
+      <DependentUpon>D100DiceRoller.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RandomTables\D10DiceRoller.xaml.cs">
+      <DependentUpon>D10DiceRoller.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RandomTables\D12DiceRoller.xaml.cs">
+      <DependentUpon>D12DiceRoller.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RandomTables\D20DiceRoller.xaml.cs">
+      <DependentUpon>D20DiceRoller.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RandomTables\D4DiceRoller.xaml.cs">
+      <DependentUpon>D4DiceRoller.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RandomTables\D6DiceRoller.xaml.cs">
+      <DependentUpon>D6DiceRoller.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RandomTables\D8DiceRoller.xaml.cs">
+      <DependentUpon>D8DiceRoller.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Save.cs" />
     <Compile Include="LocationGenerator\LocationGenerator.xaml.cs">
       <DependentUpon>LocationGenerator.xaml</DependentUpon>
@@ -133,6 +154,34 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="NpcGenerator\NpcGenerator.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RandomTables\D100DiceRoller.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RandomTables\D10DiceRoller.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RandomTables\D12DiceRoller.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RandomTables\D20DiceRoller.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RandomTables\D4DiceRoller.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RandomTables\D6DiceRoller.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RandomTables\D8DiceRoller.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
