@@ -72,6 +72,24 @@ namespace ChaoticCreation.RandomTables
             get { return dieResult; }
         }
 
+        public string DieResultPercentile
+        {
+            get
+            {
+                if (dieResult <= 10)
+                    return "00";
+                else if (dieResult % 10 == 0)
+                    return (dieResult - 10).ToString();
+                else
+                    return (dieResult - (dieResult % 10)).ToString(); 
+            }
+        }
+
+        public int DieResultD10
+        {
+            get { return dieResult % 10; }
+        }
+
         public KeyValuePair<string, string> SelectedEntry
         {
             get { return selectedEntry; }
@@ -171,6 +189,8 @@ namespace ChaoticCreation.RandomTables
 
             dieResult = rand.Next(1, dieToRoll + 1);
             OnPropertyChanged("DieResult");
+            OnPropertyChanged("DieResultD10");
+            OnPropertyChanged("DieResultPercentile");
 
             string selectedDescription = string.Empty;
 
@@ -196,8 +216,6 @@ namespace ChaoticCreation.RandomTables
 
         public void RollDie()
         {
-            Console.WriteLine("Roll Die Button Pressed");
-
             if (dieToRoll == 0)
                 return;
 
@@ -220,6 +238,8 @@ namespace ChaoticCreation.RandomTables
         {
             dieResult = rand.Next(1, dieToRoll + 1);
             OnPropertyChanged("DieResult");
+            OnPropertyChanged("DieResultD10");
+            OnPropertyChanged("DieResultPercentile");
         }
 
         private void UpdateDieToRoll()

@@ -12,30 +12,36 @@
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
 
-        <Image>
+        <Image
+            Margin="15"
+            MaxWidth="200">
             <Image.Source>
                 <BitmapImage UriSource="..\Images\d10Outline.png" Rotation="Rotate270"/>
             </Image.Source>
         </Image>
-        <TextBlock Text="{Binding Path=DieResult}"
+        <TextBlock Text="{Binding Path=DieResultPercentile}"
                    VerticalAlignment="Center"
                    HorizontalAlignment="Center"
                    Foreground="White"
-                   FontSize="40"
-                   FontWeight="Bold"/>
+                   FontSize="35"
+                   FontWeight="Bold"
+                   Margin="20,0,0,0"/>
 
-        <Image Grid.Row="1">
+        <Image Grid.Row="1"
+               Margin="15"
+            MaxWidth="200">
             <Image.Source>
                 <BitmapImage UriSource="..\Images\d10Outline.png" Rotation="Rotate0"/>
             </Image.Source>
         </Image>
         <TextBlock Grid.Row="1"
-                   Text="{Binding Path=DieResult}"
+                   Text="{Binding Path=DieResultD10}"
                    VerticalAlignment="Center"
                    HorizontalAlignment="Center"
                    Foreground="White"
-                   FontSize="40"
-                   FontWeight="Bold"/>
+                   FontSize="35"
+                   FontWeight="Bold"
+                   Margin="0,20,0,0"/>
 
     </Grid>
 </UserControl>

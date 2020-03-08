@@ -7,7 +7,9 @@
              mc:Ignorable="d" 
              d:DesignHeight="800" d:DesignWidth="450">
     <Grid>
-        <Image Source="..\Images\d20Outline.png"/>
+        <Image Source="..\Images\d20Outline.png"
+               Margin="15"
+               MaxWidth="200"/>
         <TextBlock Text="{Binding Path=DieResult}"
                    VerticalAlignment="Center"
                    HorizontalAlignment="Center"
