@@ -162,6 +162,11 @@ namespace ChaoticCreation.RandomTables
             selectedEntry = new KeyValuePair<string, string>();
             OnPropertyChanged("SelectedEntry");
 
+            dieResult = 1;
+            OnPropertyChanged("DieResult");
+            OnPropertyChanged("DieResultD10");
+            OnPropertyChanged("DieResultPercentile");
+
             if (currentTable == null) return;
 
             currentTableContents = randomTables_Gen.GetTable(currentTable);
