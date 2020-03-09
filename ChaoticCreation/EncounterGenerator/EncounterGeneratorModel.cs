@@ -26,7 +26,7 @@ namespace ChaoticCreation.EncounterGenerator
         private string encounterDescription; //description returned to front end
 
         private string encounterName;
-        private Dictionary<string, string> currentEncounter = new Dictionary<string, string>();
+        private Dictionary<string, Dictionary<string, string>> currentEncounter = new Dictionary<string, Dictionary<string, string>>();
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -35,7 +35,8 @@ namespace ChaoticCreation.EncounterGenerator
         private EncounterQuery_Gen generator = new EncounterQuery_Gen();
 
         private ObservableCollection<KeyValuePair<string, string>> encounterMonsters = new ObservableCollection<KeyValuePair<string, string>>();
-       
+        private ObservableCollection<KeyValuePair<string, string>> encounterLoot = new ObservableCollection<KeyValuePair<string, string>>();
+
         #endregion
 
         #region Getters and Setters
@@ -93,6 +94,11 @@ namespace ChaoticCreation.EncounterGenerator
             set { encounterMonsters = value; }
         }
 
+        public ObservableCollection<KeyValuePair<string, string>> Loot
+        {
+            get { return encounterLoot; }
+        }
+
         public bool GenerationNotSaved
         {
             get { return !latestGenerationSaved; }
@@ -139,6 +145,7 @@ namespace ChaoticCreation.EncounterGenerator
         public void GenerateEncounter()
         {
             encounterMonsters.Clear();
+            encounterLoot.Clear();
 
             string chosenPartySize = currentPartySize.ToString();
             string chosenPartyLevel = currentPartyLevel.ToString();
@@ -157,14 +164,19 @@ namespace ChaoticCreation.EncounterGenerator
             //Key = monsterName, Value = count of monster
             currentEncounter = generator.EncounterQuery(arguments);
 
-            foreach( KeyValuePair<string, string> monster in currentEncounter)
+            foreach( KeyValuePair<string, string> monster in currentEncounter["Monsters"])
             {
                 encounterMonsters.Add(monster); //Leah changed from Value to Key
+            }
+            foreach(KeyValuePair<string, string> loot in currentEncounter["Loot"])
+            {
+                if(loot.Value != string.Empty)
+                    encounterLoot.Add(loot);
             }
 
             encounterName = chosenDifficulty + " Level " + chosenPartyLevel + " " + chosenTerrain + " Encounter";
 
-            RecentCreations.Instance.AddCreation(encounterName, GeneratorTypesEnum.Encounter, currentEncounter);
+            RecentCreations.Instance.AddCreation(encounterName, GeneratorTypesEnum.Encounter, currentEncounter["Monsters"]);
 
             Console.WriteLine("Generate Encounter Button Pressed");
 
@@ -179,7 +191,7 @@ namespace ChaoticCreation.EncounterGenerator
                 latestGenerationSaved = true;
                 OnPropertyChanged("GenerationNotSaved");
 
-                Creation savedCreation = new Creation(encounterName, GeneratorTypesEnum.Encounter, currentEncounter);
+                Creation savedCreation = new Creation(encounterName, GeneratorTypesEnum.Encounter, currentEncounter["Monsters"]);
 
                 Save.Instance.Creation(savedCreation);
             }

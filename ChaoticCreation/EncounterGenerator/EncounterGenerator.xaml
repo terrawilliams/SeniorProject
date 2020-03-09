@@ -125,6 +125,10 @@
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="5*"/>
             </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
 
             <TextBlock 
                 Text="Encounter:"
@@ -149,8 +153,8 @@
                             VerticalAlignment="Center"
                             HorizontalAlignment="Left">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="3*"/>
                                     <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="3*"/>
                                 </Grid.ColumnDefinitions>
                                 <TextBlock
                                 Text="{Binding Path=Value}"
@@ -161,6 +165,62 @@
                                 <TextBlock 
                                 Grid.Column="1"
                                 Text="{Binding Path=Key}"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Left"
+                                TextWrapping="Wrap"
+                                Foreground="White"
+                                Margin="5"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Border>
+
+            <TextBlock 
+                Grid.Column="1"
+                Text="Loot:"
+                Foreground="White"
+                FontSize="24"
+                Padding="10"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"/>
+
+            <Border
+                Grid.Row="1"
+                Grid.Column="1"
+                Background="{StaticResource DarkThemeBackgroundSecondary}"
+                Margin="10" Padding="5">
+                <ListBox 
+                    FontSize="24"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Stretch"
+                    ItemsSource="{Binding Path=Loot}"
+                    ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Left">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="3*"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock
+                                        Text="{Binding Path=Key}"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        Foreground="White"
+                                        Margin="5"/>
+                                    <TextBlock
+                                        Text=":"
+                                        Foreground="White"
+                                        VerticalAlignment="Center"/>
+                                </StackPanel>
+                                
+                                <TextBlock 
+                                Grid.Column="1"
+                                Text="{Binding Path=Value}"
                                 VerticalAlignment="Center"
                                 HorizontalAlignment="Left"
                                 TextWrapping="Wrap"

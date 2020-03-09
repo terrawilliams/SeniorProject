@@ -53,6 +53,8 @@ namespace ChaoticCreation.RandomTables
                 currentTable = value;
                 OnPropertyChanged("CurrentTable");
 
+
+
                 ShowSelectedTable();
             }
         }
@@ -221,15 +223,9 @@ namespace ChaoticCreation.RandomTables
 
             PreliminaryRoll();
 
-            System.Threading.Thread.Sleep(250);
-
             PreliminaryRoll();
 
-            System.Threading.Thread.Sleep(250);
-
             PreliminaryRoll();
-
-            System.Threading.Thread.Sleep(250);
 
             GenerateRandomTableSelection();
         }
@@ -240,6 +236,10 @@ namespace ChaoticCreation.RandomTables
             OnPropertyChanged("DieResult");
             OnPropertyChanged("DieResultD10");
             OnPropertyChanged("DieResultPercentile");
+
+            int i = 0;
+
+            System.Threading.Thread.Sleep(250);
         }
 
         private void UpdateDieToRoll()

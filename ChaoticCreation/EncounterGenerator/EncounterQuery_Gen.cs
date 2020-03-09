@@ -15,7 +15,7 @@ namespace ChaoticCreation.EncounterGenerator
         #endregion
 
         #region Methods
-        public Dictionary<string, string> EncounterQuery(List<string> userSpecifiedData)
+        public Dictionary<string, Dictionary<string, string>> EncounterQuery(List<string> userSpecifiedData)
         {
             //userSpecifiedData[0] = size, [1] = level, etc
             string partySize = userSpecifiedData[0];
@@ -86,7 +86,12 @@ namespace ChaoticCreation.EncounterGenerator
             { Console.WriteLine("Key: " + item.Key + " Value: " + item.Value); }
             */
 
-            return generatedEncounter;
+            Dictionary<string, Dictionary<string, string>> monstersAndLoot = new Dictionary<string, Dictionary<string, string>>();
+
+            monstersAndLoot.Add("Monsters", generatedEncounter);
+            monstersAndLoot.Add("Loot", lootDict);
+
+            return monstersAndLoot;
         }
         private Dictionary<string, string> lootCalc(float CR, int monsterNum, Dictionary<string, string> monsterList)
         {
@@ -147,8 +152,8 @@ namespace ChaoticCreation.EncounterGenerator
             lootDict.Add("EP", coinArr[2].ToString());
             lootDict.Add("GP", coinArr[3].ToString());
             lootDict.Add("PP", coinArr[4].ToString());
-            lootDict.Add("object", hoardDict["object"]);
-            lootDict.Add("magic", hoardDict["magic"]);
+            lootDict.Add("Object", hoardDict["object"]);
+            lootDict.Add("Magic", hoardDict["magic"]);
 
             return lootDict;
         }
