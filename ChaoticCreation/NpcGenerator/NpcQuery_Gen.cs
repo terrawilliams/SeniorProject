@@ -18,8 +18,22 @@ namespace ChaoticCreation.NpcGenerator
             //ideally this would be dynamic and pull from the database but Imma have to revisit it later
             occupationFunction = new Dictionary<string, Func<Dictionary<string, string>>>
             {
-                {"Actor", Actor }
+                
             };
+
+            genderSubject = new Dictionary<string, string>();
+            genderObject = new Dictionary<string, string>();
+            genderNoun = new Dictionary<string, string>();
+
+            //English is hard
+            genderSubject["Male"] = "He";
+            genderSubject["Female"] = "She";
+
+            genderObject["Male"] = "His";
+            genderObject["Female"] = "Her";
+
+            genderNoun["Male"] = "Man";
+            genderNoun["Female"] = "Woman";
 
         }
         #endregion
@@ -27,8 +41,14 @@ namespace ChaoticCreation.NpcGenerator
         #region Members        
         Dictionary<string, Func<Dictionary<string, string>>> occupationFunction;
         string race;
+        string raceAdjective;
         string gender;
         string occupation;
+        Dictionary<string, string> genderSubject;
+        Dictionary<string, string> genderObject;
+        Dictionary<string, string> genderNoun;
+        string vowel = "aeiouAEIOU";
+
         #endregion
 
         #region Methods
@@ -40,13 +60,11 @@ namespace ChaoticCreation.NpcGenerator
             gender = userSpecifiedData["gender"];
             occupation = userSpecifiedData["occupation"];
 
-            //Call the appropriate location method
-            //Dictionary<string, string> generatedNpc = occupationFunction[occupation].Invoke();
-
-            //generatedNpc["description"] = "Type: " + occupation + "\n" + generatedNpc["description"];
+            //retrieve the adjective for the selected race
+            raceAdjective = Query(QueryDatabase("..\\..\\sqlDatabase\\MasterDB.db", "SELECT RaceAdj FROM NPCRaces WHERE Race = \"" + race + "\";")).ElementAt(0).Key;
 
             Dictionary<string, string> generatedNpc = new Dictionary<string, string>();
-            generatedNpc["description"] = "";
+            generatedNpc["description"] = Generic();
 
             Dictionary<string, string> name = NpcName();
 
@@ -75,41 +93,100 @@ namespace ChaoticCreation.NpcGenerator
 
             return name;
         }
-        private Dictionary<string, string> Actor()
+        private string Generic()
         {
+            Random genNum = new Random();
+
             Dictionary<string, string> tableList = new Dictionary<string, string>{
-            {"name", "CastleNamesTbl"},
-            {"location", "CastleLocationTbl" },
-            {"inhabitants", "CastleInhabitantsTbl" },
-            {"knownFor", "CastleKnownForTbl" },
-            {"room", "CastleRoomsTbl" },
-            {"feature", "CastleRoomFeatureTbl" }
-        };
+                {"body", "BodyTbl"},
+                {"height", "HeightTbl" },
+                {"chin", "ChinJawTbl" },
+                {"ears", "EarsTbl" },
+                {"hair", "HairTbl" },
+                {"hands", "HandsTbl" },
+                {"mouth", "MouthTbl" },
+                {"nose", "NoseTbl" },
+                {"tattoo", "TattooTbl" },
+                {"bodypart", "BodyPartTbl" },
+                { "placement", "PrepositionsTbl" },
+                {"scar", "ScarTbl" }
+            };
 
             Dictionary<string, string> values = runQueries(tableList);
 
-            string castleName = values["name"];
+            string description = "A";
+            //height description
+            if(genNum.Next(0,4) == 0)
+            {
+                //Get the placement of the height phrase in the sentence
+                string heightPlacement = Query(QueryDatabase("..\\..\\sqlDatabase\\MasterDB.db", "SELECT grammarType FROM HeightTbl WHERE d6Height = \"" + values["height"] + "\";")).ElementAt(0).Key;
 
-            string description =
-                "The castle sits " +
-                values["location"].ToLower() +
-                " Presently the castle is occupied by " +
-                values["inhabitants"].ToLower() +
-                " " + values["name"] +
-                " is known for " +
-                values["knownFor"].ToLower() +
-                " This chamber is " +
-                values["room"].ToLower() +
-                " You notice " +
-                values["feature"].ToLower();
+                //Height description at the end of the sentence
+                if(heightPlacement == "end")
+                {
+                    description += isVowel(raceAdjective)
+                        + raceAdjective.ToLower() + " "
+                        + genderNoun[gender].ToLower() + " of "
+                        + values["height"].ToLower()
+                        + " approaches you.";
+                }
+                //Height description in the middle of the sentence
+                else
+                {
+                    description += isVowel(values["height"])
+                        + values["height"].ToLower() + " "
+                        + raceAdjective.ToLower() + " "
+                        + genderNoun[gender].ToLower()
+                        + " approaches you.";
+                }
 
-            Dictionary<string, string> results = new Dictionary<string, string>
-        {
-            {"name", castleName},
-            {"description", description}
-        };
+            }
+            //body description
+            else
+            {
+                description += isVowel(values["body"])
+                        + values["body"].ToLower() + " "
+                        + raceAdjective.ToLower() + " "
+                        + genderNoun[gender].ToLower()
+                        + " approaches you.";
+            }
 
-            return results;
+            List<int> randomFeatures = generateDistinctNumbers(2, 7);
+            string feature1 = getFeature(randomFeatures[0], values);
+            string feature2 = getFeature(randomFeatures[1], values);
+
+            description += " "
+                + genderSubject[gender] + " "
+                + "has " + feature1.ToLower()
+                + " and " + feature2.ToLower()
+                + ".";
+
+            //25% chance of additional feature
+            if(genNum.Next(0, 4) == 0)
+            {
+                description += " You notice " + genderSubject[gender].ToLower() + " has ";
+
+                //50% chance scar
+                if(genNum.Next(0, 2) == 0)
+                {
+                    description += values["scar"].ToLower();
+                }
+                //50% chance tattoo
+                else
+                {
+                    description += values["tattoo"].ToLower() + " tattoo";
+                }
+
+                description += " "
+                        + values["placement"].ToLower() + " "
+                        + genderObject[gender].ToLower() + " "
+                        + values["bodypart"].ToLower() + ".";
+            }
+
+
+
+
+            return description;
         }
         
         private Dictionary<string, string> runQueries(Dictionary<string, string> tables)
@@ -142,7 +219,64 @@ namespace ChaoticCreation.NpcGenerator
 
             return results;
         }
+        string isVowel(string word)
+        {
+            if (vowel.IndexOf(word[0]) >= 0)
+            {
+                return "n ";
+            }
+            return " ";
+        }
 
+        string getFeature(int featureChoice, Dictionary<string, string> features)
+        {
+            string feature = "";
+
+            switch (featureChoice)
+            {
+                case 1:
+                    feature = features["chin"];
+                    break;
+                case 2:
+                    feature = features["ears"];
+                    break;
+                case 3:
+                    feature = features["hands"];
+                    break;
+                case 4:
+                    feature = features["mouth"];
+                    break;
+                case 5:
+                    feature = features["nose"];
+                    break;
+                case 6:
+                    feature = features["hair"];
+                    break;
+            }
+
+            return feature;
+        }
+
+        List<int> generateDistinctNumbers(int number_of_numbers, int range)
+        {
+            Random genNum = new Random();
+
+            List<int> numbers = new List<int>();
+            numbers.Add(genNum.Next(1, range));
+            int number;
+
+            for(int i = 0; i < number_of_numbers; i++)
+            {
+                do
+                {
+                    number = genNum.Next(1, range);
+                } while (numbers.Contains(number));
+
+                numbers.Add(number);
+            }
+
+            return numbers;
+        }
         #endregion
     }
  
