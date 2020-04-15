@@ -36,5 +36,21 @@ namespace ChaoticCreation.SavedCreations
         {
             savedCreationsModel.DeleteSelectedCreation();
         }
+
+        private void EditButton_Click(object sender, RoutedEventArgs e)
+        {
+            savedCreationsModel.EditCreation();
+        }
+
+        private void CancelButton_Click(object sender, RoutedEventArgs e)
+        {
+            savedCreationsModel.StopEditingCreation();
+        }
+
+        private void SaveEditButton_Click(object sender, RoutedEventArgs e)
+        {
+            savedCreationsModel.SaveNewVersionOfCreation(NameTextBox.Text, DescriptionTextBox.Text);
+            savedCreationsModel.StopEditingCreation();
+        }
     }
 }

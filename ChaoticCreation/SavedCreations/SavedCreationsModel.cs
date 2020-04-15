@@ -13,6 +13,8 @@ namespace ChaoticCreation.SavedCreations
         #region Members
         private string selectedCreationName;
         private string selectedCreationDescription;
+        private Creation selectedCreation;
+        private bool editingCreation;
 
         public event PropertyChangedEventHandler PropertyChanged;
         #endregion
@@ -39,10 +41,18 @@ namespace ChaoticCreation.SavedCreations
             set 
             { 
                 selectedCreationName = value;
-
-                if(!Save.SavedNpcNames.Contains(selectedCreationName) && 
-                   !Save.SavedLocationNames.Contains(selectedCreationName) && 
-                   !Save.SavedEncounterNames.Contains(selectedCreationName))
+                
+                if(Save.SavedNpcNames.Contains(selectedCreationName) ||
+                   Save.SavedLocationNames.Contains(selectedCreationName) ||
+                   Save.SavedEncounterNames.Contains(selectedCreationName))
+                {
+                    foreach(Creation creation in Save.CurrentlySavedCreations)
+                    {
+                        if (creation.Name == selectedCreationName)
+                            selectedCreation = creation;
+                    }
+                }
+                else
                 {
                     selectedCreationName = string.Empty;
                 }
@@ -55,6 +65,11 @@ namespace ChaoticCreation.SavedCreations
         public string SelectedCreationDescription
         {
             get { return selectedCreationDescription; }
+        }
+
+        public bool EditingCreation
+        {
+            get { return editingCreation; }
         }
         #endregion
 
@@ -112,6 +127,29 @@ namespace ChaoticCreation.SavedCreations
                 }
             }
         }
+
+        public void EditCreation()
+        {
+            editingCreation = true;
+            OnPropertyChanged("EditingCreation");
+        }
+
+        public void SaveNewVersionOfCreation(string newName, string newDescripiton)
+        {
+            Dictionary<string, string> newGeneration = new Dictionary<string, string>();
+            newGeneration.Add("name", newName);
+            newGeneration.Add("description", newDescripiton);
+            Creation currentCreation = new Creation(newName, selectedCreation.Type, newGeneration);
+            Save.Instance.deleteCreation(selectedCreation);
+            Save.Instance.Creation(currentCreation);
+        }
+
+        public void StopEditingCreation()
+        {
+            editingCreation = false;
+            OnPropertyChanged("EditingCreation");
+        }
+
 
         private void OnPropertyChanged(string property)
         {

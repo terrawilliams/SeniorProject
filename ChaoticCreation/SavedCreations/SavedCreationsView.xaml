@@ -54,6 +54,84 @@
             </TreeView>
         </Border>
 
+        <Popup x:Name="EditCreationPopup"
+               Grid.Column="1"
+               Height="250" Width="350"
+               IsOpen="{Binding Path=EditingCreation, Mode=OneWay}"
+               HorizontalAlignment="Center"
+               VerticalAlignment="Center">
+            <Border BorderBrush="Black"
+                    BorderThickness="2"
+                    Background="{StaticResource DarkThemeBackground}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Orientation="Horizontal"
+                                Margin="10">
+                        <TextBlock Text="Name: "
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"
+                               FontSize="20"
+                               FontWeight="Bold"
+                                   Foreground="White"/>
+                        <Border Background="{StaticResource DarkThemeBackgroundSecondary}">
+                            <TextBox x:Name="NameTextBox"
+                                Text="{Binding Path=SelectedCreationName, Mode=OneWay}"
+                                 VerticalAlignment="Center"
+                                 HorizontalAlignment="Stretch"
+                                 Foreground="White"
+                                 BorderThickness="0"
+                                 Width="250"
+                                     Background="Transparent"/>
+                        </Border>
+                        
+                    </StackPanel>
+
+
+                    <StackPanel Orientation="Horizontal"
+                                Margin="10"
+                                Grid.Row="1">
+                        <TextBlock Text="Description: "
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"
+                               FontSize="20"
+                               FontWeight="Bold"
+                                   Foreground="White"/>
+                        <Border
+                            Background="{StaticResource DarkThemeBackgroundSecondary}">
+                            <TextBox x:Name="DescriptionTextBox"
+                                Text="{Binding Path=SelectedCreationDescription, Mode=OneWay}"
+                                 VerticalAlignment="Center"
+                                 HorizontalAlignment="Stretch"
+                                 Background="Transparent"
+                                 Foreground="White"
+                                 TextWrapping="Wrap"
+                                 Width="200"
+                                 BorderThickness="0"
+                                 MinHeight="30"/>
+                        </Border>
+                        
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="2"
+                                Orientation="Horizontal"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center">
+                        <Button Content="Save Edit"
+                                Margin="10"
+                                Click="SaveEditButton_Click"/>
+                        <Button Content="Cancel"
+                                Margin="10"
+                                Click="CancelButton_Click"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </Popup>
+
         <Grid
             Grid.Row="1"
             Grid.Column="1">
@@ -93,6 +171,15 @@
             FontSize="20"
             Click="DeleteButton_Click">
             Delete Creation
+        </Button>
+
+        <Button
+            Grid.Column="1" Grid.Row="2"
+            Margin="25"
+            MaxWidth="300" MaxHeight="75"
+            FontSize="20"
+            Click="EditButton_Click">
+            Edit Creation
         </Button>
     </Grid>
 </UserControl>
