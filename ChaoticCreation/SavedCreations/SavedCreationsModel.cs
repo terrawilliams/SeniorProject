@@ -130,8 +130,11 @@ namespace ChaoticCreation.SavedCreations
 
         public void EditCreation()
         {
-            editingCreation = true;
-            OnPropertyChanged("EditingCreation");
+            if (selectedCreation.Type != GeneratorTypesEnum.Encounter)
+            {
+                editingCreation = true;
+                OnPropertyChanged("EditingCreation");
+            }
         }
 
         public void SaveNewVersionOfCreation(string newName, string newDescripiton)
