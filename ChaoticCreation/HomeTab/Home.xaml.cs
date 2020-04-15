@@ -26,5 +26,10 @@ namespace ChaoticCreation.HomeTab
             InitializeComponent();
             this.DataContext = homeTabModel;
         }
+
+        private void SaveButton_Click(object sender, RoutedEventArgs e)
+        {
+            homeTabModel.SaveCurrentCreation();
+        }
     }
 }

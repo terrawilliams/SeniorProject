@@ -12,8 +12,8 @@
             <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="4*"/>
+            <RowDefinition Height=".5*"/>
+            <RowDefinition Height="3*"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
 
@@ -75,7 +75,24 @@
             </Border>
         </Grid>
 
-        
+        <Button
+            Grid.Column="1" Grid.Row="2"
+            Margin="25"
+            Click="SaveButton_Click"
+            FontSize="20"
+            MaxWidth="300" MaxHeight="75">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock
+                    Text="*"
+                    Visibility="{Binding Path=CreationNotSaved, Converter={StaticResource BoolToVis}}"/>
+                <TextBlock
+                    Text="Save Creation"
+                    Margin="5"/>
+                <TextBlock
+                    Text="*"
+                    Visibility="{Binding Path=CreationNotSaved, Converter={StaticResource BoolToVis}}"/>
+            </StackPanel>
+        </Button>
 
     </Grid>
 </UserControl>

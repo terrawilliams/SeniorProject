@@ -13,6 +13,7 @@ namespace ChaoticCreation.HomeTab
         #region Members
         private Creation selectedCreation;
         private string selectedCreationContent = string.Empty;
+        private bool creationSaved = true;
 
         public event PropertyChangedEventHandler PropertyChanged;
         #endregion
@@ -23,6 +24,11 @@ namespace ChaoticCreation.HomeTab
             get { return RecentCreations.MostRecentCreations; }
         }
 
+        public bool CreationNotSaved
+        {
+            get { return !creationSaved; }
+        }
+
         public Creation SelectedRecentCreation
         {
             set 
@@ -30,21 +36,10 @@ namespace ChaoticCreation.HomeTab
                 selectedCreation = value;
                 OnPropertyChanged("SelectedRecentCreation");
 
-                if(selectedCreation.Type == GeneratorTypesEnum.NPC || selectedCreation.Type == GeneratorTypesEnum.Location)
-                {
-                    selectedCreationContent = selectedCreation.Generation["description"];
-                    OnPropertyChanged("SelectedCreationContent");
-                }
-                else if(selectedCreation.Type == GeneratorTypesEnum.Encounter)
-                {
-                    selectedCreationContent = string.Empty;
+                DisplaySelectedCreation();
 
-                    foreach(KeyValuePair<string, string> monster in selectedCreation.Generation)
-                    {
-                        selectedCreationContent += monster.Key + " " + monster.Value + "\n";
-                        OnPropertyChanged("SelectedCreationContent");
-                    }
-                }
+                creationSaved = CurrentCreationIsSaved();
+                OnPropertyChanged("CreationNotSaved");
             }
             get { return selectedCreation; }
         }
@@ -63,6 +58,67 @@ namespace ChaoticCreation.HomeTab
         #endregion
 
         #region Methods
+        public void SaveCurrentCreation()
+        {
+            if(!creationSaved)
+            {
+                Save.Instance.Creation(selectedCreation);
+                creationSaved = true;
+                OnPropertyChanged("CreationNotSaved");
+            }
+        }
+
+        private void DisplaySelectedCreation()
+        {
+            if (selectedCreation.Type == GeneratorTypesEnum.NPC || selectedCreation.Type == GeneratorTypesEnum.Location)
+            {
+                selectedCreationContent = selectedCreation.Generation["description"];
+                OnPropertyChanged("SelectedCreationContent");
+            }
+            else if (selectedCreation.Type == GeneratorTypesEnum.Encounter)
+            {
+                selectedCreationContent = string.Empty;
+
+                foreach (KeyValuePair<string, string> monster in selectedCreation.Generation)
+                {
+                    selectedCreationContent += monster.Key + " " + monster.Value + "\n";
+                    OnPropertyChanged("SelectedCreationContent");
+                }
+            }
+        }
+
+        private bool CurrentCreationIsSaved()
+        {
+            bool saved = false;
+
+            if(selectedCreation.Type == GeneratorTypesEnum.NPC)
+            {
+                foreach(string npc in Save.SavedNpcNames)
+                {
+                    if (npc == selectedCreation.Name)
+                        saved = true;
+                }
+            }
+            else if(selectedCreation.Type == GeneratorTypesEnum.Location)
+            {
+                foreach (string location in Save.SavedLocationNames)
+                {
+                    if (location == selectedCreation.Name)
+                        saved = true;
+                }
+            }
+            else if(selectedCreation.Type == GeneratorTypesEnum.Encounter)
+            {
+                foreach (string encounter in Save.SavedEncounterNames)
+                {
+                    if (encounter == selectedCreation.Name)
+                        saved = true;
+                }
+            }
+
+            return saved;
+        }
+
         private void OnPropertyChanged(string property)
         {
             if (PropertyChanged != null)
