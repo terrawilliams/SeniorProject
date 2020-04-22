@@ -248,6 +248,7 @@
     <Resource Include="Images\d4Outline.png" />
     <Resource Include="Images\d6Outline.png" />
     <Resource Include="Images\d8Outline.png" />
+    <Resource Include="Images\ChaoticCreationsLogo2.png" />
     <Content Include="sqlDatabase\colorQuery.sql" />
     <Content Include="sqlDatabase\nameQuery.sql" />
     <Content Include="sqlDatabase\npcQuery.sql" />
