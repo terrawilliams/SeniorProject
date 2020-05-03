@@ -101,6 +101,10 @@ namespace ChaoticCreation.LocationGenerator
         }
         #endregion
 
+        #region Methods
+        /// <summary>
+        /// Assigns values to any specifications left as "Any" then generates a location to fit the parameters
+        /// </summary>
         public void GenerateLocation()
         {
             string type = (currentLocationType.Equals("Any") ? locationType.ElementAt(rand.Next(1, locationType.Count)) : currentLocationType);
@@ -125,6 +129,9 @@ namespace ChaoticCreation.LocationGenerator
             OnPropertyChanged("GenerationNotSaved");
         }
 
+        /// <summary>
+        /// Saves the currently generated location to the database if it has not already been saved
+        /// </summary>
         public void SaveLocation()
         {
             if (!latestGenerationSaved)
@@ -138,10 +145,16 @@ namespace ChaoticCreation.LocationGenerator
             }
         }
 
+        /// <summary>
+        /// Alerts the front end that a property has changed and needs to be updated
+        /// </summary>
+        /// <param name="property">The property that needs to be updated</param>
         private void OnPropertyChanged(string property)
         {
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(property));
         }
+
+        #endregion
     }
 }

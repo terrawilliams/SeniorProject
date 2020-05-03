@@ -119,7 +119,11 @@ namespace ChaoticCreation.NpcGenerator
             currentNpcOccupation = npcOccupation.First();
         }
         #endregion
-        
+
+        #region Methods
+        /// <summary>
+        /// Assigns discrete values to any parameters left as "Any" then generates a NPC that satisfies the given parameters
+        /// </summary>
         public void GenerateNewNpc()
         {
             string race = (currentNpcRace.Equals("Any") ? npcRace.ElementAt(rand.Next(1, npcRace.Count)): currentNpcRace);
@@ -142,6 +146,9 @@ namespace ChaoticCreation.NpcGenerator
             OnPropertyChanged("GenerationNotSaved");
         }
 
+        /// <summary>
+        /// Saves the currently generated NPC to the database if it has not already been saved
+        /// </summary>
         public void SaveCurrentNpc()
         {
             if (!latestGenerationSaved)
@@ -155,10 +162,15 @@ namespace ChaoticCreation.NpcGenerator
             }
         }
 
+        /// <summary>
+        /// Alerts the front end that a property has changed and needs to be updated
+        /// </summary>
+        /// <param name="property">The property that needs to be updated</param>
         private void OnPropertyChanged(string property)
         {
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(property));
         }
+        #endregion
     }
 }

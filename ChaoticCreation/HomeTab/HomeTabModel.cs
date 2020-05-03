@@ -58,6 +58,9 @@ namespace ChaoticCreation.HomeTab
         #endregion
 
         #region Methods
+        /// <summary>
+        /// Saves the currently selected creation if the creation has not already been saved
+        /// </summary>
         public void SaveCurrentCreation()
         {
             if(!creationSaved)
@@ -68,6 +71,9 @@ namespace ChaoticCreation.HomeTab
             }
         }
 
+        /// <summary>
+        /// Displays the selected creation
+        /// </summary>
         private void DisplaySelectedCreation()
         {
             if (selectedCreation.Type == GeneratorTypesEnum.NPC || selectedCreation.Type == GeneratorTypesEnum.Location)
@@ -87,6 +93,10 @@ namespace ChaoticCreation.HomeTab
             }
         }
 
+        /// <summary>
+        /// Determines whether the current selected creation has been saved
+        /// </summary>
+        /// <returns>True if the selection has been saved, false otherwise</returns>
         private bool CurrentCreationIsSaved()
         {
             bool saved = false;
@@ -119,6 +129,10 @@ namespace ChaoticCreation.HomeTab
             return saved;
         }
 
+        /// <summary>
+        /// Alerts the front end that a property has changed and needs to be updated
+        /// </summary>
+        /// <param name="property">The property that needs to be updated</param>
         private void OnPropertyChanged(string property)
         {
             if (PropertyChanged != null)
