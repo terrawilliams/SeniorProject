@@ -15,6 +15,12 @@ namespace ChaoticCreation.EncounterGenerator
         #endregion
 
         #region Methods
+
+        /// <summary>
+        /// Base method for all encounter/loot generations
+        /// </summary>
+        /// <param name="userSpecifiedData"></param>
+        /// <returns>Dictionary that contains a generated encounter with matching loot</returns>
         public Dictionary<string, Dictionary<string, string>> EncounterQuery(List<string> userSpecifiedData)
         {
             //userSpecifiedData[0] = size, [1] = level, etc
@@ -75,17 +81,8 @@ namespace ChaoticCreation.EncounterGenerator
             Console.WriteLine("Generated Encounter");
             foreach (KeyValuePair<string, string> item in generatedEncounter)
             {Console.WriteLine("Key: " + item.Key + " Value: " + item.Value);}
-
-            //float cr = getCR(monsterTotalXp);
             
             Dictionary<string, string> lootDict = lootCalc(eachMonstCr, monsterNum, generatedEncounter);
-
-            /*
-            Console.WriteLine("CALCULATED LOOT");
-            foreach(KeyValuePair<string,string> item in lootDict)
-            { Console.WriteLine("Key: " + item.Key + " Value: " + item.Value); }
-            */
-
             Dictionary<string, Dictionary<string, string>> monstersAndLoot = new Dictionary<string, Dictionary<string, string>>();
 
             monstersAndLoot.Add("Monsters", generatedEncounter);
@@ -93,9 +90,17 @@ namespace ChaoticCreation.EncounterGenerator
 
             return monstersAndLoot;
         }
+
+        /// <summary>
+        /// Calculates loot that is received for the given encounter stats
+        /// </summary>
+        /// <param name="CR"></param>
+        /// <param name="monsterNum"></param>
+        /// <param name="monsterList"></param>
+        /// <returns>Dictionary containing the type of loot (key) and the corresponding amount of that loot (value) </returns>
         private Dictionary<string, string> lootCalc(float CR, int monsterNum, Dictionary<string, string> monsterList)
         {
-            Dictionary<string, int> coinDict = new Dictionary<string, int>(); //[0: CP, 1:SP, 2:EP, 3:GP, 4: PP]
+            Dictionary<string, int> coinDict = new Dictionary<string, int>(); //[0:CP, 1:SP, 2:EP, 3:GP, 4:PP]
             Dictionary<string, string> hoardDict = new Dictionary<string, string>(); //[0: Gem/Art, 1:Magic]
             int[] coinArr = new int[5] { 0, 0, 0, 0, 0 };
 
@@ -110,7 +115,6 @@ namespace ChaoticCreation.EncounterGenerator
                 coinDict = CoinQuery(CR, true);
                 for (int i = 0; i < 5; i++)
                 {
-                    //Console.WriteLine("coinArr[" + i + " ] = " + coinArr[i]);
                     coinArr[i] += coinDict.ElementAt(i).Value;
                 }
             }
@@ -157,6 +161,12 @@ namespace ChaoticCreation.EncounterGenerator
 
             return lootDict;
         }
+        
+        /// <summary>
+        /// Sorts the generated monster dictionary in descending order to allow duplicates to be matched in another function
+        /// </summary>
+        /// <param name="monsterList"></param>
+        /// <returns>Sorted monster dictionary </returns>
         Dictionary<string, int> SortMonsterList(Dictionary<string, string> monsterList)
         {
             Dictionary<string, int> sortedList = new Dictionary<string, int>();
@@ -166,6 +176,12 @@ namespace ChaoticCreation.EncounterGenerator
             }
             return sortedList;
         }
+        
+        /// <summary>
+        /// Calculates the hoard amount based on the Challenge Rating
+        /// </summary>
+        /// <param name="CR"></param>
+        /// <returns>A dictionary with hoard items (key) and it's amount (value)</returns>
         private Dictionary<string, string> CalcHoard(float CR)
         {
             Dictionary<string, string> hoardDict = new Dictionary<string, string>();
@@ -179,6 +195,12 @@ namespace ChaoticCreation.EncounterGenerator
             
             return hoardDict;
         }
+        
+        /// <summary>
+        /// Formats database query from hoard tables
+        /// </summary>
+        /// <param name="CR"></param>
+        /// <returns>Dictionary of Gem/Art and Magic Items</returns>
         private Dictionary<string, string> HoardQuery(float CR)
         {
             //HoardQuery
@@ -218,6 +240,12 @@ namespace ChaoticCreation.EncounterGenerator
            
             return hoardQuery;
         }
+        
+        /// <summary>
+        /// Pulls hoard table data from the database
+        /// </summary>
+        /// <param name="queryString"></param>
+        /// <returns>Dictionary of hoard items from database</returns>
         private Dictionary<string, string> QueryHoardTbl(string queryString)
         {
             //Console.WriteLine(queryString);
@@ -239,6 +267,12 @@ namespace ChaoticCreation.EncounterGenerator
             
             return queryDict;
         }
+        
+        /// <summary>
+        /// Creates formated string from object pulled from database
+        /// </summary>
+        /// <param name="objStr"></param>
+        /// <returns>string representing a loot object</returns>
         private string CalcObjStr(string objStr)
         {
             if(objStr == "null")
@@ -254,6 +288,12 @@ namespace ChaoticCreation.EncounterGenerator
 
             return lootDesc;
         }
+        
+        /// <summary>
+        /// Creates formatted string from magic item pulled from databse
+        /// </summary>
+        /// <param name="magStr"></param>
+        /// <returns>String representing magic item</returns>
         private string CalcMagicStr(string magStr)
         {
             if(magStr == "null")
@@ -275,6 +315,12 @@ namespace ChaoticCreation.EncounterGenerator
             string lootStr = itemAmt.ToString() + " " + queryResultStr;
             return lootStr;
         }
+
+        /// <summary>
+        /// Pulls object table data from the database
+        /// </summary>
+        /// <param name="queryString"></param>
+        /// <returns>Dictionary of loot objects from database</returns>
         private string QueryObjTbl(string queryString)
         {
             //Console.WriteLine(queryString);
@@ -294,6 +340,12 @@ namespace ChaoticCreation.EncounterGenerator
             
             return objStr;
         }
+        
+        /// <summary>
+        /// Pulls magic table data from the database
+        /// </summary>
+        /// <param name="queryString"></param>
+        /// <returns>Dictionary of magic items from database</returns>
         private string QueryMagTbl(string queryString)
         {
             //Console.WriteLine(queryString);
@@ -313,6 +365,13 @@ namespace ChaoticCreation.EncounterGenerator
 
             return magStr;
         }
+
+        /// <summary>
+        /// Pulls coin table data from the database
+        /// </summary>
+        /// <param name="CR"></param>
+        /// <param name="hoardTbl"></param>
+        /// <returns>Dictionary of totals for each coin type</returns>
         private Dictionary<string, int> CoinQuery(float CR, bool hoardTbl)
         {
             Random rand = new Random();
@@ -378,8 +437,14 @@ namespace ChaoticCreation.EncounterGenerator
                 coinDict.Add(item.Key, coinTotal);
             }
 
-            return coinDict; //Returns array of totals for each coin type
+            return coinDict; 
         }
+
+        /// <summary>
+        /// Formats database query from coin tables
+        /// </summary>
+        /// <param name="queryString"></param>
+        /// <returns>Dictionary of coins from database</returns>
         private Dictionary<string, string> QueryCoinTbl(string queryString)
         {
             //Console.WriteLine(queryString);
@@ -404,6 +469,12 @@ namespace ChaoticCreation.EncounterGenerator
 
             return queryDict;
         }
+        
+        /// <summary>
+        /// Formats coin strings
+        /// </summary>
+        /// <param name="tmpStr"></param>
+        /// <returns>List of coins</returns>
         private int[] CoinStringParser(string tmpStr)
         {
             int[] parsedArray = new int[3];
@@ -419,6 +490,13 @@ namespace ChaoticCreation.EncounterGenerator
 
             return parsedArray;
         }
+
+        /// <summary>
+        /// Pulls monster table data from the database
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <param name="queryString"></param>
+        /// <returns>Dictionary of monster values</returns>
         private Dictionary<string, float> QueryMonsterTbl(string filePath, string queryString)
         {
             Dictionary<string, float> queryDict = new Dictionary<string, float>();
@@ -441,6 +519,14 @@ namespace ChaoticCreation.EncounterGenerator
 
             return queryDict;
         }
+        
+        /// <summary>
+        /// Randomly selects monsters from list of qualifying monsters returned from database
+        /// </summary>
+        /// <param name="queryList"></param>
+        /// <param name="monsterNum"></param>
+        /// <param name="monstTotalXp"></param>
+        /// <returns>list of selected monsters for encounter</returns>
         private List<KeyValuePair<string, float>> SelectMonsters(Dictionary<string, float> queryList, int monsterNum, int monstTotalXp)
         {
             int listSize = queryList.Count();
@@ -453,35 +539,17 @@ namespace ChaoticCreation.EncounterGenerator
                 list.Add(queryList.ElementAt(index));
             }
 
-
-            /*
-            Random rand = new Random();
-            int size = queryList.Count();
-            int monstCnt = 0;
-            int remainingXp = monstTotalXp;
-            List<KeyValuePair<string, int>> list = new List<KeyValuePair<string, int>>();
-
-            while (monstCnt < monsterNum)
-            {
-                int index = rand.Next(0, size);
-                if (queryList.ElementAt(index).Value <= remainingXp)
-                {
-                    list.Add(new KeyValuePair<string, int>(queryList.ElementAt(index).Key, queryList.ElementAt(index).Value));
-                    monstCnt++;
-                    remainingXp -= queryList.ElementAt(index).Value;
-                }
-                else if (remainingXp < 10)
-                {
-                    list.Add(new KeyValuePair<string, int>(queryList.ElementAt(index).Key, queryList.ElementAt(index).Value));
-                    monstCnt++;
-                }
-            }
-            */
-
             return list;
         }
+        
+        /// <summary>
+        /// Combines monster duplicates in list and corresponds their totals as values in the returned dictionary
+        /// </summary>
+        /// <param name="monstersList"></param>
+        /// <returns>Dictionary of monsters (key) and their corresponding totals (value)</returns>
         private Dictionary<string, string> CombineMonsters(List<KeyValuePair<string, float>> monstersList)
         {
+
             List<KeyValuePair<string, float>> list = monstersList.ToList();
             Dictionary<string, string> generatedEncounter = new Dictionary<string, string>();
 
@@ -498,6 +566,14 @@ namespace ChaoticCreation.EncounterGenerator
 
             return generatedEncounter;
         }
+        
+        /// <summary>
+        /// Calculates the XP (Experience Points) from user input values
+        /// </summary>
+        /// <param name="partySize"></param>
+        /// <param name="partyLevel"></param>
+        /// <param name="difficulty"></param>
+        /// <returns>Party XP value</returns>
         private int calcTotalXP(string partySize, string partyLevel, string difficulty)
         {
             int size = Int32.Parse(partySize);
@@ -512,6 +588,11 @@ namespace ChaoticCreation.EncounterGenerator
 
             return partyXP;
         }
+
+        /// <summary>
+        /// Randomly selects total number of monsters to be in encounter
+        /// </summary>
+        /// <returns>number of monsters that will be in the encounter</returns>
         private int getMonsterNum()
         {
             Random rand = new Random();
@@ -527,8 +608,17 @@ namespace ChaoticCreation.EncounterGenerator
 
             return numMonsters;
         }
+        
+        /// <summary>
+        /// Gets corresponding multiplier for number of monsters in encounter according to fifth edition rules
+        /// </summary>
+        /// <param name="monsterNum"></param>
+        /// <returns>monster multiplier</returns>
         private double getMonsterMultiplier(int monsterNum)
         {
+            //This function returns the multiplier needed to calculate
+            //the CR level of the encounter based on the number of monsters
+            //in the encounter
             double multiplier = 0;
 
             if (monsterNum == 1) { multiplier = 1; }
@@ -540,6 +630,12 @@ namespace ChaoticCreation.EncounterGenerator
 
             return multiplier;
         }
+        
+        /// <summary>
+        /// Retrieves the CR value from database that corresponds with the calculated XP value for the party
+        /// </summary>
+        /// <param name="xp"></param>
+        /// <returns>Challenge rating</returns>
         private float getCR(int xp)
         {
             //highest xp in table = 155000
