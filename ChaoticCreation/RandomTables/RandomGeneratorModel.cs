@@ -156,6 +156,9 @@ namespace ChaoticCreation.RandomTables
         #endregion
 
         #region Methods
+        /// <summary>
+        /// Displays the contents of the selected table
+        /// </summary>
         private void ShowSelectedTable()
         {
             currentTableEntries.Clear();
@@ -189,6 +192,9 @@ namespace ChaoticCreation.RandomTables
             UpdateDieToRoll();
         }
 
+        /// <summary>
+        /// Generates a random selection on the currently selected table
+        /// </summary>
         public void GenerateRandomTableSelection()
         {
             if (dieToRoll == 0)
@@ -221,6 +227,9 @@ namespace ChaoticCreation.RandomTables
             }
         }
 
+        /// <summary>
+        /// Chooses random numbers for the graphical dice roller to land on
+        /// </summary>
         public void RollDie()
         {
             if (dieToRoll == 0)
@@ -235,6 +244,9 @@ namespace ChaoticCreation.RandomTables
             GenerateRandomTableSelection();
         }
 
+        /// <summary>
+        /// Randomly generates a number on the current die
+        /// </summary>
         private void PreliminaryRoll()
         {
             dieResult = rand.Next(1, dieToRoll + 1);
@@ -242,11 +254,12 @@ namespace ChaoticCreation.RandomTables
             OnPropertyChanged("DieResultD10");
             OnPropertyChanged("DieResultPercentile");
 
-            int i = 0;
-
             System.Threading.Thread.Sleep(250);
         }
 
+        /// <summary>
+        /// Updates variables so that the front end knows which die to display
+        /// </summary>
         private void UpdateDieToRoll()
         {
             OnPropertyChanged("DieToRoll");
@@ -259,6 +272,10 @@ namespace ChaoticCreation.RandomTables
             OnPropertyChanged("IsD100");
         }
 
+        /// <summary>
+        /// Determines which tables should be visible based on the input substring
+        /// </summary>
+        /// <param name="filter">substring to check table names against</param>
         public void TrimTablesTree(string filter)
         {
             
@@ -284,6 +301,12 @@ namespace ChaoticCreation.RandomTables
             }
         }
 
+        /// <summary>
+        /// Helper to determine if tables should be visible based on input substring
+        /// </summary>
+        /// <param name="currentNode">parent node of tables to be checked</param>
+        /// <param name="filter">substring to check table names against</param>
+        /// <returns>the subtree with tables applicable to the substring</returns>
         public RandomTableCategory TrimTablesTreeHelper(RandomTableCategory currentNode, string filter)
         {
             RandomTableCategory newCategory = new RandomTableCategory(currentNode.Name);
@@ -306,6 +329,10 @@ namespace ChaoticCreation.RandomTables
             return newCategory;
         }
 
+        /// <summary>
+        /// Allerts front end when the input property has been changed
+        /// </summary>
+        /// <param name="property">property to be updated</param>
         private void OnPropertyChanged(string property)
         {
             if (PropertyChanged != null)

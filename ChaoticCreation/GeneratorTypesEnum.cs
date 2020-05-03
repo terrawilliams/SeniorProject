@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace ChaoticCreation
 {
+    /// <summary>
+    /// This enum is used to differentiate between types of creations
+    /// </summary>
     enum GeneratorTypesEnum
     {
         RandomTables = 1,

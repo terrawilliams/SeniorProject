@@ -21,11 +21,11 @@
         </Grid.RowDefinitions>
 
         <Image
-            HorizontalAlignment="Left"
+            HorizontalAlignment="Center"
             VerticalAlignment="Stretch"
-            Margin="15"
+            Margin="10"
             Height="{Binding ElementName=TopRow, Path=Height}"
-            Source="/Images/ChaoticCreationsLogo.png"/>
+            Source="/Images/ChaoticCreationsLogo2.png"/>
 
         <UniformGrid Columns="6" Margin="5,0">
             <FrameworkElement x:Name="uniformGrid"/>

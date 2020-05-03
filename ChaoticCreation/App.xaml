@@ -14,9 +14,18 @@
 
         <BooleanToVisibilityConverter x:Key="BoolToVis" />
 
+        <Style TargetType="{x:Type Window}">
+            <Setter Property="FontFamily" Value="Palatino Linotype"/>
+        </Style>
+
         <Style TargetType="Label">
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="Background" Value="{StaticResource DarkThemeBackgroundSecondary}"/>
+            <Setter Property="FontFamily" Value="Palatino Linotype"/>
+        </Style>
+
+        <Style TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="Palatino Linotype"/>
         </Style>
 
         <Style TargetType="Button">
@@ -25,6 +34,7 @@
             <Setter Property="Background" Value="{StaticResource DarkThemePrimaryColor}"/>
             <Setter Property="Padding" Value="10"/>
             <Setter Property="Margin" Value="5"/>
+            <Setter Property="FontFamily" Value="Palatino Linotype"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
@@ -50,7 +60,7 @@
         </Style>
 
         <Style TargetType="TabItem">
-            <Setter Property="FontFamily" Value="Ariel"/>
+            <Setter Property="FontFamily" Value="Palatino Linotype"/>
             <Setter Property="FontSize" Value="15"/>
             <Setter Property="Padding" Value="20"/>
             <Setter Property="Height" Value="30"/>
@@ -97,10 +107,12 @@
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="BorderBrush" Value="Transparent"/>
             <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontFamily" Value="Palatino Linotype"/>
         </Style>
 
         <Style TargetType="TreeViewItem">
             <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontFamily" Value="Palatino Linotype"/>
         </Style>
     </Application.Resources>
 </Application>

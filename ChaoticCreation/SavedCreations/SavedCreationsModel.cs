@@ -81,6 +81,9 @@ namespace ChaoticCreation.SavedCreations
         #endregion
 
         #region Methods
+        /// <summary>
+        /// Displays information from the selected creation
+        /// </summary>
         private void DisplaySelectedCreation()
         {
             if(selectedCreationName == string.Empty)
@@ -113,6 +116,9 @@ namespace ChaoticCreation.SavedCreations
             }
         }
 
+        /// <summary>
+        /// Deletes the selected creation from the database
+        /// </summary>
         public void DeleteSelectedCreation()
         {
             if (selectedCreationName == string.Empty)
@@ -128,6 +134,9 @@ namespace ChaoticCreation.SavedCreations
             }
         }
 
+        /// <summary>
+        /// Alerts the application that a creation is being edited
+        /// </summary>
         public void EditCreation()
         {
             if (selectedCreation.Type != GeneratorTypesEnum.Encounter)
@@ -137,6 +146,11 @@ namespace ChaoticCreation.SavedCreations
             }
         }
 
+        /// <summary>
+        /// Deletes the original instance of the creation from the database and saves the new, edited version
+        /// </summary>
+        /// <param name="newName">new name of the creation entered by the user</param>
+        /// <param name="newDescripiton">new description of the creation entered by the user</param>
         public void SaveNewVersionOfCreation(string newName, string newDescripiton)
         {
             Dictionary<string, string> newGeneration = new Dictionary<string, string>();
@@ -147,13 +161,19 @@ namespace ChaoticCreation.SavedCreations
             Save.Instance.Creation(currentCreation);
         }
 
+        /// <summary>
+        /// Alerts the application that the creation is no longer being edited
+        /// </summary>
         public void StopEditingCreation()
         {
             editingCreation = false;
             OnPropertyChanged("EditingCreation");
         }
 
-
+        /// <summary>
+        /// Allerts the front end that a property has been changed and needs to update
+        /// </summary>
+        /// <param name="property">The property that needs to be updated</param>
         private void OnPropertyChanged(string property)
         {
             if (PropertyChanged != null)

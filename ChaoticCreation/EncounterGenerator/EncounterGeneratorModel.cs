@@ -142,6 +142,10 @@ namespace ChaoticCreation.EncounterGenerator
         }
         #endregion
 
+        #region Methods
+        /// <summary>
+        /// Chooses values for any parameters left as "Any" then generates an encounter that fits all parameters
+        /// </summary>
         public void GenerateEncounter()
         {
             encounterMonsters.Clear();
@@ -184,6 +188,9 @@ namespace ChaoticCreation.EncounterGenerator
             OnPropertyChanged("GenerationNotSaved");
         }
 
+        /// <summary>
+        /// Saves current encounter if it has not already been saved
+        /// </summary>
         public void SaveCurrentEnocunter()
         {
             if (!latestGenerationSaved)
@@ -196,11 +203,16 @@ namespace ChaoticCreation.EncounterGenerator
                 Save.Instance.Creation(savedCreation);
             }
         }
-        
+
+        /// <summary>
+        /// Alerts the front end that a property has changed and needs to be updated
+        /// </summary>
+        /// <param name="property">The property that needs to be updated</param>
         private void OnPropertyChanged(string property)
         {
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(property));
         }
+        #endregion
     }
 }

@@ -31,6 +31,12 @@ namespace ChaoticCreation
         #endregion
 
         #region Methods
+        /// <summary>
+        /// Adds a new creation to the list of recent creations
+        /// </summary>
+        /// <param name="creationName">name of the creation to be added</param>
+        /// <param name="creationType">type fo the creation to be added</param>
+        /// <param name="creation">creation to be added</param>
         public void AddCreation(String creationName, GeneratorTypesEnum creationType, Dictionary<string, string> creation)
         {
             Creation newCreation = new Creation(creationName, creationType, creation);
