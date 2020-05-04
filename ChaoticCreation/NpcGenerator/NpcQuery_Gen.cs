@@ -13,9 +13,11 @@ namespace ChaoticCreation.NpcGenerator
     class NpcQuery_Gen : GeneralGenerator
     {
         #region Constructors
+        /// <summary>
+        /// Sets up initial grammar data to be used in NPC descriptions
+        /// </summary>
         public NpcQuery_Gen()
         {
-            //ideally this would be dynamic and pull from the database but Imma have to revisit it later
             occupationFunction = new Dictionary<string, Func<Dictionary<string, string>>>
             {
                 
@@ -52,7 +54,12 @@ namespace ChaoticCreation.NpcGenerator
         #endregion
 
         #region Methods
-
+        /// <summary>
+        /// Creates an NPC name and description based on the user specifications
+        /// </summary>
+        /// <param name="userSpecifiedData"></param>
+        /// <returns>Dictionary containing the name and description of the
+        /// generated NPC</returns>
         public Dictionary<string, string> NpcQuery(Dictionary<string, string> userSpecifiedData)
         {
             
@@ -72,7 +79,10 @@ namespace ChaoticCreation.NpcGenerator
 
             return generatedNpc;
         }
-
+        /// <summary>
+        /// Randomly generates an NPC name given a requested gender
+        /// </summary>
+        /// <returns>A dictionary containg the first and last name created</returns>
         private Dictionary<string, string> NpcName()
         {
             Dictionary<string, string> tableList = new Dictionary<string, string>
@@ -93,6 +103,10 @@ namespace ChaoticCreation.NpcGenerator
 
             return name;
         }
+        /// <summary>
+        /// Creates a generic physical description of an NPC
+        /// </summary>
+        /// <returns>Generic physical description of an NPC</returns>
         private string Generic()
         {
             Random genNum = new Random();
@@ -150,7 +164,7 @@ namespace ChaoticCreation.NpcGenerator
                         + genderNoun[gender].ToLower()
                         + " approaches you.";
             }
-
+            //Randomly select an additional feature that the NPC has
             List<int> randomFeatures = generateDistinctNumbers(2, 7);
             string feature1 = getFeature(randomFeatures[0], values);
             string feature2 = getFeature(randomFeatures[1], values);
@@ -188,7 +202,11 @@ namespace ChaoticCreation.NpcGenerator
 
             return description;
         }
-        
+        /// <summary>
+        /// Given a dictionary of tables, runQueries selects one random record from
+        /// </summary>
+        /// <param name="tables"></param>
+        /// <returns>Dictionary containing query results</returns>
         private Dictionary<string, string> runQueries(Dictionary<string, string> tables)
         {
             List<string> queries = new List<string>();
@@ -219,6 +237,12 @@ namespace ChaoticCreation.NpcGenerator
 
             return results;
         }
+        /// <summary>
+        /// Checks if a word or phrase begins with a vowel
+        /// </summary>
+        /// <param name="word"></param>
+        /// <returns>An empty string if the word does not start with a vowel
+        /// and a "n " if the word does start with a vowel</returns>
         string isVowel(string word)
         {
             if (vowel.IndexOf(word[0]) >= 0)
@@ -227,7 +251,12 @@ namespace ChaoticCreation.NpcGenerator
             }
             return " ";
         }
-
+        /// <summary>
+        /// Helper function to assist in choosing random physical features for an NPC
+        /// </summary>
+        /// <param name="featureChoice"></param>
+        /// <param name="features"></param>
+        /// <returns>String containg the randomly chosen NPC feature</returns>
         string getFeature(int featureChoice, Dictionary<string, string> features)
         {
             string feature = "";
@@ -256,7 +285,12 @@ namespace ChaoticCreation.NpcGenerator
 
             return feature;
         }
-
+        /// <summary>
+        /// Helper function to generate a requested number of distinct random integers
+        /// </summary>
+        /// <param name="number_of_numbers"></param>
+        /// <param name="range"></param>
+        /// <returns>List of distinct random integers</returns>
         List<int> generateDistinctNumbers(int number_of_numbers, int range)
         {
             Random genNum = new Random();
