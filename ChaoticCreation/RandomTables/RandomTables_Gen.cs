@@ -31,7 +31,10 @@ namespace ChaoticCreation.RandomTables
     class RandomTables_Gen : GeneralGenerator
     {
         #region Constructors
-
+        /// <summary>
+        /// Creates the list matching the User facing table names with the
+        /// database table names
+        /// </summary>
         public RandomTables_Gen()
         {
             tableList = new Dictionary<string, string>
@@ -73,6 +76,12 @@ namespace ChaoticCreation.RandomTables
         #endregion
 
         #region Methods
+        /// <summary>
+        /// Retrieves and formats the requested table to be displayed to the user
+        /// </summary>
+        /// <param name="tableName"></param>
+        /// <returns>List containing all of the data entries of the 
+        /// requested table</returns>
         public List<RandomTableEntry> GetTable(string tableName)
         {
             string query;
@@ -123,7 +132,11 @@ namespace ChaoticCreation.RandomTables
 
             return newTable;
         }
-
+        /// <summary>
+        /// Establishes the menu structure for the user interface
+        /// </summary>
+        /// <returns>List of lists of tables to be displayed to the user in
+        /// menu/submenu structure</returns>
         public RandomTableCategory InitializeRandomTableList()
         {
             RandomTableCategory listOfTables = new RandomTableCategory("Random Tables");
@@ -135,7 +148,10 @@ namespace ChaoticCreation.RandomTables
 
             return listOfTables;
         }
-
+        /// <summary>
+        /// Creates the Artobjects submenu
+        /// </summary>
+        /// <returns>Art Objects category with all subcategories</returns>
         private RandomTableCategory InitializeArtObjectsList()
         {
             RandomTableCategory artObjects = new RandomTableCategory("Art Objects");
@@ -148,7 +164,10 @@ namespace ChaoticCreation.RandomTables
 
             return artObjects;
         }
-
+        /// <summary>
+        /// Creates the Gemstones submenu
+        /// </summary>
+        /// <returns>Gemstones category with all subcategories</returns>
         private RandomTableCategory InitializeGemstonesList()
         {
             RandomTableCategory gemstones = new RandomTableCategory("Gemstones");
@@ -162,7 +181,10 @@ namespace ChaoticCreation.RandomTables
 
             return gemstones;
         }
-
+        /// <summary>
+        /// Creates the Magic Effects submenu
+        /// </summary>
+        /// <returns>Magic Effects category with all subcategories</returns>
         private RandomTableCategory InitializeMagicEffectsList()
         {
             RandomTableCategory magicEffects = new RandomTableCategory("Magic Effects");
@@ -173,7 +195,10 @@ namespace ChaoticCreation.RandomTables
 
             return magicEffects;
         }
-
+        /// <summary>
+        /// Creates the Magic Items submenu
+        /// </summary>
+        /// <returns>Magic Items category with all subcategories</returns>
         private RandomTableCategory InitializeMagicItemsList()
         {
             RandomTableCategory magicItems = new RandomTableCategory("Magic Items");
