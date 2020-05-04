@@ -10,9 +10,14 @@ namespace ChaoticCreation.LocationGenerator
     class LocationQuery_Gen : GeneralGenerator
     {
         #region Constructors
+
+        /// <summary>
+        /// Creates a dictionary matching locaiton types given as strings to their respective
+        /// description generation functions that take the location size as an argument and 
+        /// return a dictionary containing the generated description
+        /// </summary>
         public LocationQuery_Gen()
         {
-            //ideally this would be dynamic and pull from the database but Imma have to revisit it later
             locationFunction = new Dictionary<string, Func<string, Dictionary<string, string>>>
             {
                 {"Castle", Castle},
@@ -35,6 +40,12 @@ namespace ChaoticCreation.LocationGenerator
 
         #region Methods
 
+        /// <summary>
+        /// Location generator endpoint, generates a loctation description given the user specified
+        /// type and size
+        /// </summary>
+        /// <param name="userSpecifiedData"></param>
+        /// <returns>Dictionary containing the generated location's name and description</returns>
         public Dictionary<string, string> LocationQuery(List<string> userSpecifiedData)
         {
             //userSpecifiedData[0] = type, [1] = size
@@ -49,6 +60,11 @@ namespace ChaoticCreation.LocationGenerator
             return generatedLocation;
         }
 
+        /// <summary>
+        /// Queries the relevant tables in the database and generates a description of a castle
+        /// </summary>
+        /// <param name="size"></param>
+        /// <returns>Returns a dictionary containing the generated Name and Description of a castle</returns>
         private Dictionary<string, string> Castle(string size)
         {
             Dictionary<string, string> tableList = new Dictionary<string, string>{
@@ -85,6 +101,11 @@ namespace ChaoticCreation.LocationGenerator
 
             return results;
         }
+        /// <summary>
+        /// Queries the relevant tables in the database and generates a description of a cave
+        /// </summary>
+        /// <param name="size"></param>
+        /// <returns>Returns a dictionary containing the generated Name and Description of a cave</returns>
         private Dictionary<string, string> Cave(string size)
         {
 
@@ -127,6 +148,11 @@ namespace ChaoticCreation.LocationGenerator
 
             return results;
         }
+        /// <summary>
+        /// Queries the relevant tables in the database and generates a description of a desert
+        /// </summary>
+        /// <param name="size"></param>
+        /// <returns>Returns a dictionary containing the generated Name and Description of a desert</returns>
         private Dictionary<string, string> Desert(string size)
         {
             Dictionary<string, string> tableList = new Dictionary<string, string>{
@@ -169,6 +195,11 @@ namespace ChaoticCreation.LocationGenerator
 
             return results;
         }
+        /// <summary>
+        /// Queries the relevant tables in the database and generates a description of a forest
+        /// </summary>
+        /// <param name="size"></param>
+        /// <returns>Returns a dictionary containing the generated Name and Description of a forest</returns>
         private Dictionary<string, string> Forest(string size)
         {
             Dictionary<string, string> tableList = new Dictionary<string, string>{
@@ -205,6 +236,11 @@ namespace ChaoticCreation.LocationGenerator
             return results;
 
         }
+        /// <summary>
+        /// Queries the relevant tables in the database and generates a description of a jungle
+        /// </summary>
+        /// <param name="size"></param>
+        /// <returns>Returns a dictionary containing the generated Name and Description of a jungle</returns>
         private Dictionary<string, string> Jungle(string size)
         {
             Dictionary<string, string> tableList = new Dictionary<string, string>{
@@ -238,6 +274,11 @@ namespace ChaoticCreation.LocationGenerator
 
             return results;
         }
+        /// <summary>
+        /// Queries the relevant tables in the database and generates a description of a mine
+        /// </summary>
+        /// <param name="size"></param>
+        /// <returns>Returns a dictionary containing the generated Name and Description of a mine</returns>
         private Dictionary<string, string> Mine(string size)
         {
             Dictionary<string, string> tableList = new Dictionary<string, string>{
@@ -279,6 +320,11 @@ namespace ChaoticCreation.LocationGenerator
 
             return results;
         }
+        /// <summary>
+        /// Queries the relevant tables in the database and generates a description of a mountain
+        /// </summary>
+        /// <param name="size"></param>
+        /// <returns>Returns a dictionary containing the generated Name and Description of a mountain</returns>
         private Dictionary<string, string> Mountain(string size)
         {
             Dictionary<string, string> tableList = new Dictionary<string, string>{
@@ -317,7 +363,11 @@ namespace ChaoticCreation.LocationGenerator
 
             return results;
         }
-
+        /// <summary>
+        /// Queries the relevant tables in the database and generates a description of a tavern
+        /// </summary>
+        /// <param name="size"></param>
+        /// <returns>Returns a dictionary containing the generated Name and Description of a tavern</returns>
         private Dictionary<string, string> Tavern(string size)
         {
             Dictionary<string, string> tableList = new Dictionary<string, string>{
@@ -344,7 +394,11 @@ namespace ChaoticCreation.LocationGenerator
 
             return results;
         }
-
+        /// <summary>
+        /// Queries the database for random elements and creates a unique tavern name from one 
+        /// of 4 possible grammatical structures
+        /// </summary>
+        /// <returns>The generated tavern name</returns>
         private string createTavernName()
         {
             string table = "TavernNameTbl";
@@ -404,7 +458,11 @@ namespace ChaoticCreation.LocationGenerator
 
             return name;
         }
-
+        /// <summary>
+        /// Queries the relevant tables in the database and generates a description of a temple
+        /// </summary>
+        /// <param name="size"></param>
+        /// <returns>Returns a dictionary containing the generated Name and Description of a temple</returns>
         private Dictionary<string, string> Temple(string size)
         {
             Dictionary<string, string> tableList = new Dictionary<string, string>{
@@ -444,7 +502,12 @@ namespace ChaoticCreation.LocationGenerator
 
             return results;
         }
-
+        /// <summary>
+        /// Helper function to location generator functions. Takes a list of tables as input and randomly
+        /// selects one record from each of those  tables.
+        /// </summary>
+        /// <param name="tables"></param>
+        /// <returns>Dictionary containing the results of the database query</returns>
         private Dictionary<string, string> runQueries(Dictionary<string, string> tables)
         {
             List<string> queries = new List<string>();
