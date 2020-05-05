@@ -32,10 +32,21 @@ namespace ChaoticCreation
         #endregion
 
         #region Methods
-
-        //can adapt to many situations
-        //must require at least the table being queried, then it default uses the general query defined in the members of this class, however that can be replaced if need be(see the UI implementation in NpcGeneratorModel)
-        //column and search are for when you are searching for something specfic (user specified) column is the column in the table you want to grab from, and search is the specific thing you are searching for
+        /// <summary>
+        ///     Adapts the query string to the specific requirements for any special query from any generator
+        /// </summary>
+        /// <param name="table"></param>
+        /// <param name="query"></param>
+        /// <param name="column"></param>
+        /// <param name="search"></param>
+        /// <returns>
+        ///     Returns the adapted query string
+        /// </returns>
+        /// <special instructions>
+        ///     can adapt to many situations
+        ///     must require at least the table being queried, then it default uses the general query defined in the members of this class, however that can be replaced if need be(see the UI implementation in NpcGeneratorModel)
+        ///     column and search are for when you are searching for something specfic (user specified) column is the column in the table you want to grab from, and search is the specific thing you are searching for
+        /// </special instructions>
         public string QueryEdit(string table, string query = GeneralQuery, string column = null, string search = null)
         {
             string retValue = query;
@@ -57,8 +68,14 @@ namespace ChaoticCreation
             return retValue;
 
         }
-
-        //query the database
+        /// <summary>
+        ///     Runs the query into the database to result in a SQL dataset that can be used by the generators
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <param name="query"></param>
+        /// <returns>
+        ///     The SQL dataset that can be edited and observed by any generator
+        /// </returns>
         public DataSet QueryDatabase(string filePath, string query) 
         {
             string temp = "Data Source=";
@@ -76,8 +93,15 @@ namespace ChaoticCreation
 
             return dataSet;
         }
-        //Read from database and store into a dictionary holding specific values. column descriptions in db are the key for the 
-        //dictionary and the info in that column is the data in the dictionary
+        /// <summary>
+        ///     Read from database and store into a dictionary holding specific values.
+        ///     Column descriptions in db are the key for the dictionary and the info in that column is the data in the dictionary.
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns>
+        ///     The final dictionary containing strings for both the key and data. Used by the UI connection and generators.
+        /// </returns>
+
         public Dictionary<string, string> Query(DataSet data)
         {
             Dictionary<string, string> dataValues = new Dictionary<string, string>();
